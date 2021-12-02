@@ -362,7 +362,9 @@ $action = Yii::$app->controller->action->id;
             </footer>
         </div>
     </div>
-
+    <script>
+        alert('adu')
+    </script>
     <?php $this->endBody() ?>
     </body>
     </html>
