@@ -221,7 +221,7 @@ $action = Yii::$app->controller->action->id;
                         </div>
                         <div class="col-1 d-md-none"></div>
                         <div class="col-10 d-none d-lg-flex align-items-center mx-0 px-0">
-                            <ul class="list-unstyled w-100 p-0 m-0 d-flex justify-content-end bar-menu">
+                            <ul class="list-unstyled w-100 h-100 p-0 m-0 d-flex justify-content-end bar-menu">
                                 <li class="bar-item">
                                     <a class="text-dark bar-link text-decoration-none fw-bold"
                                        href="#"><?= Yii::t('app', 'New Arrivals') ?></a>
