@@ -162,3 +162,27 @@ footer .footer-content {
     height: 50px;
     max-height: 50px;
 }
+
+.header_login, .shopping-cart {
+    padding: 0 5px;
+    display: inline-block;
+}
+
+.header_login > a, .shopping-cart > a {
+    text-decoration: none;
+    color: white;
+}
+
+.header_login:hover > .dropdown-menu {
+    display: block;
+    z-index: 9999;
+}
+
+.header_login > .dropdown-toggle:active {
+    /*Without this, clicking will make it sticky*/
+    pointer-events: none;
+}
+
+.header_login > .dropdown-toggle:after {
+    display: none;
+}

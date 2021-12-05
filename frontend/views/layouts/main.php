@@ -57,7 +57,7 @@ $action = Yii::$app->controller->action->id;
                                 </div>
                             </div>
                             <div class="col-9 ps-2 text-light">
-                                <h5 class="m-0 sidebar-user-name">Hello,...</h5>
+                                <h5 class="m-0 sidebar-user-name">Hello, <?= Yii::$app->user->identity->name ?></h5>
                                 <span><i class="fas fa-circle success-icon"></i></span>
                                 Online
                             </div>
@@ -120,7 +120,7 @@ $action = Yii::$app->controller->action->id;
                     </div>
                 </div>
                 <div class="copy-right bg-cr-sidebar text-center">
-                    <span>Copyright &copy; <?= date('Y') ?> by DE OBELLY</span>
+                    <span>Copyright &copy; <?= date('Y') ?> by MinhKhanh</span>
                 </div>
             </div>
 <!--            end sidebar-->
@@ -162,7 +162,7 @@ $action = Yii::$app->controller->action->id;
                                             <a class="dropdown-toggle text-decoration-none text-light" type="button"
                                                id="dropdownUserLogin"
                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="far fa-user"></i> Admin
+                                                <i class="far fa-user"></i> <?= Yii::$app->user->identity->name ?>
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownUserLogin">
                                                 <a class="dropdown-item"
@@ -195,7 +195,7 @@ $action = Yii::$app->controller->action->id;
                                             <a href="<?= Url::toRoute('cart/') ?>"
                                                class="text-decoration-none text-light">
                                                 <i class="fas fa-shopping-cart"></i>
-                                                <span class='badge badge-warning'
+                                                <span class='badge bg-light rounded-circle text-danger'
                                                       id='lblCartCount'>1</span>
                                             </a>
                                         </div>
@@ -357,7 +357,7 @@ $action = Yii::$app->controller->action->id;
                     </div>
                 </div>
                 <div class="copy-right bg-dark text-center">
-                    <span>Copyright &copy; <?= date('Y') ?> by DE OBELLY</span>
+                    <span>Copyright &copy; <?= date('Y') ?> by MinhKhanh</span>
                 </div>
             </footer>
         </div>

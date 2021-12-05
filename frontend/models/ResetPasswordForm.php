@@ -13,6 +13,7 @@ use common\models\User;
 class ResetPasswordForm extends Model
 {
     public $password;
+    public $password_confirm;
 
     /**
      * @var \common\models\User
@@ -30,11 +31,11 @@ class ResetPasswordForm extends Model
     public function __construct($token, $config = [])
     {
         if (empty($token) || !is_string($token)) {
-            throw new InvalidArgumentException('Password reset token cannot be blank.');
+            throw new InvalidArgumentException(Yii::t('app', 'Password reset token cannot be blank.'));
         }
         $this->_user = User::findByPasswordResetToken($token);
         if (!$this->_user) {
-            throw new InvalidArgumentException('Wrong password reset token.');
+            throw new InvalidArgumentException(Yii::t('app', 'Wrong password reset token.'));
         }
         parent::__construct($config);
     }
@@ -45,8 +46,11 @@ class ResetPasswordForm extends Model
     public function rules()
     {
         return [
-            ['password', 'required'],
+            ['password', 'required', 'message' => '{attribute}' . Yii::t('app', ' can not be blank.')],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+
+            ['password_confirm', 'required', 'message' => '{attribute}' . Yii::t('app', ' can not be blank.')],
+            ['password_confirm', 'compare', 'compareAttribute' => 'password', 'message' => Yii::t('app', 'Incorrect password.')],
         ];
     }
 
@@ -54,6 +58,7 @@ class ResetPasswordForm extends Model
      * Resets password.
      *
      * @return bool if password was reset.
+     * @throws \yii\base\Exception
      */
     public function resetPassword()
     {

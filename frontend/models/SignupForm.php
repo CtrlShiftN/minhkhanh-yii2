@@ -11,9 +11,10 @@ use common\models\User;
  */
 class SignupForm extends Model
 {
-    public $username;
     public $email;
     public $password;
+    public $name;
+    public $tel;
 
 
     /**
@@ -22,41 +23,59 @@ class SignupForm extends Model
     public function rules()
     {
         return [
-            ['username', 'trim'],
-            ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
-            ['username', 'string', 'min' => 2, 'max' => 255],
-
-            ['email', 'trim'],
-            ['email', 'required'],
+            ['email', 'required', 'message'=>'{attribute}' . Yii::t('app',' can not be blank.')],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => Yii::t('app', 'This email address is already in use.')],
 
-            ['password', 'required'],
+            ['password', 'required', 'message'=>'{attribute}' . Yii::t('app',' can not be blank.')],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+
+            ['name', 'required', 'message'=>'{attribute}' . Yii::t('app',' can not be blank.')],
+            ['name', 'string', 'max' => 100],
+
+            ['tel', 'required', 'message'=>'{attribute}' . Yii::t('app',' can not be blank.')],
+            [['tel'], 'match', 'pattern' => '/^(84|0)+([0-9]{9})$/', 'message' => Yii::t('app', 'Includes 10 digits starting with 0 or 84.')],
         ];
     }
 
     /**
-     * Signs user up.
-     *
-     * @return bool whether the creating new account was successful and email was sent
+     * @return bool|null
+     * @throws \yii\base\Exception
      */
     public function signup()
     {
         if (!$this->validate()) {
             return null;
         }
-        
+
         $user = new User();
-        $user->username = $this->username;
         $user->email = $this->email;
         $user->setPassword($this->password);
+        $user->name = $this->name;
+        $user->tel = $this->tel;
         $user->generateAuthKey();
-        $user->generateEmailVerificationToken();
+        $user->generatePasswordResetToken();
+        $user->username = strstr($this->email, '@', true);
+        $user->referral_code = strstr($this->email, '@', true);
+        $user->role = $user::ROLE_USER;
+        $user->created_at = date('Y-m-d H:m:s');
+        $user->updated_at = date('Y-m-d H:m:s');
+        $user->status = $user::STATUS_ACTIVE;
+        return $user->save();
+    }
 
-        return $user->save() && $this->sendEmail($user);
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'email' => Yii::t('app','Email'),
+            'name' => Yii::t('app','Name'),
+            'password' => Yii::t('app','Password'),
+            'tel' => Yii::t('app','Tel'),
+        ];
     }
 
     /**
@@ -64,7 +83,7 @@ class SignupForm extends Model
      * @param User $user user model to with email should be send
      * @return bool whether the email was sent
      */
-    protected function sendEmail($user)
+    protected function sendEmail(User $user): bool
     {
         return Yii::$app
             ->mailer
