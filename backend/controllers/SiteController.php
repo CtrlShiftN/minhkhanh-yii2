@@ -2,7 +2,13 @@
 
 namespace backend\controllers;
 
-use common\models\LoginForm;
+use backend\models\LoginForm;
+use backend\models\MixAndMatch;
+use backend\models\Order;
+use backend\models\TailorMadeOrder;
+use backend\models\User;
+use common\components\SystemConstant;
+use common\models\Product;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -37,7 +43,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    'logout' => ['post', 'get'],
                 ],
             ],
         ];
@@ -55,6 +61,15 @@ class SiteController extends Controller
         ];
     }
 
+    public function beforeAction($action)
+    {
+        $this->layout = 'adminlte3';
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+        return true; // or false to not run the action
+    }
+
     /**
      * Displays homepage.
      *
@@ -62,7 +77,22 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+//        $latestProduct = Product::find()->where(['status' => SystemConstant::STATUS_ACTIVE])->orderBy('created_at DESC')->limit(5)->asArray()->all();
+//        $latestOrders = Order::getLatestOrder(5);
+//        $statusBG = Order::getStatusColor();
+//        $totalActiveUsers = User::find()->where(['status' => SystemConstant::STATUS_ACTIVE])->count();
+//        $totalOrders = Order::find()->where(['<=', 'status', 4])->count();
+//        $totalTailor = TailorMadeOrder::find()->where(['status' => SystemConstant::STATUS_ACTIVE])->count();
+//        $totalMix = MixAndMatch::find()->where(['status' => SystemConstant::STATUS_ACTIVE])->count();
+        return $this->render('index', [
+//            'products' => $latestProduct,
+//            'orders' => $latestOrders,
+//            'statusBG' => $statusBG,
+//            'totalActiveUsers' => $totalActiveUsers,
+//            'totalOrder' => $totalOrders,
+//            'totalTailor' => $totalTailor,
+//            'totalMix' => $totalMix
+        ]);
     }
 
     /**
@@ -95,7 +125,7 @@ class SiteController extends Controller
      *
      * @return Response
      */
-    public function actionLogout()
+    public function actionLogout(): Response
     {
         Yii::$app->user->logout();
 

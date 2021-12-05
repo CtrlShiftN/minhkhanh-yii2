@@ -15,14 +15,21 @@ class m130524_201442_init extends Migration
         $this->createTable('{{%user}}', [
             'id' => $this->primaryKey(),
             'username' => $this->string()->notNull()->unique(),
+            'name'=>$this->string(100)->notNull(),
+            'tel'=>$this->string(12),
+            'address'=>$this->string(),
             'auth_key' => $this->string(32)->notNull(),
             'password_hash' => $this->string()->notNull(),
             'password_reset_token' => $this->string()->unique(),
             'email' => $this->string()->notNull()->unique(),
-
-            'status' => $this->smallInteger()->notNull()->defaultValue(10),
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'verified_at'=>$this->dateTime(),
+            'referral_code' => $this->string()->notNull()->unique(),
+            'status' => $this->smallInteger()->notNull()->defaultValue(1)->comment('0 for inactive, 1 for active'),
+            'role'=>$this->smallInteger()->notNull()->defaultValue(0)->comment('0 for customer, >= 1 for admins and sales'),
+            'source' => $this->string()->defaultValue(null),
+            'source_id' => $this->string()->defaultValue(null),
+            'created_at' => $this->dateTime()->notNull(),
+            'updated_at' => $this->dateTime()->notNull(),
         ], $tableOptions);
     }
 
