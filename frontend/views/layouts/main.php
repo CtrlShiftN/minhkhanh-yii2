@@ -49,16 +49,16 @@ $action = Yii::$app->controller->action->id;
                 <div class="offcanvas-body border-top p-0">
                     <?php if (!Yii::$app->user->isGuest) : ?>
                         <!-- User -->
-                        <div class="d-flex align-items-center p-3">
+                        <div class="d-flex align-items-center p-3 bg-cr-sidebar text-light">
                             <div class="col-3 p-0">
                                 <div class="user__avatar img-circle">
                                     <!-- Avatar image -->
                                     <i class="far fa-user fa-2x"></i>
                                 </div>
                             </div>
-                            <div class="col-9 ps-2 text-light">
+                            <div class="col-9 ps-2">
                                 <h5 class="m-0 sidebar-user-name">Hello, <?= Yii::$app->user->identity->name ?></h5>
-                                <span><i class="fas fa-circle success-icon"></i></span>
+                                <span><i class="fas fa-circle success-icon text-success"></i></span>
                                 Online
                             </div>
                         </div>
