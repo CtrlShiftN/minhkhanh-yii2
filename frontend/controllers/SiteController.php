@@ -2,7 +2,9 @@
 
 namespace frontend\controllers;
 
+use common\components\MailServer;
 use frontend\models\ResendVerificationEmailForm;
+use frontend\models\Terms;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
@@ -15,6 +17,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\web\Response;
 
 /**
  * Site controller
@@ -120,18 +123,18 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays contact page.
-     *
-     * @return mixed
+     * @return string|Response
      */
     public function actionContact()
     {
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
+            if ($model->saveContactData()) {
+                $mailSubjectAdmin = Yii::t('app', 'A new contact has been initialized.');
+                MailServer::sendMailContactAdmin($mailSubjectAdmin);
+                Yii::$app->session->setFlash('contactSuccess', 'Thank you for your feedback. We will reply to you soon.');
             } else {
-                Yii::$app->session->setFlash('error', 'There was an error sending your message.');
+                Yii::$app->session->setFlash('contactError', 'Unable to submit a response. Please try again.');
             }
 
             return $this->refresh();
@@ -264,6 +267,17 @@ class SiteController extends Controller
 
         return $this->render('resendVerificationEmail', [
             'model' => $model
+        ]);
+    }
+
+    /**
+     * @return string
+     */
+    public function actionTerms()
+    {
+        $getTerms = Terms::getTermsAndServices();
+        return $this->render('terms', [
+            'terms' => $getTerms,
         ]);
     }
 }

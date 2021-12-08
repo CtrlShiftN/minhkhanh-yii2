@@ -6,22 +6,49 @@
 /* @var $exception Exception */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
+$cdnUrl = Yii::$app->params['backend'];
 $this->title = $name;
+$this->registerCssFile($cdnUrl.'/css/error/style.css');
 ?>
 <div class="site-error">
+    <header class="top-header">
+    </header>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <div class="alert alert-danger">
-        <?= nl2br(Html::encode($message)) ?>
+    <!--dust particel-->
+    <div>
+        <div class="starsec"></div>
+        <div class="starthird"></div>
+        <div class="starfourth"></div>
+        <div class="starfifth"></div>
     </div>
+    <!--Dust particle end--->
 
-    <p>
-        The above error occurred while the Web server was processing your request.
-    </p>
-    <p>
-        Please contact us if you think this is a server error. Thank you.
-    </p>
 
+    <div class="lamp__wrap">
+        <div class="lamp">
+            <div class="cable"></div>
+            <div class="cover"></div>
+            <div class="in-cover">
+                <div class="bulb"></div>
+            </div>
+            <div class="light"></div>
+        </div>
+    </div>
+    <!-- END Lamp -->
+    <section class="error">
+        <!-- Content -->
+        <div class="error__content">
+            <div class="error__message message">
+                <h1 class="message__title"><?= Html::encode($this->title) ?></h1>
+                <p class="message__text"><?= nl2br(Html::encode($message)) ?></p>
+            </div>
+            <div class="error__nav e-nav">
+                <a href="<?= $cdnUrl ?>" class="e-nav__link"></a>
+            </div>
+        </div>
+        <!-- END Content -->
+
+    </section>
 </div>

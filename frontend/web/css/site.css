@@ -1,3 +1,7 @@
+body {
+    overflow-x: hidden !important;
+    overflow-y: scroll;
+}
 .vr {
     display: inline-block;
     width: 1px;
@@ -8,6 +12,7 @@
 }
 .topbar-content {
     font-size: 0.8rem !important;
+    z-index: 999 !important;
 }
 
 .topbar-content,.bg-cr-sidebar{
