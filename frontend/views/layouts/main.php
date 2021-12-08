@@ -143,14 +143,14 @@ $action = Yii::$app->controller->action->id;
                         <div class="col-12 col-lg-7 d-none d-md-flex mx-0 px-0">
                             <ul class="list-unstyled w-100 p-0 m-0 d-flex align-items-center justify-content-md-center justify-content-lg-end">
                                 <li class="site-nav-top"><a
-                                            href="<?= Url::toRoute('site/login?ref=' . Yii::$app->request->url) ?>"
+                                            href="<?= Url::toRoute('site/terms') ?>"
                                             class="text-decoration-none text-light"><span><?= Yii::t('app', 'Terms & Services') ?></span></a>
                                 </li>
                                 <li class="site-nav-top">
                                     <div class="vr"></div>
                                 </li>
                                 <li class="site-nav-top"><a
-                                            href="<?= Url::toRoute('site/login?ref=' . Yii::$app->request->url) ?>"
+                                            href="<?= Url::toRoute('site/contact') ?>"
                                             class="text-decoration-none text-light"><span><?= Yii::t('app', 'Contact') ?></span></a>
                                 </li>
                                 <?php if (!Yii::$app->user->isGuest) : ?>

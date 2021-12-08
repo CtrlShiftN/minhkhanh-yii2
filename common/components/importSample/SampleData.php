@@ -2,36 +2,25 @@
 
 namespace common\components\importsample;
 
-use backend\models\SiteCasual;
 use common\components\encrypt\CryptHelper;
 use common\components\helpers\StringHelper;
 use common\components\SystemConstant;
-use common\models\Cart;
-use common\models\Color;
-use common\models\Footer;
-use common\models\GeoLocation;
-use common\models\MixAndMatch;
-use common\models\Order;
-use common\models\OrderTracking;
-use common\models\Post;
-use common\models\PostCategory;
-use common\models\PostTag;
-use common\models\Product;
-use common\models\ProductAssoc;
-use common\models\ProductCategory;
-use common\models\ProductType;
-use common\models\Showroom;
-use common\models\SiteContact;
-use common\models\SiteIndex;
-use common\models\SiteOurStories;
-use common\models\Size;
-use common\models\Social;
-use common\models\TermsAndServices;
-use common\models\TrackingStatus;
-use common\models\Trademark;
+//use common\models\Cart;
+//use common\models\GeoLocation;
+//use common\models\Order;
+//use common\models\OrderTracking;
+//use common\models\Post;
+//use common\models\PostCategory;
+//use common\models\PostTag;
+//use common\models\Product;
+//use common\models\ProductAssoc;
+//use common\models\ProductCategory;
+//use common\models\ProductType;
+//use common\models\Social;
+use common\models\Terms;
+//use common\models\TrackingStatus;
+//use common\models\Trademark;
 use common\models\User;
-use frontend\models\SiteLuxury;
-use frontend\models\Slider;
 use phpDocumentor\Reflection\Types\Self_;
 use Yii;
 use yii\base\Exception;
@@ -45,7 +34,7 @@ class SampleData
      */
     protected static $userInfoArr = [
         [
-            'email' => 'admin.deobelly@gmail.com',
+            'email' => 'admin.minhkhanh@gmail.com',
             'password_hash' => 'Iamadmin@1234',
             'name' => "Admin",
             'tel' => '0364752421',
@@ -53,7 +42,7 @@ class SampleData
             'role' => User::ROLE_ADMIN,
         ],
         [
-            'email' => 'editor.deobelly@gmail.com',
+            'email' => 'editor.minhkhanh@gmail.com',
             'password_hash' => 'Iameditor@1234',
             'name' => "Writer God",
             'tel' => '0334517566',
@@ -61,7 +50,7 @@ class SampleData
             'role' => User::ROLE_EDITOR,
         ],
         [
-            'email' => 'sale.deobelly@gmail.com',
+            'email' => 'sale.minhkhanh@gmail.com',
             'password_hash' => 'Iamsale@1234',
             'name' => "Sale",
             'tel' => '0345678910',
@@ -69,7 +58,7 @@ class SampleData
             'role' => User::ROLE_SALE,
         ],
         [
-            'email' => 'customer.deobelly@gmail.com',
+            'email' => 'customer.minhkhanh@gmail.com',
             'password_hash' => 'Iamcustomer@1234',
             'name' => "Customer",
             'tel' => '0333333333',
@@ -77,7 +66,7 @@ class SampleData
             'role' => User::ROLE_USER,
         ],
         [
-            'email' => 'customer2.deobelly@gmail.com',
+            'email' => 'customer2.minhkhanh@gmail.com',
             'password_hash' => 'Iamcustomer@1234',
             'name' => "Customer2",
             'tel' => '0339583763',
@@ -680,224 +669,6 @@ class SampleData
     }
 
     /**
-     * @var \string[][]
-     */
-    protected static $arrColor = [
-        [
-            'name' => 'Cam đậm',
-            'slug' => 'cam-dam',
-            'image' => 'color/cam-dam.jpg',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Cam tươi',
-            'slug' => 'cam-tuoi',
-            'image' => 'color/cam-tuoi.jpg',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Đen',
-            'slug' => 'den',
-            'image' => 'color/den.jpg',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Đỏ',
-            'slug' => 'do',
-            'image' => 'color/do.jpg',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Hồng phấn',
-            'slug' => 'hong-phan',
-            'image' => 'color/hong-phan.jpg',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Kem',
-            'slug' => 'kem',
-            'image' => 'color/kem.jpg',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Muối tiêu',
-            'slug' => 'muoi-tieu',
-            'image' => 'color/muoi-tieu.jpg',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Nâu',
-            'slug' => 'nau',
-            'image' => 'color/nau.jpg',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Thiên thanh',
-            'slug' => 'thien-thanh',
-            'image' => 'color/thien-thanh.jpg',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Tím huế',
-            'slug' => 'tim-hue',
-            'image' => 'color/tim-hue.jpg',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Trắng',
-            'slug' => 'trang',
-            'image' => 'color/trang.jpg',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Vàng chanh',
-            'slug' => 'vang-chanh',
-            'image' => 'color/vang-chanh.jpg',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Vàng đậm',
-            'slug' => 'vang-dam',
-            'image' => 'color/vang-dam.jpg',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Xanh đen',
-            'slug' => 'xanh-den',
-            'image' => 'color/xanh-den.jpg',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Xanh da',
-            'slug' => 'xanh-da',
-            'image' => 'color/xanh-da.jpg',
-            'admin_id' => 1,
-        ],
-    ];
-
-    /**
-     *
-     */
-    public static function insertSampleColor()
-    {
-        $countColor = 0;
-        foreach (self::$arrColor as $value) {
-            $color = new Color();
-            $color->name = $value['name'];
-            $color->slug = $value['slug'];
-            $color->image = $value['image'];
-            $color->admin_id = $value['admin_id'];
-            $color->created_at = date('Y-m-d H:m:s');
-            $color->updated_at = date('Y-m-d H:m:s');
-            if ($color->save()) {
-                $countColor++;
-            }
-        }
-        echo "Inserted " . $countColor . '/' . count(self::$arrColor) . ' product colour.' . PHP_EOL;
-    }
-
-    /**
-     * @var \string[][]
-     */
-    protected static $arrSize = [
-        [
-            'name' => 'XXS',
-            'slug' => 'xxs',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'XS',
-            'slug' => 'xs',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'S',
-            'slug' => 's',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'M',
-            'slug' => 'm',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'L',
-            'slug' => 'l',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'XL',
-            'slug' => 'xl',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'XXL',
-            'slug' => 'xxl',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => '36',
-            'slug' => '36',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => '37',
-            'slug' => '37',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => '38',
-            'slug' => '38',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => '39',
-            'slug' => '39',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => '40',
-            'slug' => '40',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => '41',
-            'slug' => '41',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => '42',
-            'slug' => '42',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => '43',
-            'slug' => '43',
-            'admin_id' => 1,
-        ],
-    ];
-
-    /**
-     *
-     */
-    public static function insertSampleSize()
-    {
-        $countSize = 0;
-        foreach (self::$arrSize as $value) {
-            $size = new Size();
-            $size->name = $value['name'];
-            $size->slug = $value['slug'];
-            $size->admin_id = $value['admin_id'];
-            $size->created_at = date('Y-m-d H:m:s');
-            $size->updated_at = date('Y-m-d H:m:s');
-            if ($size->save()) {
-                $countSize++;
-            }
-        }
-        echo "Inserted " . $countSize . '/' . count(self::$arrSize) . ' product sizes.' . PHP_EOL;
-    }
-
-    /**
      *  trademark data
      * @var array[]
      */
@@ -1108,7 +879,7 @@ class SampleData
     {
         $countTerms = 0;
         foreach (self::$termsInfoArr as $value) {
-            $terms = new TermsAndServices();
+            $terms = new Terms();
             $terms->title = $value['title'];
             $terms->content = $value['content'];
             $terms->admin_id = $value['admin_id'];
@@ -1241,137 +1012,6 @@ class SampleData
             }
         }
         echo "Inserted " . $countPostCate . '/' . count(self::$postCategoryInfoArr) . ' post category.' . PHP_EOL;
-    }
-
-    /**
-     * @var array[]
-     */
-    protected static $arrSliderInfo = [
-        [
-            'link' => 'slider/sliderItems1.jpg',
-            'site' => 'index',
-            'slide_label' => 'First slide label',
-            'slide_text' => 'No life is free right now, sometimes soft against vibrations',
-            'admin_id' => 1,
-        ],
-        [
-            'link' => 'slider/slider2.jpg',
-            'site' => 'index',
-            'slide_label' => 'Second slide label',
-            'slide_text' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-            'admin_id' => 1,
-        ],
-        [
-            'link' => 'slider/sliderItems2.jpg',
-            'site' => 'index',
-            'slide_label' => 'Third slide label',
-            'slide_text' => 'Praesent commodo cursus magna, vel scelerisque nisl consectetur',
-            'admin_id' => 1,
-        ],
-        [
-            'link' => 'slider/sliderItems2.jpg',
-            'site' => 'casual',
-            'slide_label' => 'First slide label',
-            'slide_text' => 'No life is free right now, sometimes soft against vibrations',
-            'admin_id' => 1,
-        ],
-        [
-            'link' => 'slider/sliderItems1.jpg',
-            'site' => 'casual',
-            'slide_label' => 'Second slide label',
-            'slide_text' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-            'admin_id' => 1,
-        ],
-        [
-            'link' => 'slider/slider1.jpg',
-            'site' => 'casual',
-            'slide_label' => 'Third slide label',
-            'slide_text' => 'Praesent commodo cursus magna, vel scelerisque nisl consectetur',
-            'admin_id' => 1,
-        ],
-        [
-            'link' => 'slider/slider1.jpg',
-            'site' => 'our-stories',
-            'slide_label' => null,
-            'slide_text' => null,
-            'admin_id' => 1,
-        ],
-        [
-            'link' => 'slider/sliderItems1.jpg',
-            'site' => 'our-stories',
-            'slide_label' => null,
-            'slide_text' => null,
-            'admin_id' => 1,
-        ],
-        [
-            'link' => 'slider/slider2.jpg',
-            'site' => 'our-stories',
-            'slide_label' => null,
-            'slide_text' => null,
-            'admin_id' => 1,
-        ],
-        [
-            'link' => 'slider/slider2.jpg',
-            'site' => 'luxury',
-            'slide_label' => null,
-            'slide_text' => null,
-            'admin_id' => 1,
-        ],
-        [
-            'link' => 'slider/sliderItems2.jpg',
-            'site' => 'luxury',
-            'slide_label' => null,
-            'slide_text' => null,
-            'admin_id' => 1,
-        ],
-        [
-            'link' => 'slider/sliderItems1.jpg',
-            'site' => 'luxury',
-            'slide_label' => null,
-            'slide_text' => null,
-            'admin_id' => 1,
-        ],
-        [
-            'link' => 'slider/sliderItems1.jpg',
-            'site' => 'shop',
-            'slide_label' => null,
-            'slide_text' => null,
-            'admin_id' => 1,
-        ],
-        [
-            'link' => 'slider/sliderItems2.jpg',
-            'site' => 'shop',
-            'slide_label' => null,
-            'slide_text' => null,
-            'admin_id' => 1,
-        ],
-        [
-            'link' => 'slider/slider1.jpg',
-            'site' => 'shop',
-            'slide_label' => null,
-            'slide_text' => null,
-            'admin_id' => 1,
-        ],
-    ];
-
-    /**
-     *
-     */
-    protected static function insertSlider()
-    {
-        $count = 0;
-        foreach (self::$arrSliderInfo as $value) {
-            $slider = new Slider();
-            $slider->link = $value['link'];
-            $slider->site = $value['site'];
-            $slider->admin_id = $value['admin_id'];
-            $slider->created_at = date('Y-m-d H:m:s');
-            $slider->updated_at = date('Y-m-d H:m:s');
-            if ($slider->save()) {
-                $count++;
-            }
-        }
-        echo "Inserted " . $count . '/' . count(self::$arrSliderInfo) . ' slider links.' . PHP_EOL;
     }
 
     /**
@@ -2568,82 +2208,6 @@ class SampleData
         echo "Inserted " . $count . '/' . count(self::$arrWardDistrictProvince) . ' geo location.' . PHP_EOL;
     }
 
-    protected static $arrShowroom = [
-        [
-            'name' => 'SHOWROOM PHỐ HUẾ',
-            'image' => 'showroom/showroom-ba-trieu.png',
-            'address' => '250 Phố Huế, phường Phố Huế, quận Hai Bà Trưng, Hà Nội',
-            'tel' => '02432052232',
-            'gps_link' => 'https://goo.gl/maps/4azB8afpttbvdGtD9',
-        ],
-    ];
-
-    public static function insertSampleShowroom()
-    {
-        $count = 0;
-        foreach (self::$arrShowroom as $showroom) {
-            $model = new Showroom();
-            $model->name = $showroom['name'];
-            $model->slug = StringHelper::toSlug($showroom['name']);
-            $model->image = $showroom['image'];
-            $model->address = $showroom['address'];
-            $model->tel = $showroom['tel'];
-            $model->gps_link = $showroom['gps_link'];
-            $model->admin_id = 1;
-            $model->created_at = date('Y-m-d H:i:s');
-            $model->updated_at = date('Y-m-d H:i:s');
-            if ($model->save()) {
-                $count++;
-            }
-        }
-        echo "Inserted " . $count . '/' . count(self::$arrShowroom) . ' showrooms.' . PHP_EOL;
-    }
-
-    protected static $arrMixes = [
-        [
-            'title' => 'Bộ trang phục công sở Lados 2021',
-            'slug' => 'bo-trang-phuc-cong-so-lados-2021',
-            'image' => 'product/mixes/bo-trang-phuc-cong-so-lados-2021.jpg',
-            'mixed_product_id' => '6,8',
-            'content' => '<li> Chất vải sờ mịn không phai, không nhăn, không xù.</li><li> Chất liệu thoáng mái.</li>
-                <li> Mếch cổ và tay làm bằng chất liệu cao cấp, không bị bong tróc.</li>
-                <li> Fom Body cực chuẩn, ôm chọn bờ vai mặc cực trẻ trung và phong cách phù hợp với mọi hoàn cảnh kể cả đi chơi và đi làm.</li>
-                <li> Hàng có sẵn, đủ size: M, L, XL, 2XL, 3XL</li><li> Màu sắc: Theo bộ(1 quần+ 1 áo)</li>',
-            'admin_id' => 1,
-        ],
-        [
-            'title' => 'Bộ vest nam The Shirt Studio F4',
-            'slug' => 'bo-vest-nam-the-shirt-studio-f4',
-            'image' => 'product/mixes/bo-vest-nam-the-shirt-studio-f4.jpg',
-            'mixed_product_id' => '9,10',
-            'content' => '<li> Chất vải sờ mịn không phai, không nhăn, không xù.</li><li> Chất liệu thoáng mái.</li>
-                <li> Mếch cổ và tay làm bằng chất liệu cao cấp, không bị bong tróc.</li>
-                <li> Fom Body cực chuẩn, ôm chọn bờ vai mặc cực trẻ trung và phong cách phù hợp với mọi hoàn cảnh kể cả đi chơi và đi làm.</li>
-                <li> Hàng có sẵn, đủ size: M, L, XL, 2XL, 3XL</li><li> Màu sắc: Theo bộ(1 quần+ 1 áo)</li>',
-            'admin_id' => 1,
-        ]
-    ];
-
-    public static function insertSampleMixes()
-    {
-        $count = 0;
-        foreach (self::$arrMixes as $mixes) {
-            $model = new MixAndMatch();
-            $model->title = $mixes['title'];
-            $model->slug = StringHelper::toSlug($mixes['title']);
-            $model->image = $mixes['image'];
-            $model->mixed_product_id = $mixes['mixed_product_id'];
-            $model->content = $mixes['content'];
-            $model->admin_id = $mixes['admin_id'];
-            $model->created_at = date('Y-m-d H:i:s');
-            $model->updated_at = date('Y-m-d H:i:s');
-            if ($model->save()) {
-                $count++;
-            }
-        }
-        echo "Inserted " . $count . '/' . count(self::$arrMixes) . ' mixes.' . PHP_EOL;
-    }
-
     public static $arrSocialNetwork = [
         [
             'icon' => '<i class="fab fa-facebook-f" aria-hidden="true"></i>',
@@ -2684,649 +2248,27 @@ class SampleData
         echo "Inserted " . $count . '/' . count(self::$arrSocialNetwork) . ' social network.' . PHP_EOL;
     }
 
-    public static $arrFooter = [
-        'About us' => [
-            'link' => 'javascript:void(0)',
-            'children' => [
-                'About De-Obelly' => '/site/our-stories',
-                'Terms and services' => '/site/terms',
-            ]
-        ],
-        'News' => [
-            'link' => 'javascript:void(0)',
-            'children' => [
-                'Latest news' => '/post/',
-                'Fashion news' => '/post/',
-            ]
-        ],
-        'Product consulting' => [
-            'link' => 'javascript:void(0)',
-            'children' => [
-                'Get a tailor-made' => '/tailor-made/',
-                'Collections' => '/mix-and-match/',
-                'Ask a question' => '/site/contact',
-            ]
-        ],
-        'Instructions' => [
-            'link' => 'javascript:void(0)',
-            'children' => [
-                'Get in touch' => '/site/contact',
-                'Get a suit' => '/tailor-made/set',
-            ]
-        ],
-    ];
-
-    public static function insertSampleFooter()
-    {
-        $count = 0;
-        foreach (self::$arrFooter as $items => $item) {
-            $model = new Footer();
-            $model->title = $items;
-            $model->link = $item['link'];
-            $model->slug = StringHelper::toSlug($items);
-            $model->parent_id = 0;
-            $model->admin_id = 1;
-            $model->created_at = date('Y-m-d H:i:s');
-            $model->updated_at = date('Y-m-d H:i:s');
-            if ($model->save()) {
-                $count++;
-                if(!empty($item['children'])) {
-                    foreach ($item['children'] as $title => $link) {
-                        $childModel = new Footer();
-                        $childModel->title = $title;
-                        $childModel->link = $link;
-                        $childModel->slug = StringHelper::toSlug($title);
-                        $childModel->parent_id = $model->id;
-                        $childModel->admin_id = 1;
-                        $childModel->created_at = date('Y-m-d H:i:s');
-                        $childModel->updated_at = date('Y-m-d H:i:s');
-                        if ($childModel->save()) {
-                            $count++;
-                        } else {
-                            echo print_r($childModel->errors) . PHP_EOL;
-                        }
-                    }
-                }
-            }
-        }
-        echo "Inserted " . $count . '/' . count(self::$arrFooter) . ' footer.' . PHP_EOL;
-    }
-
-    /**
-     * @var \string[][]
-     */
-    public static $arrOurStories = [
-        [
-            'content' => "<p>Với việc tập trung vào giá trị cốt lõi về chất lượng sản phẩm, cũng như phát triển dịch vụ, kết hợp trải
-                nghiệm khách hàng tại điểm bán lẻ nhằm cung cấp cho khách hàng sự tự tin, tính trang trọng và sự hứng
-                khởi trong việc mua sắm, De Obelly đã phát triển đa dạng các dòng hàng, từ áo sơ mi, polo cho tới
-                các bộ quần áo vest lịch lãm, hay các phụ kiện đồ da tinh tế.</p>
-            <p>Tất cả các sản phẩm của De Obelly đều được sản xuất dưới tiêu chuẩn chất lượng sản phẩm của phân
-                khúc xa xỉ và cận xa xỉ với triết lý sử dụng các nguyên phụ liệu cao cấp và xa xỉ nhập khẩu từ các nhà
-                máy có uy tín lâu năm đang sản xuất cho các thương hiệu xa xỉ, và gia công tại hệ thống các nhà máy
-                nhượng quyền sản xuất được tuyển chọn của De Obelly đặt tại Ý, Bồ Đào Nha, Nhật, Ấn Độ, Trung Quốc,
-                Việt Nam, Thái Lan… Sản phẩm bắt buộc phải trải qua các vòng kiểm tra chi tiết, đảm bảo chất lượng đúng
-                chuẩn hàng xa xỉ Châu Âu – tiêu chuẩn mà De Obelly đã tuân thủ trong thời gian qua.</p>
-            <p>Không chỉ quan tâm đặc biệt tới các vấn đề về sản xuất, De Obelly còn quan tâm tới việc thiết kế và
-                chỉ đạo nghệ thuật để có được sự liền mạch trong trải nghiệm khách hàng. Với đội ngũ tư vấn về sáng tạo và truyền thông có uy tín
-                quốc tế, De Obelly hứa hẹn sẽ mang lại làn gió mới cho ngành thời trang cao cấp và cận xa xỉ ở Việt
-                Nam cũng như khu vực Đông Nam Á.</p>",
-            'image' => 'stories/TUJ04917.jpg',
-            'section' => 'intro',
-        ],
-        [
-            'image' => 'stories/brand2.jpg',
-            'section' => 'fullwidth',
-        ],
-        [
-            'content' => "<p>“Từ khi ra đời đến nay, chúng tôi luôn kiên định với sứ mệnh tái hiện nét thanh lịch tự nhiên và
-                    phong cách Ý tại khu vực Đông Nam Á. Đó là lý do chúng tôi tồn tại và làm việc mỗi ngày. Chúng tôi
-                    đặc biệt quan tâm tới việc phục vụ khách hàng với những sản phẩm tinh tế, xa xỉ cùng chất lượng vượt
-                    trội và phong cách thanh lịch tự nhiên. Sự tập trung vào việc đổi mới liên tục giúp chúng tôi phục
-                    vụ khách
-                    hàng ngày càng hiệu quả hơn.”</p>",
-            'image' => 'stories/handsome.jpg',
-            'section' => 'quote',
-        ]
-    ];
-
-    /**
-     *
-     */
-    public static function insertSampleOurStories()
-    {
-        $count = 0;
-        foreach (self::$arrOurStories as $value) {
-            $model = new SiteOurStories();
-            if (!empty($value['content'])) {
-                $model->content = $value['content'];
-            }
-            $model->image = $value['image'];
-            $model->section = $value['section'];
-            $model->admin_id = 1;
-            $model->created_at = date('Y-m-d H:i:s');
-            $model->updated_at = date('Y-m-d H:i:s');
-            if ($model->save()) {
-                $count++;
-            } else {
-                echo print_r($model->errors) . PHP_EOL;
-            }
-        }
-        echo 'Inserted ' . $count . '/' . count(self::$arrOurStories) . ' stories' . PHP_EOL;
-    }
-
-    /**
-     * @var \string[][]
-     */
-    public static $arrContactContent = [
-        [
-            'gps_link' => '<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7449.718021307349!2d105.870143!3d20.998288!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac038aa77f2f%3A0x77b2bccf4277c606!2zVMOyYSBDVDEsIDUzNkEgUC4gTWluaCBLaGFpLCBWxKluaCBQaMO6LCBIYWkgQsOgIFRyxrBuZywgSMOgIE7hu5lpIDEwMDAwMCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2sus!4v1636390068351!5m2!1svi!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
-            'logo_link' => 'logo.png',
-            'company_address' => '536 Minh Khai, Tòa CT1, tầng 5, Phường Vĩnh Tuy, Quận Hai Bà Trưng, Hà Nội',
-            'tel' => 1900599961,
-            'email' => 'deobelly.vn@gmail.com',
-        ],
-    ];
-
-    /**
-     *
-     */
-    public static function insertSampleContactContent()
-    {
-        $count = 0;
-        foreach (self::$arrContactContent as $value) {
-            $model = new SiteContact();
-            $model->gps_link = $value['gps_link'];
-            $model->logo_link = $value['logo_link'];
-            $model->company_address = $value['company_address'];
-            $model->tel = $value['tel'];
-            $model->email = $value['email'];
-            $model->admin_id = 1;
-            $model->created_at = date('Y-m-d H:i:s');
-            $model->updated_at = date('Y-m-d H:i:s');
-            if ($model->save()) {
-                $count++;
-            } else {
-                echo print_r($model->errors) . PHP_EOL;
-            }
-        }
-        echo 'Inserted ' . $count . '/' . count(self::$arrContactContent) . ' contact page content' . PHP_EOL;
-    }
-
-    protected static $arrSiteIndexContent = [
-        [
-            'title' => 'New Arrivals 1',
-            'label' => null,
-            'image' => 'sites/index/newProductImg1.jpg',
-            'content' => null,
-            'type' => 'image-link',
-            'link' => '/shop/product',
-            'section' => 'new-arrival',
-            'note' => null,
-        ],
-        [
-            'title' => 'New Arrivals 2',
-            'label' => null,
-            'image' => 'sites/index/newProductImg2.jpg',
-            'content' => null,
-            'link' => '/shop/product',
-            'section' => 'new-arrival',
-            'note' => null,
-            'type' => 'image-link',
-        ],
-        [
-            'title' => 'New Arrivals 3',
-            'label' => null,
-            'image' => 'sites/index/newProductImg3.jpg',
-            'content' => null,
-            'link' => '/shop/product',
-            'section' => 'new-arrival',
-            'note' => null,
-            'type' => 'image-link',
-        ],
-        [
-            'title' => 'New Arrivals 4',
-            'label' => null,
-            'image' => 'sites/index/newProductImg4.jpg',
-            'content' => null,
-            'link' => '/shop/product',
-            'section' => 'new-arrival',
-            'note' => null,
-            'type' => 'image-link',
-        ],
-        [
-            'title' => null,
-            'label' => null,
-            'image' => null,
-            'content' => 'See more',
-            'link' => '/shop/product',
-            'section' => 'new-arrival',
-            'note' => null,
-            'type' => 'see-more-link',
-        ],
-        [
-            'title' => 'De-O Collections',
-            'label' => null,
-            'image' => null,
-            'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer interdum porttitor sagittis. Suspendisse malesuada lacus sit amet nulla vehicula, vel tincidunt nulla viverra. Aliquam dapibus felis sit amet dui tincidunt vulputate. Pellentesque eu quam facilisis velit ullamcorper tincidunt id a nisl. Phasellus ornare tempus volutpat. Maecenas consequat, arcu vitae tempor dapibus, turpis metus porttitor arcu, non laoreet neque massa ut sapien. Etiam sodales egestas sem, quis hendrerit massa laoreet nec. Mauris a enim eu lorem porta blandit. Donec vehicula, dolor tempus convallis dictum, risus ex lacinia urna, eget pretium lectus dolor vitae sapien. Curabitur ultricies finibus commodo. Aenean faucibus odio nec ultrices volutpat. Quisque venenatis velit aliquet, scelerisque lorem nec, tempus ligula. Nam ullamcorper augue purus, ac feugiat massa rutrum non. Ut eget lorem purus. Mauris blandit, lacus sed eleifend tincidunt, leo lorem aliquam odio, auctor pharetra odio ligula id massa. Vestibulum id finibus urna.',
-            'link' => '/mix-and-match/',
-            'section' => 'collections',
-            'note' => null,
-            'type' => 'mix',
-        ],
-        [
-            'title' => 'De-O Collections',
-            'label' => null,
-            'image' => 'sites/index/sereno.jpg',
-            'content' => null,
-            'link' => '/mix-and-match/',
-            'section' => 'collections',
-            'note' => 'Large screen image',
-            'type' => 'image-link',
-        ],
-        [
-            'title' => 'De-O Collections',
-            'label' => null,
-            'image' => 'sites/index/sereno-responsive.jpg',
-            'content' => null,
-            'link' => '/mix-and-match/',
-            'section' => 'collections',
-            'note' => 'Mobile screen image',
-            'type' => 'image-link',
-        ],
-        [
-            'title' => 'Pronto',
-            'label' => null,
-            'image' => null,
-            'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer interdum porttitor sagittis. Suspendisse malesuada lacus sit amet nulla vehicula, vel tincidunt nulla viverra. Aliquam dapibus felis sit amet dui tincidunt vulputate. Pellentesque eu quam facilisis velit ullamcorper tincidunt id a nisl. Phasellus ornare tempus volutpat. Maecenas consequat, arcu vitae tempor dapibus, turpis metus porttitor arcu, non laoreet neque massa ut sapien. Etiam sodales egestas sem, quis hendrerit massa laoreet nec. Mauris a enim eu lorem porta blandit. Donec vehicula, dolor tempus convallis dictum, risus ex lacinia urna, eget pretium lectus dolor vitae sapien. Curabitur ultricies finibus commodo. Aenean faucibus odio nec ultrices volutpat. Quisque venenatis velit aliquet, scelerisque lorem nec, tempus ligula. Nam ullamcorper augue purus, ac feugiat massa rutrum non. Ut eget lorem purus. Mauris blandit, lacus sed eleifend tincidunt, leo lorem aliquam odio, auctor pharetra odio ligula id massa. Vestibulum id finibus urna.',
-            'link' => '/shop/',
-            'section' => 'product-type',
-            'note' => null,
-            'type' => 'mix',
-        ],
-        [
-            'title' => 'Pronto Image 1',
-            'label' => null,
-            'image' => 'sites/index/pronto-img-1.jpg',
-            'content' => null,
-            'link' => '/shop/product',
-            'section' => 'product-type',
-            'note' => 'height - 50',
-            'type' => 'image-link',
-        ],
-        [
-            'title' => 'Pronto Image 2',
-            'label' => null,
-            'image' => 'sites/index/pronto-img-2.jpg',
-            'content' => null,
-            'link' => '/shop/product',
-            'section' => 'product-type',
-            'note' => 'height - 50',
-            'type' => 'image-link',
-        ],
-        [
-            'title' => 'Pronto Image 3',
-            'label' => null,
-            'image' => 'sites/index/pronto-img-3.jpg',
-            'content' => null,
-            'link' => '/shop/product',
-            'section' => 'product-type',
-            'note' => 'height - 25',
-            'type' => 'image-link',
-        ],
-        [
-            'title' => 'Pronto Image 4',
-            'label' => null,
-            'image' => 'sites/index/pronto-img-4.jpg',
-            'content' => null,
-            'link' => '/shop/product',
-            'section' => 'product-type',
-            'note' => 'height - 50',
-            'type' => 'image-link',
-        ],
-        [
-            'title' => 'Pronto Image 5',
-            'label' => null,
-            'image' => 'sites/index/pronto-img-5.jpg',
-            'content' => null,
-            'link' => '/shop/product',
-            'section' => 'product-type',
-            'note' => 'height - 25',
-            'type' => 'image-link',
-        ],
-        [
-            'title' => null,
-            'label' => null,
-            'image' => null,
-            'content' => 'See more',
-            'link' => '/shop/',
-            'section' => 'product-type',
-            'note' => null,
-            'type' => 'see-more-link',
-        ],
-        [
-            'title' => 'New arrival',
-            'label' => null,
-            'image' => 'sites/index/men.jpg',
-            'content' => null,
-            'link' => '/shop/product',
-            'section' => 'product-types',
-            'note' => null,
-            'type' => 'image-link',
-        ],
-        [
-            'title' => 'Gifts',
-            'label' => null,
-            'image' => 'sites/index/women.jpg',
-            'content' => null,
-            'link' => '/shop/product',
-            'section' => 'product-types',
-            'note' => null,
-            'type' => 'image-link',
-        ],
-    ];
-
-    public static function insertSampleSiteIndexContent()
-    {
-        $count = 0;
-        foreach (self::$arrSiteIndexContent as $value) {
-            $model = new SiteIndex();
-            $model->title = $value['title'];
-            $model->label = $value['label'];
-            $model->image = $value['image'];
-            $model->content = $value['content'];
-            $model->link = $value['link'];
-            $model->section = $value['section'];
-            $model->note = $value['note'];
-            $model->type = $value['type'];
-            $model->admin_id = 1;
-            $model->created_at = date('Y-m-d H:i:s');
-            $model->updated_at = date('Y-m-d H:i:s');
-            if ($model->save()) {
-                $count++;
-            } else {
-                echo print_r($model->errors) . PHP_EOL;
-            }
-        }
-        echo 'Inserted ' . $count . '/' . count(self::$arrSiteIndexContent) . ' index page content' . PHP_EOL;
-    }
-
-    protected static $arrSiteCasualContent = [
-        [
-            'title' => 'New Arrivals 1',
-            'label' => null,
-            'image' => 'sites/casual/newProductImg1.jpg',
-            'content' => null,
-            'type' => 'image-link',
-            'link' => '/shop/product',
-            'section' => 'new-arrival',
-            'note' => null,
-        ],
-        [
-            'title' => 'New Arrivals 2',
-            'label' => null,
-            'image' => 'sites/casual/newProductImg2.jpg',
-            'content' => null,
-            'link' => '/shop/product',
-            'section' => 'new-arrival',
-            'note' => null,
-            'type' => 'image-link',
-        ],
-        [
-            'title' => 'New Arrivals 3',
-            'label' => null,
-            'image' => 'sites/casual/newProductImg3.jpg',
-            'content' => null,
-            'link' => '/shop/product',
-            'section' => 'new-arrival',
-            'note' => null,
-            'type' => 'image-link',
-        ],
-        [
-            'title' => 'New Arrivals 4',
-            'label' => null,
-            'image' => 'sites/casual/newProductImg4.jpg',
-            'content' => null,
-            'link' => '/shop/product',
-            'section' => 'new-arrival',
-            'note' => null,
-            'type' => 'image-link',
-        ],
-        [
-            'title' => null,
-            'label' => null,
-            'image' => null,
-            'content' => 'See more',
-            'link' => '/shop/product',
-            'section' => 'new-arrival',
-            'note' => null,
-            'type' => 'see-more-link',
-        ],
-        [
-            'title' => 'De-O Collections',
-            'label' => null,
-            'image' => null,
-            'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer interdum porttitor sagittis. Suspendisse malesuada lacus sit amet nulla vehicula, vel tincidunt nulla viverra. Aliquam dapibus felis sit amet dui tincidunt vulputate. Pellentesque eu quam facilisis velit ullamcorper tincidunt id a nisl. Phasellus ornare tempus volutpat. Maecenas consequat, arcu vitae tempor dapibus, turpis metus porttitor arcu, non laoreet neque massa ut sapien. Etiam sodales egestas sem, quis hendrerit massa laoreet nec. Mauris a enim eu lorem porta blandit. Donec vehicula, dolor tempus convallis dictum, risus ex lacinia urna, eget pretium lectus dolor vitae sapien. Curabitur ultricies finibus commodo. Aenean faucibus odio nec ultrices volutpat. Quisque venenatis velit aliquet, scelerisque lorem nec, tempus ligula. Nam ullamcorper augue purus, ac feugiat massa rutrum non. Ut eget lorem purus. Mauris blandit, lacus sed eleifend tincidunt, leo lorem aliquam odio, auctor pharetra odio ligula id massa. Vestibulum id finibus urna.',
-            'link' => '/mix-and-match/',
-            'section' => 'collections',
-            'note' => null,
-            'type' => 'mix',
-        ],
-        [
-            'title' => 'De-O Collections',
-            'label' => null,
-            'image' => 'sites/casual/sereno.jpg',
-            'content' => null,
-            'link' => '/mix-and-match/',
-            'section' => 'collections',
-            'note' => 'Large screen image',
-            'type' => 'image-link',
-        ],
-        [
-            'title' => 'De-O Collections',
-            'label' => null,
-            'image' => 'sites/casual/sereno-responsive.jpg',
-            'content' => null,
-            'link' => '/mix-and-match/',
-            'section' => 'collections',
-            'note' => 'Mobile screen image',
-            'type' => 'image-link',
-        ],
-        [
-            'title' => 'Pronto',
-            'label' => null,
-            'image' => null,
-            'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer interdum porttitor sagittis. Suspendisse malesuada lacus sit amet nulla vehicula, vel tincidunt nulla viverra. Aliquam dapibus felis sit amet dui tincidunt vulputate. Pellentesque eu quam facilisis velit ullamcorper tincidunt id a nisl. Phasellus ornare tempus volutpat. Maecenas consequat, arcu vitae tempor dapibus, turpis metus porttitor arcu, non laoreet neque massa ut sapien. Etiam sodales egestas sem, quis hendrerit massa laoreet nec. Mauris a enim eu lorem porta blandit. Donec vehicula, dolor tempus convallis dictum, risus ex lacinia urna, eget pretium lectus dolor vitae sapien. Curabitur ultricies finibus commodo. Aenean faucibus odio nec ultrices volutpat. Quisque venenatis velit aliquet, scelerisque lorem nec, tempus ligula. Nam ullamcorper augue purus, ac feugiat massa rutrum non. Ut eget lorem purus. Mauris blandit, lacus sed eleifend tincidunt, leo lorem aliquam odio, auctor pharetra odio ligula id massa. Vestibulum id finibus urna.',
-            'link' => '/shop/',
-            'section' => 'product-type',
-            'note' => null,
-            'type' => 'mix',
-        ],
-        [
-            'title' => 'Pronto Image 1',
-            'label' => null,
-            'image' => 'sites/casual/pronto-img-1.jpg',
-            'content' => null,
-            'link' => '/shop/product',
-            'section' => 'product-type',
-            'note' => 'height - 50',
-            'type' => 'image-link',
-        ],
-        [
-            'title' => 'Pronto Image 2',
-            'label' => null,
-            'image' => 'sites/casual/pronto-img-2.jpg',
-            'content' => null,
-            'link' => '/shop/product',
-            'section' => 'product-type',
-            'note' => 'height - 50',
-            'type' => 'image-link',
-        ],
-        [
-            'title' => 'Pronto Image 3',
-            'label' => null,
-            'image' => 'sites/casual/pronto-img-3.jpg',
-            'content' => null,
-            'link' => '/shop/product',
-            'section' => 'product-type',
-            'note' => 'height - 25',
-            'type' => 'image-link',
-        ],
-        [
-            'title' => 'Pronto Image 4',
-            'label' => null,
-            'image' => 'sites/casual/pronto-img-4.jpg',
-            'content' => null,
-            'link' => '/shop/product',
-            'section' => 'product-type',
-            'note' => 'height - 50',
-            'type' => 'image-link',
-        ],
-        [
-            'title' => 'Pronto Image 5',
-            'label' => null,
-            'image' => 'sites/casual/pronto-img-5.jpg',
-            'content' => null,
-            'link' => '/shop/product',
-            'section' => 'product-type',
-            'note' => 'height - 25',
-            'type' => 'image-link',
-        ],
-        [
-            'title' => null,
-            'label' => null,
-            'image' => null,
-            'content' => 'See more',
-            'link' => '/shop/',
-            'section' => 'product-type',
-            'note' => null,
-            'type' => 'see-more-link',
-        ],
-        [
-            'title' => 'New arrival',
-            'label' => null,
-            'image' => 'sites/casual/men.jpg',
-            'content' => null,
-            'link' => '/shop/product',
-            'section' => 'product-types',
-            'note' => null,
-            'type' => 'image-link',
-        ],
-        [
-            'title' => 'Gifts',
-            'label' => null,
-            'image' => 'sites/casual/women.jpg',
-            'content' => null,
-            'link' => '/shop/product',
-            'section' => 'product-types',
-            'note' => null,
-            'type' => 'image-link',
-        ],
-    ];
-
-    public static function insertSampleSiteCasualContent()
-    {
-        $count = 0;
-        foreach (self::$arrSiteCasualContent as $value) {
-            $model = new SiteCasual();
-            $model->title = $value['title'];
-            $model->label = $value['label'];
-            $model->image = $value['image'];
-            $model->content = $value['content'];
-            $model->link = $value['link'];
-            $model->section = $value['section'];
-            $model->note = $value['note'];
-            $model->type = $value['type'];
-            $model->admin_id = 1;
-            $model->created_at = date('Y-m-d H:i:s');
-            $model->updated_at = date('Y-m-d H:i:s');
-            if ($model->save()) {
-                $count++;
-            } else {
-                echo print_r($model->errors) . PHP_EOL;
-            }
-        }
-        echo 'Inserted ' . $count . '/' . count(self::$arrSiteCasualContent) . ' casual page content' . PHP_EOL;
-    }
-
-    protected static $arrSiteLuxuryContent = [
-        [
-            'title' => 'Tailor Made',
-            'image' => 'tailor-made.jpg',
-            'link' => '/tailor-made/',
-            'note' => null,
-        ],
-        [
-            'title' => 'Collections',
-            'image' => 'collections.png',
-            'link' => '/mix-and-match/',
-            'note' => null,
-        ],
-        [
-            'title' => 'Collections',
-            'image' => 'collections.png',
-            'link' => '/mix-and-match/',
-            'note' => null,
-        ],
-        [
-            'title' => 'Tailor Made',
-            'image' => 'tailor-made.jpg',
-            'link' => '/tailor-made/',
-            'note' => null,
-        ],
-    ];
-
-    public static function insertSampleSiteLuxuryContent(){
-        $count = 0;
-        foreach (self::$arrSiteLuxuryContent as $value) {
-            $model = new SiteLuxury();
-            $model->title = $value['title'];
-            $model->image = $value['image'];
-            $model->link = $value['link'];
-            $model->note = $value['note'];
-            $model->admin_id = 1;
-            $model->created_at = date('Y-m-d H:i:s');
-            $model->updated_at = date('Y-m-d H:i:s');
-            if ($model->save()) {
-                $count++;
-            } else {
-                echo print_r($model->errors) . PHP_EOL;
-            }
-        }
-        echo 'Inserted ' . $count . '/' . count(self::$arrSiteLuxuryContent) . ' luxury page content' . PHP_EOL;
-    }
-
     /**
      * @throws Exception
      */
     public static function importAllSampleData()
     {
         self::insertSampleUser();
-        self::insertSampleProduct();
-        self::insertSampleProductAssoc();
-        self::insertSampleProductType();
-        self::insertSampleProductCategory();
-        self::insertSampleColor();
-        self::insertSampleSize();
-        self::insertSampleTrademark();
-        self::insertSamplePost();
-        self::insertSamplePostTag();
-        self::insertSamplePostCategory();
+//        self::insertSampleProduct();
+//        self::insertSampleProductAssoc();
+//        self::insertSampleProductType();
+//        self::insertSampleProductCategory();
+//        self::insertSampleTrademark();
+//        self::insertSamplePost();
+//        self::insertSamplePostTag();
+//        self::insertSamplePostCategory();
         self::insertSampleTerms();
-        self::insertSlider();
-        self::insertSampleCart();
-        self::insertSampleSocialNetwork();
-        self::insertSampleFooter();
-        self::insertSampleOurStories();
-        self::insertSampleContactContent();
-        self::insertSampleGeoLocation();
-        self::insertSampleOrder();
-        self::insertSampleOrderTracking();
-        self::insertSampleTrackingStatus();
-        self::insertSampleShowroom();
-        self::insertSampleMixes();
-        self::insertSampleSiteIndexContent();
-        self::insertSampleSiteCasualContent();
-        self::insertSampleSiteLuxuryContent();
+//        self::insertSampleCart();
+//        self::insertSampleSocialNetwork();
+//        self::insertSampleOurStories();
+//        self::insertSampleGeoLocation();
+//        self::insertSampleOrder();
+//        self::insertSampleOrderTracking();
+//        self::insertSampleTrackingStatus();
     }
 }
