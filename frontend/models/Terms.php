@@ -15,7 +15,7 @@ use Yii;
  * @property string|null $created_at
  * @property string|null $updated_at
  */
-class Terms extends \common\models\Terms
+class Terms extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -44,16 +44,16 @@ class Terms extends \common\models\Terms
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'title' => 'Title',
-            'content' => 'Content',
-            'status' => 'Status',
-            'admin_id' => 'Admin ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'id' => Yii::t('app', 'ID'),
+            'title' => Yii::t('app', 'Title'),
+            'content' => Yii::t('app', 'Content'),
+            'status' => Yii::t('app', 'Status'),
+            'admin_id' => Yii::t('app', 'Admin ID'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
-
+    
     /**
      * @return mixed
      */

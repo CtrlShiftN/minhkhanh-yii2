@@ -232,7 +232,7 @@ $action = Yii::$app->controller->action->id;
                                 </li>
                                 <li class="bar-item">
                                     <a class="text-dark bar-link text-decoration-none fw-bold"
-                                       href="#"><?= Yii::t('app', 'News') ?></a>
+                                       href="<?= Url::toRoute('post/') ?>"><?= Yii::t('app', 'News') ?></a>
                                 </li>
                                 <li class="bar-item">
                                     <a class="text-dark bar-link text-decoration-none fw-bold"
