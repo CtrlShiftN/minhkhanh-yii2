@@ -5,21 +5,15 @@ namespace common\components\importsample;
 use common\components\encrypt\CryptHelper;
 use common\components\helpers\StringHelper;
 use common\components\SystemConstant;
-//use common\models\Cart;
-//use common\models\GeoLocation;
-//use common\models\Order;
-//use common\models\OrderTracking;
-//use common\models\Post;
-//use common\models\PostCategory;
-//use common\models\PostTag;
-//use common\models\Product;
-//use common\models\ProductAssoc;
-//use common\models\ProductCategory;
-//use common\models\ProductType;
-//use common\models\Social;
+use common\models\Post;
+use common\models\PostCategory;
+use common\models\PostTag;
+use common\models\Product;
+use common\models\ProductAssoc;
+use common\models\ProductCategory;
+use common\models\ProductType;
 use common\models\Terms;
-//use common\models\TrackingStatus;
-//use common\models\Trademark;
+use common\models\Trademark;
 use common\models\User;
 use phpDocumentor\Reflection\Types\Self_;
 use Yii;
@@ -108,265 +102,15 @@ class SampleData
      */
     protected static $productInforArr = [
         [
-            'name' => 'Áo thun UNISEX không cổ BOSS',
-            'slug' => 'ao-thun-unisex-khong-co-boss',
-            'short_description' => "<li>Category：Men's Wear   Clothing  Women’s Wear</li>",
-            'description' => "<li>Category：Men's Wear   Clothing  Women’s Wear</li>
-<li>T-Shirts</li>
-<li>-Color：Black , White , Red, Blue, Yellow,Pink</li>
-<li>-Sizes: XS  S M L XL  XXL  3XL </li>
-<li>-If you like loose, please take a big size.</li>
-<li>-Ships From:China</li>
-<li>-Transportation time：It takes about 5-20 days, depending on the speed of logistics</li>
-<li>-Product Description</li>
-<li>-Brand New T-shirt </li>
-<li>-Various tide brands</li>
-<li>-We are committed to providing you with the best quality products at the best prices.</li>
-",
-            'cost_price' => 150000,
-            'regular_price' => 299000,
+            'name' => 'Camera DAHUA HDBW-1400EP-S2',
+            'description' => ' <li>Camera vỏ hỗ trợ HDCVI/HDTVI/AHD/ANALOG, tích hợp OSD </li><li>Độ phân giải 2Megapixel cảm biến CMOS kích thước 1/2.7", 30fps@1080P </li><li>Thời gian thực không trễ hình, độ nhạy sáng tối thiểu 0.01Lux@F1.2(0Lux IR LED on), chế độ ngày đêm(ICR), tự động cân bằng trắng (AWB), tự động bù sáng (AGC), chống ngược sáng(BLC), chống nhiễu (2D-DNR)</li><li>Tầm xa hồng ngoại 30m với công nghệ hồng ngoại thông minh </li><li>Ống kính cố định 3.6mm, chuẩn kháng nước IP67, vỏ kim loại</li>',
+            'cost_price' => 15000000,
+            'regular_price' => 29900000,
             'discount' => null,
-            'image' => 'product/clothes/top/shirt1.png',
-            'images' => 'product/clothes/top/shirt1.png,product/clothes/top/shirt2.png,product/clothes/top/shirt3.png',
+            'image' => 'product/camera/dahua/hdcvi/DH-HAC-HDBW1400EP-S2.png',
+            'images' => 'product/camera/dahua/hdcvi/DH-HAC-HDBW1400EP-S2.png',
+            'quantity' => 6312,
             'trademark_id' => 1,
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Áo thun UNISEX không cổ HUGO-BOSS',
-            'slug' => 'ao-thun-unisex-khong-co-hugo-boss',
-            'short_description' => "<li>Category：Men's Wear   Clothing  Women’s Wear</li>",
-            'description' => "<li>Category：Men's Wear   Clothing  Women’s Wear</li>
-<li>T-Shirts</li>
-<li>-Color：Black , White , Red, Blue, Yellow,Pink</li>
-<li>-Sizes: XS  S M L XL  XXL  3XL </li>
-<li>-If you like loose, please take a big size.</li>
-<li>-Ships From:China</li>
-<li>-Transportation time：It takes about 5-20 days, depending on the speed of logistics</li>
-<li>-Product Description</li>
-<li>-Brand New T-shirt </li>
-<li>-Various tide brands</li>
-<li>-We are committed to providing you with the best quality products at the best prices.</li>
-",
-            'cost_price' => 200000,
-            'regular_price' => 400000,
-            'discount' => null,
-            'image' => 'product/clothes/top/shirt6.png',
-            'images' => 'product/clothes/top/shirt1.png,product/clothes/top/shirt2.png,product/clothes/top/shirt3.png',
-            'trademark_id' => 1,
-            'quantity' => 182,
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Áo thun UNISEX không cổ',
-            'slug' => 'ao-thun-unisex-khong-co',
-            'short_description' => "<li>Category：Men's Wear   Clothing  Women’s Wear</li>",
-            'description' => "<li>Category：Men's Wear   Clothing  Women’s Wear</li>
-<li>T-Shirts</li>
-<li>-Color：Black , White , Red, Blue, Yellow,Pink</li>
-<li>-Sizes: XS  S M L XL  XXL  3XL </li>
-<li>-If you like loose, please take a big size.</li>
-<li>-Ships From:China</li>
-<li>-Transportation time：It takes about 5-20 days, depending on the speed of logistics</li>
-<li>-Product Description</li>
-<li>-Brand New T-shirt </li>
-<li>-Various tide brands</li>
-<li>-We are committed to providing you with the best quality products at the best prices.</li>
-",
-            'cost_price' => 200000,
-            'regular_price' => 399000,
-            'discount' => null,
-            'image' => 'product/clothes/top/shirt3.png',
-            'images' => 'product/clothes/top/shirt1.png,product/clothes/top/shirt2.png,product/clothes/top/shirt3.png',
-            'trademark_id' => 1,
-            'quantity' => 52,
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Áo thun không cổ HUGO BOSS',
-            'slug' => 'ao-thun-khong-co-hugo-boss',
-            'short_description' => "<li>Category：Men's Wear   Clothing  Women’s Wear</li>",
-            'description' => "<li>Category：Men's Wear   Clothing  Women’s Wear</li>
-<li>T-Shirts</li>
-<li>-Color：Black , White , Red, Blue, Yellow,Pink</li>
-<li>-Sizes: XS  S M L XL  XXL  3XL </li>
-<li>-If you like loose, please take a big size.</li>
-<li>-Ships From:China</li>
-<li>-Transportation time：It takes about 5-20 days, depending on the speed of logistics</li>
-<li>-Product Description</li>
-<li>-Brand New T-shirt </li>
-<li>-Various tide brands</li>
-<li>-We are committed to providing you with the best quality products at the best prices.</li>
-",
-            'cost_price' => 300000,
-            'regular_price' => 599000,
-            'discount' => null,
-            'image' => 'product/clothes/top/shirt4.png',
-            'images' => 'product/clothes/top/shirt1.png,product/clothes/top/shirt2.png,product/clothes/top/shirt3.png',
-            'trademark_id' => 1,
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Áo T-shirt HUGO BOSS',
-            'slug' => 'ao-t-shirt-hugo-boss',
-            'short_description' => "<li>Category：Men's Wear   Clothing  Women’s Wear</li>",
-            'description' => "<li>Category：Men's Wear   Clothing  Women’s Wear</li>
-<li>T-Shirts</li>
-<li>-Color：Black , White , Red, Blue, Yellow,Pink</li>
-<li>-Sizes: XS  S M L XL  XXL  3XL </li>
-<li>-If you like loose, please take a big size.</li>
-<li>-Ships From:China</li>
-<li>-Transportation time：It takes about 5-20 days, depending on the speed of logistics</li>
-<li>-Product Description</li>
-<li>-Brand New T-shirt </li>
-<li>-Various tide brands</li>
-<li>-We are committed to providing you with the best quality products at the best prices.</li>
-",
-            'cost_price' => 175000,
-            'regular_price' => 349000,
-            'discount' => null,
-            'image' => 'product/clothes/top/shirt2.png',
-            'images' => 'product/clothes/top/shirt1.png,product/clothes/top/shirt2.png,product/clothes/top/shirt3.png',
-            'trademark_id' => 1,
-            'quantity' => 97,
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Áo sơ mi nam tay dài CÔNG SỞ LADOS',
-            'slug' => 'ao-so-mi-nam-tay-dai-cong-so-lados',
-            'short_description' => "<li>chất vải mát mịn chống nhăn</li>",
-            'description' => "
-<li> Chất liệu: vải kate lụa mịn mềm, thấm hút mồ hôi tốt.</li>
-<li> Co giãn nhẹ, mặc cực thoải mái, ít nhăn</li>
-<li> Chất vải đẹp, không xù lông, không phai màu</li>
-<li> Đường may cực tỉ mỉ cực đẹp</li>
-<li> Có thể mặc đi làm, đi chơi, dễ phối đồ, không kén người mặc</li>
-<li> Kiểu dáng: Thiết kế theo form rộng vừa,đơn giản , dễ mặc ..Tôn lên được sự trẻ trung năng động cho các bạn nam, kèm vào đó là sự hoạt động thoải mái khi mặc sản phẩm.</li>
-</li>Được sản xuất và bảo hành bởi Công ty TNHH MTV LADOS VIỆT NAM</li>
-",
-            'cost_price' => 800000,
-            'regular_price' => 1600000,
-            'discount' => 15,
-            'image' => 'product/clothes/shirt/ao-so-mi-lados.jpg',
-            'images' => '',
-            'trademark_id' => 2,
-            'is_feature' => 1,
-            'quantity' => 31,
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Áo Vest Nam Thời Trang The Shirts Studio Hàn Quốc',
-            'slug' => 'ao-vest-nam-thoi-trang-the-shirt-studio-han-quoc',
-            'short_description' => "",
-            'description' => "
-<li> Hàng nhập khẩu trực tiếp chính hãng từ Hàn Quốc.</li>
-<li> Thiết kế đẹp mắt hợp thời trang, kiểu dáng trẻ trung. </li>
-<li> Bộ Vest The Shirt Studio là dòng sản phẩm cao cấp,được thiết kế,may đo theo xu hướng hiện đại ,lịch lãm ,kiểu dáng body khoẻ khoắn.</li>
-<li> <ul>Hướng dẫn bảo quản:<li> Giặt máy bằng nước lạnh</li><li> Không sử dụng chất tẩy mạnh.</li><li> Ủi nhẹ ở nhiệt độ tối đa 110°C.</li></ul></li>
-</li> Thông tin thương hiệu The Shirt Studio là thương hiệu thời trang rất được giới trẻ ưa chuộng. Khác với những thương hiệu thời trang thông thường, The Shirt Studio không chú trọng vào những thiết kế mang tính thời thượng mà chỉ tập trung phát triển những mẫu trang phục cơ bản nhất, dễ phối đồ và luôn cần có trong tủ quần áo của các đấng mày râu. Thêm vào đó, sự khác biệt của The Shirt Studio còn thể hiện rõ nét thông qua chất liệu vải được tuyển chọn, xử lý kỹ lưỡng , thân thiện với môi trường, kết hợp cùng kiểu dáng không bao giờ lỗi mốt và những đường cắt may tinh xảo</li>
-",
-            'cost_price' => 600000,
-            'regular_price' => 11999000,
-            'discount' => 10,
-            'image' => 'product/clothes/vest/vest-nam-han-quoc.jpg',
-            'images' => '',
-            'trademark_id' => 3,
-            'quantity' => 152,
-            'is_feature' => 1,
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Quần tây nam co giãn nhẹ Lados',
-            'slug' => 'quan-tay-nam-co-gian-nhe-lados',
-            'short_description' => "",
-            'description' => "<h3>Quần tây nam chất lượng LADOS - 327, chất vải dày dặn co giãn nhẹ, form slimfit </h3>
-                <h4>⏩ Thông tin sản phẩm:</h4>
-                👉 Chất liệu: Chất Vải dày, Không nhăn <br>
-                👉 Co giãn nhẹ, đặc biệt không nhăn<br>
-                👉 Chất vải đẹp, không xù lông, không phai màu<br>
-                👉 Đường may cực tỉ mỉ cực đẹp<br>
-                👉 Có thể mặc đi làm, đi chơi, dễ phối đồ, không kén người mặc<br>
-                👉 Kiểu dáng: Thiết kế theo form Slimfit , dáng gọn, tôn dám trẻ trung- thông số phù hợp với người việt nam<br>
-                ⏩Được sản xuất và bảo hành bởi Công ty TNHH MTV LADOS VIỆT NAM<br>
-                <br><br>
-                <h4>XEM CÁCH CHỌN SIZE TRÊN HÌNH ĐỂ ĐƯỢC CHÍNH XÁC NHẤT</h4>
-                ⏩  Cách chọn size: Shop có bảng size mẫu. <br>
-                Size 28 : 47kg-52kg<br>
-                Size 29 : 50kg-57kg<br>
-                Size 30 : 55kg-62kg<br>
-                Size 31 : 60kg-67kg<br>
-                Size 32 : 65kg-70kg<br>
-                Size 34 : 67kg-72kg<br>
-                Size 36 : 72kg-78kg",
-            'cost_price' => 100000,
-            'regular_price' => 299000,
-            'discount' => 15,
-            'image' => 'product/quan-tay-nam-co-gian-nhe-lados.jpg',
-            'images' => '',
-            'trademark_id' => 3,
-            'quantity' => 527,
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Quần tây kẻ kiểu dáng Hàn Quốc',
-            'slug' => 'quan-tay-ke-kieu-dang-han-quoc',
-            'short_description' => "",
-            'description' => "<h3>Quần tây nam kẻ kiểu dáng Hàn Quốc </h3>
-                <h4>⏩ Thông tin sản phẩm:</h4>
-                👉 Chất liệu: Chất Vải dày, Không nhăn <br>
-                👉 Co giãn nhẹ, đặc biệt không nhăn<br>
-                👉 Chất vải đẹp, không xù lông, không phai màu<br>
-                👉 Đường may cực tỉ mỉ cực đẹp<br>
-                👉 Có thể mặc đi làm, đi chơi, dễ phối đồ, không kén người mặc<br>
-                👉 Kiểu dáng: Thiết kế theo form Slimfit , dáng gọn, tôn dám trẻ trung- thông số phù hợp với người việt nam<br>
-                <br><br>
-                <h4>XEM CÁCH CHỌN SIZE TRÊN HÌNH ĐỂ ĐƯỢC CHÍNH XÁC NHẤT</h4>
-                ⏩  Cách chọn size: Shop có bảng size mẫu. <br>
-                Size 28 : 47kg-52kg<br>
-                Size 29 : 50kg-57kg<br>
-                Size 30 : 55kg-62kg<br>
-                Size 31 : 60kg-67kg<br>
-                Size 32 : 65kg-70kg<br>
-                Size 34 : 67kg-72kg<br>
-                Size 36 : 72kg-78kg",
-            'cost_price' => 150000,
-            'regular_price' => 350000,
-            'discount' => 20,
-            'image' => 'product/quan-tay-ke-kieu-dang-han-quoc.jpg',
-            'images' => '',
-            'trademark_id' => 3,
-            'quantity' => 326,
-            'hide' => 1,
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Áo vest nam The Shirt Studio F4',
-            'slug' => 'ao-vest-nam-the-shirt-studio-f4',
-            'short_description' => "",
-            'description' => "<h3>Áo vest nam The Shirt Studio F4 </h3>
-                <h4>⏩ Thông tin sản phẩm:</h4>
-                👉 Chất liệu: Chất Vải dày, Không nhăn <br>
-                👉 Chất vải đẹp, không xù, không phai màu<br>
-                👉 Đường may cực tỉ mỉ cực đẹp<br>
-                👉 Có thể mặc đi làm, đi chơi, dễ phối đồ, không kén người mặc<br>
-                👉 Kiểu dáng: Thiết kế dáng gọn, tôn dáng trẻ trung- thông số phù hợp với người Việt Nam<br>
-                <br><br>
-                <h4>XEM CÁCH CHỌN SIZE TRÊN HÌNH ĐỂ ĐƯỢC CHÍNH XÁC NHẤT</h4>
-                ⏩  Cách chọn size: Shop có bảng size mẫu. <br>
-                Size 28 : 47kg-52kg<br>
-                Size 29 : 50kg-57kg<br>
-                Size 30 : 55kg-62kg<br>
-                Size 31 : 60kg-67kg<br>
-                Size 32 : 65kg-70kg<br>
-                Size 34 : 67kg-72kg<br>
-                Size 36 : 72kg-78kg",
-            'cost_price' => 140000,
-            'regular_price' => 290000,
-            'discount' => 10,
-            'image' => 'product/ao-vest-nam-the-shirt-studio-f4.jpg',
-            'images' => '',
-            'trademark_id' => 3,
-            'quantity' => 126,
-            'hide' => 1,
             'admin_id' => 1,
         ],
     ];
@@ -380,8 +124,10 @@ class SampleData
         foreach (self::$productInforArr as $values) {
             $product = new Product();
             $product->name = $values['name'];
-            $product->slug = $values['slug'];
-            $product->short_description = $values['short_description'];
+            $product->slug = StringHelper::toSlug($values['name']);
+            if(!empty($values['short_description'])) {
+                $product->short_description = $values['short_description'];
+            }
             $product->description = $values['description'];
             $product->cost_price = $values['cost_price'];
             $product->regular_price = $values['regular_price'];
@@ -405,16 +151,13 @@ class SampleData
             if (!empty($values['quantity'])) {
                 $product->quantity = $values['quantity'];
             }
-            if (!empty($values['hide'])) {
-                $product->hide = $values['hide'];
-            }
             if (!empty($values['is_feature'])) {
                 $product->is_feature = $values['is_feature'];
             }
             $product->created_at = date('Y-m-d H:m:s');
             $product->updated_at = date('Y-m-d H:m:s');
             $product->admin_id = $values['admin_id'];
-            if ($product->save()) {
+            if ($product->save(false)) {
                 $countProduct++;
             }
         }
@@ -424,82 +167,8 @@ class SampleData
     protected static $productAssocInfoArr = [
         [
             'product_id' => '1',
-            'type_id' => '2',
-            'category_id' => '2',
-            'color_id' => '1,2',
-            'size_id' => '3,4,5,6',
-            'admin_id' => 1,
-        ],
-        [
-            'product_id' => '2',
-            'type_id' => '2',
-            'category_id' => '2',
-            'color_id' => '1,2',
-            'size_id' => '3,4,5,6',
-            'admin_id' => 1,
-        ],
-        [
-            'product_id' => '3',
-            'type_id' => '2',
-            'category_id' => '2',
-            'color_id' => '1,2',
-            'size_id' => '3,4,5,6',
-            'admin_id' => 1,
-        ],
-        [
-            'product_id' => '4',
-            'type_id' => '2',
-            'category_id' => '2',
-            'color_id' => '1,2',
-            'size_id' => '3,4,5,6,7',
-            'admin_id' => 1,
-        ],
-        [
-            'product_id' => '5',
-            'type_id' => '2',
-            'category_id' => '2',
-            'color_id' => '1,2,6',
-            'size_id' => '3,4,5,6',
-            'admin_id' => 1,
-        ],
-        [
-            'product_id' => '6',
-            'type_id' => '2,4',
+            'type_id' => ',1,',
             'category_id' => '1',
-            'color_id' => '1,6,7',
-            'size_id' => '3,4,5,6',
-            'admin_id' => 1,
-        ],
-        [
-            'product_id' => '7',
-            'type_id' => '2,4',
-            'category_id' => '3',
-            'color_id' => '2,11,12',
-            'size_id' => '3,4,5,6',
-            'admin_id' => 1,
-        ],
-        [
-            'product_id' => '8',
-            'type_id' => '4,5',
-            'category_id' => '4',
-            'color_id' => '3,7',
-            'size_id' => '8,9,10',
-            'admin_id' => 1,
-        ],
-        [
-            'product_id' => '9',
-            'type_id' => '4,5',
-            'category_id' => '4',
-            'color_id' => '7',
-            'size_id' => '8,9,10',
-            'admin_id' => 1,
-        ],
-        [
-            'product_id' => '10',
-            'type_id' => '2,4',
-            'category_id' => '4',
-            'color_id' => '8,14',
-            'size_id' => '8,9,10',
             'admin_id' => 1,
         ],
     ];
@@ -512,12 +181,6 @@ class SampleData
             $assoc->product_id = $values['product_id'];
             $assoc->type_id = $values['type_id'];
             $assoc->category_id = $values['category_id'];
-            if (!empty($values['color_id'])) {
-                $assoc->color_id = $values['color_id'];
-            }
-            if (!empty($values['size_id'])) {
-                $assoc->size_id = $values['size_id'];
-            }
             $assoc->created_at = date('Y-m-d H:m:s');
             $assoc->updated_at = date('Y-m-d H:m:s');
             $assoc->admin_id = $values['admin_id'];
@@ -534,33 +197,8 @@ class SampleData
      */
     protected static $productCategoryInfoArr = [
         [
-            'name' => 'Áo thun',
-            'slug' => 'ao-thun',
-            'type_id' => '2',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Áo Vest',
-            'slug' => 'ao-vest',
-            'type_id' => '2,4',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Quần âu',
-            'slug' => 'quan-au',
-            'type_id' => '4,5',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Dây lưng',
-            'slug' => 'day-lung',
-            'type_id' => '3,4',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Giày',
-            'slug' => 'giay',
-            'type_id' => '3,4',
+            'name' => 'HDCVI',
+            'type_id' => '1',
             'admin_id' => 1,
         ],
     ];
@@ -574,7 +212,7 @@ class SampleData
         foreach (self::$productCategoryInfoArr as $values) {
             $category = new ProductCategory();
             $category->name = $values['name'];
-            $category->slug = $values['slug'];
+            $category->slug = StringHelper::toSlug($values['name']);
             $category->type_id = $values['type_id'];
             $category->created_at = date('Y-m-d H:m:s');
             $category->updated_at = date('Y-m-d H:m:s');
@@ -591,52 +229,8 @@ class SampleData
      */
     protected static $arrProductType = [
         [
-            'name' => 'New arrival',
-            'slug' => 'new-arrival',
-            'image' => 'type/brand2.jpg',
-            'shop_show' => 1,
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Tailor-made',
-            'slug' => 'tailor-made',
-            'image' => 'type/gift.jpg',
-            'segment' => 1,
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Collections',
-            'slug' => 'mix-and-match',
-            'image' => 'type/gift.jpg',
-            'segment' => 1,
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Áo sơ mi',
-            'slug' => 'ao-so-mi',
-            'image' => 'type/vest-nam-den.jpg',
-            'shop_show' => 1,
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Quần',
-            'slug' => 'quan',
-            'image' => 'type/quan-tay-ong-rong.jpg',
-            'shop_show' => 1,
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Phụ kiện',
-            'slug' => 'phu-kien',
-            'image' => 'type/GLT_1219.jpeg',
-            'shop_show' => 1,
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'Quà tặng',
-            'slug' => 'qua-tang',
-            'image' => 'type/gift.jpg',
-            'shop_show' => 1,
+            'name' => 'Camera',
+            'image' => 'product/camera/dahua/hdcvi/DH-HAC-HDBW1400EP-S2.png',
             'admin_id' => 1,
         ],
     ];
@@ -650,14 +244,8 @@ class SampleData
         foreach (self::$arrProductType as $value) {
             $model = new ProductType();
             $model->name = $value['name'];
-            $model->slug = $value['slug'];
+            $model->slug = StringHelper::toSlug($value['name']);
             $model->image = $value['image'];
-            if (!empty($value['shop_show'])) {
-                $model->shop_show = $value['shop_show'];
-            }
-            if (!empty($value['segment'])) {
-                $model->segment = $value['segment'];
-            }
             $model->admin_id = $value['admin_id'];
             $model->created_at = date('Y-m-d H:m:s');
             $model->updated_at = date('Y-m-d H:m:s');
@@ -674,18 +262,7 @@ class SampleData
      */
     protected static $trademarkInfoArr = [
         [
-            'name' => 'HUGO',
-            'slug' => 'hugo',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'LADOS',
-            'slug' => 'lados',
-            'admin_id' => 1,
-        ],
-        [
-            'name' => 'The Shirt Studio',
-            'slug' => 'the-shirt-studio',
+            'name' => 'DAHUA',
             'admin_id' => 1,
         ],
     ];
@@ -699,7 +276,7 @@ class SampleData
         foreach (self::$trademarkInfoArr as $values) {
             $trademark = new Trademark();
             $trademark->name = $values['name'];
-            $trademark->slug = $values['slug'];
+            $trademark->slug = StringHelper::toSlug($values['name']);
             $trademark->created_at = date('Y-m-d H:m:s');
             $trademark->updated_at = date('Y-m-d H:m:s');
             $trademark->admin_id = $values['admin_id'];
@@ -2254,14 +1831,14 @@ class SampleData
     public static function importAllSampleData()
     {
         self::insertSampleUser();
-//        self::insertSampleProduct();
-//        self::insertSampleProductAssoc();
-//        self::insertSampleProductType();
-//        self::insertSampleProductCategory();
-//        self::insertSampleTrademark();
-//        self::insertSamplePost();
-//        self::insertSamplePostTag();
-//        self::insertSamplePostCategory();
+        self::insertSampleProduct();
+        self::insertSampleProductAssoc();
+        self::insertSampleProductType();
+        self::insertSampleProductCategory();
+        self::insertSampleTrademark();
+        self::insertSamplePost();
+        self::insertSamplePostTag();
+        self::insertSamplePostCategory();
         self::insertSampleTerms();
 //        self::insertSampleCart();
 //        self::insertSampleSocialNetwork();
