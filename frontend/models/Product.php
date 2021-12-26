@@ -4,6 +4,7 @@ namespace frontend\models;
 
 use common\components\SystemConstant;
 use Yii;
+use yii\db\Expression;
 use yii\db\Query;
 
 /**
@@ -115,6 +116,22 @@ class Product extends \common\models\Product
     }
 
     /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function getBestSellingProduct($otherId, $limit)
+    {
+        return Product::find()->where(['status' => 1])->andWhere(['not', ['id' => $otherId]])->orderBy(['sold DESC'])->orderBy(new Expression('rand()'))->limit($limit)->all();
+    }
+
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function getOnSaleProduct($otherId, $limit)
+    {
+        return Product::find()->where(['status' => 1])->andWhere(['not', ['id' => $otherId]])->andWhere(['not', ['sale_price' => null]])->andWhere(['not', ['sale_price' => 0]])->orderBy(new Expression('rand()'))->limit($limit)->all();
+    }
+
+    /**
      * @param $id
      * @return array
      */
@@ -124,12 +141,39 @@ class Product extends \common\models\Product
             [
                 'product.*',
                 'product_assoc.type_id as assoc_type_id',
-                'product_assoc.color_id as assoc_color_id',
-                'product_assoc.size_id as assoc_size_id',
             ]
         )->from('product')
             ->leftJoin('product_assoc', 'product_assoc.product_id = product.id')
             ->where(['product.status' => 1, 'product.id' => $id]);
         return $query->one();
+    }
+
+    /**
+     * @param $id
+     * @return false|int|string|null
+     */
+    public static function getPriceProductById($id)
+    {
+        return Product::find()->select('selling_price')->where(['status' => SystemConstant::STATUS_ACTIVE, 'id' => $id])->asArray()->scalar();
+    }
+
+    /**
+     * @param $id
+     * @return false|int|string|null
+     */
+    public static function getProductQuantityById($id)
+    {
+        return Product::find()->select('quantity')->where(['status' => SystemConstant::STATUS_ACTIVE, 'id' => $id])->asArray()->scalar();
+    }
+
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function getLatestProduct()
+    {
+        return Product::find()->where([
+            'status' => SystemConstant::STATUS_ACTIVE
+        ])->orderBy('created_at DESC')
+            ->limit(6)->asArray()->all();
     }
 }

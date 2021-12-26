@@ -85,32 +85,32 @@ function requestData() {
     });
 }
 
-function responsive() {
-    $('#bestsellers .product-card').removeClass('d-none');
-    $('#onSale .product-card').removeClass('d-none');
-    if (window.matchMedia('(min-width: 1200px) and (max-width: 1400px)').matches || window.matchMedia('(min-width: 576px) and (max-width: 992px)').matches) {
-        if ($('#bestsellers .product-card').length > 4) {
-            $("#bestsellers .product-card:last").addClass('d-none');
-        }
-        if ($('#onSale .product-card').length > 4) {
-            $("#onSale .product-card:last").addClass('d-none');
-        }
-    } else if (window.matchMedia('(min-width: 992px) and (max-width: 1200px)').matches || window.matchMedia('(max-width: 576px)').matches) {
-        if ($('#bestsellers .product-card').length > 3) {
-            $("#bestsellers .product-card:first, #bestsellers .product-card:last").addClass('d-none');
-        }
-        if ($('#onSale .product-card').length > 3) {
-            $("#onSale .product-card:first, #onSale .product-card:last").addClass('d-none');
-        }
-    }
-}
+// function responsive() {
+//     $('#bestsellers .product-card').removeClass('d-none');
+//     $('#onSale .product-card').removeClass('d-none');
+//     if (window.matchMedia('(min-width: 1200px) and (max-width: 1400px)').matches || window.matchMedia('(min-width: 576px) and (max-width: 992px)').matches) {
+//         if ($('#bestsellers .product-card').length > 4) {
+//             $("#bestsellers .product-card:last").addClass('d-none');
+//         }
+//         if ($('#onSale .product-card').length > 4) {
+//             $("#onSale .product-card:last").addClass('d-none');
+//         }
+//     } else if (window.matchMedia('(min-width: 992px) and (max-width: 1200px)').matches || window.matchMedia('(max-width: 576px)').matches) {
+//         if ($('#bestsellers .product-card').length > 3) {
+//             $("#bestsellers .product-card:first, #bestsellers .product-card:last").addClass('d-none');
+//         }
+//         if ($('#onSale .product-card').length > 3) {
+//             $("#onSale .product-card:first, #onSale .product-card:last").addClass('d-none');
+//         }
+//     }
+// }
 
-$(document).ready(function () {
-    responsive();
-});
-$(window).resize(function () {
-    responsive();
-});
+// $(document).ready(function () {
+//     responsive();
+// });
+// $(window).resize(function () {
+//     responsive();
+// });
 //accept press number into input
 $("#amountInput").keypress(function (e) {
     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {

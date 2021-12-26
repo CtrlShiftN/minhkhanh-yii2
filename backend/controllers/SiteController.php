@@ -77,21 +77,17 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-//        $latestProduct = Product::find()->where(['status' => SystemConstant::STATUS_ACTIVE])->orderBy('created_at DESC')->limit(5)->asArray()->all();
-//        $latestOrders = Order::getLatestOrder(5);
-//        $statusBG = Order::getStatusColor();
-//        $totalActiveUsers = User::find()->where(['status' => SystemConstant::STATUS_ACTIVE])->count();
-//        $totalOrders = Order::find()->where(['<=', 'status', 4])->count();
-//        $totalTailor = TailorMadeOrder::find()->where(['status' => SystemConstant::STATUS_ACTIVE])->count();
-//        $totalMix = MixAndMatch::find()->where(['status' => SystemConstant::STATUS_ACTIVE])->count();
+        $latestProduct = Product::find()->where(['status' => SystemConstant::STATUS_ACTIVE])->orderBy('created_at DESC')->limit(5)->asArray()->all();
+        $latestOrders = Order::getLatestOrder(5);
+        $statusBG = Order::getStatusColor();
+        $totalActiveUsers = User::find()->where(['status' => SystemConstant::STATUS_ACTIVE])->count();
+        $totalOrders = Order::find()->where(['<=', 'status', 4])->count();
         return $this->render('index', [
-//            'products' => $latestProduct,
-//            'orders' => $latestOrders,
-//            'statusBG' => $statusBG,
-//            'totalActiveUsers' => $totalActiveUsers,
-//            'totalOrder' => $totalOrders,
-//            'totalTailor' => $totalTailor,
-//            'totalMix' => $totalMix
+            'products' => $latestProduct,
+            'orders' => $latestOrders,
+            'statusBG' => $statusBG,
+            'totalActiveUsers' => $totalActiveUsers,
+            'totalOrder' => $totalOrders,
         ]);
     }
 

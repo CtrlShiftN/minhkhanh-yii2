@@ -5,6 +5,10 @@ namespace common\components\importsample;
 use common\components\encrypt\CryptHelper;
 use common\components\helpers\StringHelper;
 use common\components\SystemConstant;
+use common\models\Cart;
+use common\models\GeoLocation;
+use common\models\Order;
+use common\models\OrderTracking;
 use common\models\Post;
 use common\models\PostCategory;
 use common\models\PostTag;
@@ -13,6 +17,7 @@ use common\models\ProductAssoc;
 use common\models\ProductCategory;
 use common\models\ProductType;
 use common\models\Terms;
+use common\models\TrackingStatus;
 use common\models\Trademark;
 use common\models\User;
 use phpDocumentor\Reflection\Types\Self_;
@@ -106,10 +111,94 @@ class SampleData
             'description' => ' <li>Camera vỏ hỗ trợ HDCVI/HDTVI/AHD/ANALOG, tích hợp OSD </li><li>Độ phân giải 2Megapixel cảm biến CMOS kích thước 1/2.7", 30fps@1080P </li><li>Thời gian thực không trễ hình, độ nhạy sáng tối thiểu 0.01Lux@F1.2(0Lux IR LED on), chế độ ngày đêm(ICR), tự động cân bằng trắng (AWB), tự động bù sáng (AGC), chống ngược sáng(BLC), chống nhiễu (2D-DNR)</li><li>Tầm xa hồng ngoại 30m với công nghệ hồng ngoại thông minh </li><li>Ống kính cố định 3.6mm, chuẩn kháng nước IP67, vỏ kim loại</li>',
             'cost_price' => 15000000,
             'regular_price' => 29900000,
-            'discount' => null,
+            'discount' => 10,
             'image' => 'product/camera/dahua/hdcvi/DH-HAC-HDBW1400EP-S2.png',
             'images' => 'product/camera/dahua/hdcvi/DH-HAC-HDBW1400EP-S2.png',
             'quantity' => 6312,
+            'trademark_id' => 1,
+            'admin_id' => 1,
+        ],
+        [
+            'name' => 'Camera DAHUA HDBW-1500EP-S2',
+            'description' => ' <li>Camera vỏ hỗ trợ HDCVI/HDTVI/AHD/ANALOG, tích hợp OSD </li><li>Độ phân giải 2Megapixel cảm biến CMOS kích thước 1/2.7", 30fps@1080P </li><li>Thời gian thực không trễ hình, độ nhạy sáng tối thiểu 0.01Lux@F1.2(0Lux IR LED on), chế độ ngày đêm(ICR), tự động cân bằng trắng (AWB), tự động bù sáng (AGC), chống ngược sáng(BLC), chống nhiễu (2D-DNR)</li><li>Tầm xa hồng ngoại 30m với công nghệ hồng ngoại thông minh </li><li>Ống kính cố định 3.6mm, chuẩn kháng nước IP67, vỏ kim loại</li>',
+            'cost_price' => 5000000,
+            'regular_price' => 9900000,
+            'discount' => 5,
+            'image' => 'product/camera/dahua/hdcvi/DH-HAC-HDBW1500EP.png',
+            'images' => 'product/camera/dahua/hdcvi/DH-HAC-HDBW1500EP.png',
+            'quantity' => 612,
+            'trademark_id' => 1,
+            'admin_id' => 1,
+        ],
+        [
+            'name' => 'Camera DAHUA HDW1400EMP-A-S2',
+            'description' => ' <li>Camera vỏ hỗ trợ HDCVI/HDTVI/AHD/ANALOG, tích hợp OSD </li><li>Độ phân giải 2Megapixel cảm biến CMOS kích thước 1/2.7", 30fps@1080P </li><li>Thời gian thực không trễ hình, độ nhạy sáng tối thiểu 0.01Lux@F1.2(0Lux IR LED on), chế độ ngày đêm(ICR), tự động cân bằng trắng (AWB), tự động bù sáng (AGC), chống ngược sáng(BLC), chống nhiễu (2D-DNR)</li><li>Tầm xa hồng ngoại 30m với công nghệ hồng ngoại thông minh </li><li>Ống kính cố định 3.6mm, chuẩn kháng nước IP67, vỏ kim loại</li>',
+            'cost_price' => 15000000,
+            'regular_price' => 19900000,
+            'discount' => 25,
+            'image' => 'product/camera/dahua/hdcvi/DH-HAC-HDW1400EMP-A-S2.png',
+            'images' => 'product/camera/dahua/hdcvi/DH-HAC-HDW1400EMP-A-S2.png',
+            'quantity' => 612,
+            'trademark_id' => 1,
+            'admin_id' => 1,
+        ],
+        [
+            'name' => 'Camera DAHUA HDBW-1500RP-Z',
+            'description' => ' <li>Camera vỏ hỗ trợ HDCVI/HDTVI/AHD/ANALOG, tích hợp OSD </li><li>Độ phân giải 2Megapixel cảm biến CMOS kích thước 1/2.7", 30fps@1080P </li><li>Thời gian thực không trễ hình, độ nhạy sáng tối thiểu 0.01Lux@F1.2(0Lux IR LED on), chế độ ngày đêm(ICR), tự động cân bằng trắng (AWB), tự động bù sáng (AGC), chống ngược sáng(BLC), chống nhiễu (2D-DNR)</li><li>Tầm xa hồng ngoại 30m với công nghệ hồng ngoại thông minh </li><li>Ống kính cố định 3.6mm, chuẩn kháng nước IP67, vỏ kim loại</li>',
+            'cost_price' => 5000000,
+            'regular_price' => 9900000,
+            'discount' => 5,
+            'image' => 'product/camera/dahua/hdcvi/DH-HAC-HDBW1500RP-Z.png',
+            'images' => 'product/camera/dahua/hdcvi/DH-HAC-HDBW1500RP-Z.png',
+            'quantity' => 612,
+            'trademark_id' => 1,
+            'admin_id' => 1,
+        ],
+        [
+            'name' => 'Camera DAHUA HAC-HFW1200DP',
+            'description' => ' <li>Camera vỏ hỗ trợ HDCVI/HDTVI/AHD/ANALOG, tích hợp OSD </li><li>Độ phân giải 2Megapixel cảm biến CMOS kích thước 1/2.7", 30fps@1080P </li><li>Thời gian thực không trễ hình, độ nhạy sáng tối thiểu 0.01Lux@F1.2(0Lux IR LED on), chế độ ngày đêm(ICR), tự động cân bằng trắng (AWB), tự động bù sáng (AGC), chống ngược sáng(BLC), chống nhiễu (2D-DNR)</li><li>Tầm xa hồng ngoại 30m với công nghệ hồng ngoại thông minh </li><li>Ống kính cố định 3.6mm, chuẩn kháng nước IP67, vỏ kim loại</li>',
+            'cost_price' => 9000000,
+            'regular_price' => 17900000,
+            'discount' => 15,
+            'image' => 'product/camera/dahua/hdcvi/dh-hac-hfw1200dp-768x768-1595210649-1596783207.png',
+            'images' => 'product/camera/dahua/hdcvi/dh-hac-hfw1200dp-768x768-1595210649-1596783207.png',
+            'quantity' => 612,
+            'trademark_id' => 1,
+            'admin_id' => 1,
+        ],
+        [
+            'name' => 'Camera DAHUA HAC-HFW1400RP',
+            'description' => ' <li>Camera vỏ hỗ trợ HDCVI/HDTVI/AHD/ANALOG, tích hợp OSD </li><li>Độ phân giải 2Megapixel cảm biến CMOS kích thước 1/2.7", 30fps@1080P </li><li>Thời gian thực không trễ hình, độ nhạy sáng tối thiểu 0.01Lux@F1.2(0Lux IR LED on), chế độ ngày đêm(ICR), tự động cân bằng trắng (AWB), tự động bù sáng (AGC), chống ngược sáng(BLC), chống nhiễu (2D-DNR)</li><li>Tầm xa hồng ngoại 30m với công nghệ hồng ngoại thông minh </li><li>Ống kính cố định 3.6mm, chuẩn kháng nước IP67, vỏ kim loại</li>',
+            'cost_price' => 7000000,
+            'regular_price' => 13900000,
+            'discount' => 10,
+            'image' => 'product/camera/dahua/hdcvi/DH-HAC-HFW1400RP.png',
+            'images' => 'product/camera/dahua/hdcvi/DH-HAC-HFW1400SP.png',
+            'quantity' => 612,
+            'trademark_id' => 1,
+            'admin_id' => 1,
+        ],
+        [
+            'name' => 'Camera DAHUA HAC-HFW1400SP-S2',
+            'description' => ' <li>Camera vỏ hỗ trợ HDCVI/HDTVI/AHD/ANALOG, tích hợp OSD </li><li>Độ phân giải 2Megapixel cảm biến CMOS kích thước 1/2.7", 30fps@1080P </li><li>Thời gian thực không trễ hình, độ nhạy sáng tối thiểu 0.01Lux@F1.2(0Lux IR LED on), chế độ ngày đêm(ICR), tự động cân bằng trắng (AWB), tự động bù sáng (AGC), chống ngược sáng(BLC), chống nhiễu (2D-DNR)</li><li>Tầm xa hồng ngoại 30m với công nghệ hồng ngoại thông minh </li><li>Ống kính cố định 3.6mm, chuẩn kháng nước IP67, vỏ kim loại</li>',
+            'cost_price' => 7000000,
+            'regular_price' => 13900000,
+            'discount' => 15,
+            'image' => 'product/camera/dahua/hdcvi/DH-HAC-HFW1400SP-S2.png',
+            'images' => 'product/camera/dahua/hdcvi/DH-HAC-HFW1400SP-S2.png',
+            'quantity' => 612,
+            'trademark_id' => 1,
+            'admin_id' => 1,
+        ],
+        [
+            'name' => 'Camera DAHUA HAC-HFW1400DP-S2',
+            'description' => ' <li>Camera vỏ hỗ trợ HDCVI/HDTVI/AHD/ANALOG, tích hợp OSD </li><li>Độ phân giải 2Megapixel cảm biến CMOS kích thước 1/2.7", 30fps@1080P </li><li>Thời gian thực không trễ hình, độ nhạy sáng tối thiểu 0.01Lux@F1.2(0Lux IR LED on), chế độ ngày đêm(ICR), tự động cân bằng trắng (AWB), tự động bù sáng (AGC), chống ngược sáng(BLC), chống nhiễu (2D-DNR)</li><li>Tầm xa hồng ngoại 30m với công nghệ hồng ngoại thông minh </li><li>Ống kính cố định 3.6mm, chuẩn kháng nước IP67, vỏ kim loại</li>',
+            'cost_price' => 7000000,
+            'regular_price' => 14900000,
+            'discount' => 15,
+            'image' => 'product/camera/dahua/hdcvi/DH-HAC-HFW1400DP-S2.png',
+            'images' => 'product/camera/dahua/hdcvi/DH-HAC-HFW1400DP-S2.png',
+            'quantity' => 612,
             'trademark_id' => 1,
             'admin_id' => 1,
         ],
@@ -598,22 +687,16 @@ class SampleData
         [
             'user_id' => 4,
             'product_id' => '7',
-            'color_id' => 1,
-            'size_id' => 6,
             'quantity' => 3,
         ],
         [
             'user_id' => 4,
             'product_id' => '3',
-            'color_id' => 4,
-            'size_id' => 3,
             'quantity' => 4,
         ],
         [
             'user_id' => 4,
             'product_id' => '5',
-            'color_id' => 2,
-            'size_id' => 5,
             'quantity' => 2,
         ],
     ];
@@ -628,12 +711,6 @@ class SampleData
             $cart = new Cart();
             $cart->user_id = $value['user_id'];
             $cart->product_id = $value['product_id'];
-            if (!empty($value['color_id'])) {
-                $cart->color_id = $value['color_id'];
-            }
-            if (!empty($value['size_id'])) {
-                $cart->size_id = $value['size_id'];
-            }
             $cart->quantity = $value['quantity'];
             $cart->total_price = $value['quantity'] * \frontend\models\Product::getPriceProductById($value['product_id']);
             $cart->created_at = date('Y-m-d H:m:s');
@@ -652,8 +729,6 @@ class SampleData
         [
             'user_id' => 4,
             'product_id' => '7',
-            'color_id' => 1,
-            'size_id' => 6,
             'quantity' => 3,
             'province_id' => 1,
             'district_id' => 63,
@@ -668,8 +743,6 @@ class SampleData
         [
             'user_id' => 4,
             'product_id' => '8',
-            'color_id' => 1,
-            'size_id' => 5,
             'quantity' => 1,
             'province_id' => 1,
             'district_id' => 63,
@@ -684,8 +757,6 @@ class SampleData
         [
             'user_id' => 4,
             'product_id' => '5',
-            'color_id' => 2,
-            'size_id' => 6,
             'quantity' => 6,
             'province_id' => 1,
             'district_id' => 63,
@@ -700,8 +771,6 @@ class SampleData
         [
             'user_id' => 4,
             'product_id' => '3',
-            'color_id' => 2,
-            'size_id' => 4,
             'quantity' => 1,
             'tel' => '0334517566',
             'name' => 'Hoàng Thị Lý',
@@ -712,8 +781,6 @@ class SampleData
         [
             'user_id' => 5,
             'product_id' => '8',
-            'color_id' => 2,
-            'size_id' => 5,
             'quantity' => 1,
             'province_id' => 1,
             'district_id' => 63,
@@ -728,8 +795,6 @@ class SampleData
         [
             'user_id' => 5,
             'product_id' => '6',
-            'color_id' => 2,
-            'size_id' => 3,
             'quantity' => 2,
             'province_id' => 1,
             'district_id' => 63,
@@ -744,8 +809,6 @@ class SampleData
         [
             'user_id' => 5,
             'product_id' => '8',
-            'color_id' => 2,
-            'size_id' => 6,
             'quantity' => 1,
             'province_id' => 1,
             'district_id' => 63,
@@ -760,8 +823,6 @@ class SampleData
         [
             'user_id' => 5,
             'product_id' => '4',
-            'color_id' => 2,
-            'size_id' => 6,
             'quantity' => 1,
             'province_id' => 1,
             'district_id' => 63,
@@ -786,12 +847,6 @@ class SampleData
             $order->BL_code = 'DE'.date('YmdHis').chr(rand(97,122)).rand(1,9);
             $order->user_id = $value['user_id'];
             $order->product_id = $value['product_id'];
-            if (!empty($value['color_id'])) {
-                $order->color_id = $value['color_id'];
-            }
-            if (!empty($value['size_id'])) {
-                $order->size_id = $value['size_id'];
-            }
             $order->quantity = $value['quantity'];
             if ($value['logistic_method'] == 0) {
                 $order->province_id = $value['province_id'];
@@ -1840,12 +1895,11 @@ class SampleData
         self::insertSamplePostTag();
         self::insertSamplePostCategory();
         self::insertSampleTerms();
-//        self::insertSampleCart();
+        self::insertSampleCart();
 //        self::insertSampleSocialNetwork();
-//        self::insertSampleOurStories();
-//        self::insertSampleGeoLocation();
-//        self::insertSampleOrder();
-//        self::insertSampleOrderTracking();
-//        self::insertSampleTrackingStatus();
+        self::insertSampleGeoLocation();
+        self::insertSampleOrder();
+        self::insertSampleOrderTracking();
+        self::insertSampleTrackingStatus();
     }
 }

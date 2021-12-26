@@ -81,7 +81,7 @@ class ShopController extends Controller
     /**
      * @return string
      */
-    public function actionProductDetail()
+    public function actionDetail()
     {
         $getParamDetail = ParamHelper::getParamValue('detail');
         if (!empty($getParamDetail)) {
@@ -91,7 +91,7 @@ class ShopController extends Controller
             $model->viewed += 1;
             $model->save();
             if (!empty($productDetail)) {
-                return $this->render('product-detail', [
+                return $this->render('detail', [
                     'detail' => $productDetail,
                 ]);
             } else {

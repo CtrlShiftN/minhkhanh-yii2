@@ -196,7 +196,7 @@ $action = Yii::$app->controller->action->id;
                                                class="text-decoration-none text-light">
                                                 <i class="fas fa-shopping-cart"></i>
                                                 <span class='badge bg-light rounded-circle text-danger'
-                                                      id='lblCartCount'>1</span>
+                                                      id='lblCartCount'><?= count(\frontend\models\Cart::getCartByUserId(Yii::$app->user->identity->getId())) ?></span>
                                             </a>
                                         </div>
                                     </li>
