@@ -36,6 +36,7 @@ $action = Yii::$app->controller->action->id;
     </head>
     <body>
     <?php $this->beginBody() ?>
+    <?php $social = \frontend\models\Social::getAllSocialNetwork(); ?>
     <div id="wrapper">
         <div id="content">
 <!--            sidebar-->
@@ -337,7 +338,9 @@ $action = Yii::$app->controller->action->id;
                                                 class="ft-content"><?= Yii::t('app', 'Social networks') ?></span></li>
                                     <li>
                                         <div class="ft-social-network">
-                                            <a href="javascript:void(0)" class="mt-1"><i class="fab fa-facebook-f"></i></a>
+                                            <?php foreach ($social as $value): ?>
+                                                <a href="<?= $value['link'] ?>" class="mt-1"><?= $value['icon'] ?></a>
+                                            <?php endforeach; ?>
                                         </div>
                                     </li>
                                 </ul>

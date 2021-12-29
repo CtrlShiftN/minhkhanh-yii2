@@ -1896,7 +1896,7 @@ class SampleData
         self::insertSamplePostCategory();
         self::insertSampleTerms();
         self::insertSampleCart();
-//        self::insertSampleSocialNetwork();
+        self::insertSampleSocialNetwork();
         self::insertSampleGeoLocation();
         self::insertSampleOrder();
         self::insertSampleOrderTracking();

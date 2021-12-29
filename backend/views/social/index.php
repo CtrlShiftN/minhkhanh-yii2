@@ -6,15 +6,16 @@ use yii\helpers\Url;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\ContactSearch */
+/* @var $searchModel backend\models\SocialSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Contacts');
+$this->title = Yii::t('app', 'Socials');
+$arrStatus = [Yii::t('app', 'Inactive'), Yii::t('app', 'Active')];
 $this->params['breadcrumbs'][] = $this->title;
-$arrStatus = [Yii::t('app','Inactive'), Yii::t('app','Active')];
-$commonUrl = Yii::$app->params['common'];
+
 ?>
-<div class="contact-index">
+<div class="social-index">
+
     <div class="pt-3">
         <?php
         $defaultExportConfig = [
@@ -27,7 +28,7 @@ $commonUrl = Yii::$app->params['common'];
                 'showFooter' => true,
                 'showCaption' => true,
                 'filename' => 'grid-export',
-                'alertMsg' => Yii::t('app','The EXCEL export file will be generated for download.'),
+                'alertMsg' => Yii::t('app', 'The EXCEL export file will be generated for download.'),
                 'options' => ['title' => 'Microsoft Excel 95+'],
                 'mime' => 'application/vnd.ms-excel',
                 'config' => [
@@ -43,67 +44,55 @@ $commonUrl = Yii::$app->params['common'];
                 'headerOptions' => ['class' => 'kartik-sheet-style']
             ],
             [
-                'class' => 'kartik\grid\EditableColumn',
-                'attribute' => 'name',
-                'label' => Yii::t('app','Name'),
+                'attribute' => 'icon',
+                'label' => Yii::t('app', 'Icon'),
                 'vAlign' => 'middle',
                 'hAlign' => 'center',
+                'width' => '70px',
                 'value' => function ($model, $key, $index, $widget) {
-                    return $model['name'];
+                    return $model['icon'];
                 },
-                // edit field
-                'editableOptions' => [
-                    'asPopover' => false,
-                ],
+                'format' => 'raw',
+                'filter' => false,
+                'enableSorting' => false
             ],
             [
                 'class' => 'kartik\grid\EditableColumn',
-                'attribute' => 'email',
-                'label' => Yii::t('app','Email'),
+                'attribute' => 'icon',
+                'label' => Yii::t('app', 'Fontawesome Icon'),
                 'vAlign' => 'middle',
                 'hAlign' => 'center',
+                'width' => '150px',
                 'value' => function ($model, $key, $index, $widget) {
-                    return $model['email'];
+                    return $model['icon'];
                 },
                 // edit field
                 'editableOptions' => [
                     'asPopover' => false,
                 ],
+                'filter' => false,
+                'enableSorting' => false
             ],
             [
                 'class' => 'kartik\grid\EditableColumn',
-                'attribute' => 'tel',
-                'label' => Yii::t('app','Tel'),
+                'attribute' => 'link',
+                'label' => Yii::t('app', 'Link'),
                 'vAlign' => 'middle',
                 'hAlign' => 'center',
+                'width' => '150px',
                 'value' => function ($model, $key, $index, $widget) {
-                    return $model['tel'];
+                    return $model['link'];
                 },
                 // edit field
                 'editableOptions' => [
                     'asPopover' => false,
                 ],
-                'format'=>'raw'
-            ],
-            [
-                'class' => 'kartik\grid\EditableColumn',
-                'attribute' => 'content',
-                'label' => Yii::t('app','Content'),
-                'vAlign' => 'middle',
-                'hAlign' => 'center',
-                'value' => function ($model, $key, $index, $widget) {
-                    return $model['content'];
-                },
-                // edit field
-                'editableOptions' => [
-                    'asPopover' => false,
-                ],
-                'format'=>'raw'
+                'filter' => false,
             ],
             [
                 'class' => 'kartik\grid\EditableColumn',
                 'attribute' => 'status',
-                'label' => Yii::t('app','Status'),
+                'label' => Yii::t('app', 'Status'),
                 'vAlign' => 'middle',
                 'hAlign' => 'center',
                 'width' => '150px',
@@ -114,7 +103,7 @@ $commonUrl = Yii::$app->params['common'];
                     return [
                         'name' => 'status',
                         'asPopover' => false,
-                        'header' => Yii::t('app','Status'),
+                        'header' => Yii::t('app', 'Status'),
                         'size' => 'md',
                         'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
                         'data' => $arrStatus,
@@ -128,31 +117,30 @@ $commonUrl = Yii::$app->params['common'];
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
-                'filterInputOptions' => ['placeholder' => '-- '.Yii::t('app','Status').' --']
+                'filterInputOptions' => ['placeholder' => '-- ' . Yii::t('app', 'Status') . ' --']
             ],
             [
                 'attribute' => 'created_at',
-                'label' => Yii::t('app','Created_at'),
+                'label' => Yii::t('app', 'Created_at'),
                 'vAlign' => 'middle',
                 'hAlign' => 'center',
                 'filter' => false,
-                'width' => '200px',
+                'width' => '150px',
                 'format' => 'raw'
             ],
             [
-                'label' => Yii::t('app','Actions'),
+                'label' => Yii::t('app', 'Actions'),
                 'vAlign' => 'middle',
                 'hAlign' => 'center',
                 'width' => '150px',
                 'value' => function ($model, $key, $index, $widget) {
-                    return Html::a('Xóa', Url::toRoute(['contact/delete', 'id' => \common\components\encrypt\CryptHelper::encryptString($key)]), ['class' => 'btn btn-danger', 'data' => [
+                    return Html::a('Xóa', Url::toRoute(['social/delete', 'id' => \common\components\encrypt\CryptHelper::encryptString($key)]), ['class' => 'btn btn-danger', 'data' => [
                         'method' => 'post',
-                        'confirm' => Yii::t('app','Are you sure you want to delete this item?'),
+                        'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
                     ],]);
                 },
                 'format' => 'raw'
             ]
-
         ];
         Pjax::begin();
         echo GridView::widget([
@@ -167,7 +155,7 @@ $commonUrl = Yii::$app->params['common'];
             // set export properties
             'export' => [
                 'fontAwesome' => true,
-                'label' => '<i class="far fa-file-alt"></i> '.Yii::t('app','Export files'),
+                'label' => '<i class="far fa-file-alt"></i>  ' . Yii::t('app', 'Export files'),
             ],
             'responsive' => true,
             'persistResize' => false,
@@ -182,15 +170,42 @@ $commonUrl = Yii::$app->params['common'];
             'columns' => $gridColumns,
             'exportConfig' => $defaultExportConfig,
             'toolbar' => [
+                [
+                    'content' => Html::button('<i class="fas fa-plus"></i> ' . Yii::t('app', 'Add New Social Network'), [
+                        'value' => Url::toRoute('social/create'),
+                        'class' => 'btn btn-success',
+                        'id' => 'modalSocialButton',
+                        'data-bs-toggle' => 'modal',
+                        'data-bs-target' => '#modalSocial'
+                    ]),
+                    'options' => ['class' => 'btn-group mr-2']
+                ],
                 '{export}',
                 '{toggleData}',
             ],
             'panel' => [
                 'type' => GridView::TYPE_DEFAULT,
-                'heading' => Yii::t('app','Contacts'),
+                'heading' => Yii::t('app', 'Social Network List'),
             ],
         ]);
         Pjax::end();
         ?>
+        <!-- Modal -->
+        <div class="modal fade" id="modalSocial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"><?= Yii::t('app', 'Add New Social Network') ?></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body modal-social-content"></div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $('.modal-social-content').load($('#modalSocialButton').attr('value'));
+            });
+        </script>
     </div>
 </div>

@@ -6,15 +6,14 @@ use yii\helpers\Url;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\ContactSearch */
+/* @var $searchModel backend\models\TermsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Contacts');
+$this->title = Yii::t('app', 'Terms & Services');
 $this->params['breadcrumbs'][] = $this->title;
-$arrStatus = [Yii::t('app','Inactive'), Yii::t('app','Active')];
-$commonUrl = Yii::$app->params['common'];
+$arrStatus = [Yii::t('app', 'Inactive'), Yii::t('app', 'Active')];
 ?>
-<div class="contact-index">
+<div class="terms-index">
     <div class="pt-3">
         <?php
         $defaultExportConfig = [
@@ -27,7 +26,7 @@ $commonUrl = Yii::$app->params['common'];
                 'showFooter' => true,
                 'showCaption' => true,
                 'filename' => 'grid-export',
-                'alertMsg' => Yii::t('app','The EXCEL export file will be generated for download.'),
+                'alertMsg' => Yii::t('app', 'The EXCEL export file will be generated for download.'),
                 'options' => ['title' => 'Microsoft Excel 95+'],
                 'mime' => 'application/vnd.ms-excel',
                 'config' => [
@@ -43,70 +42,34 @@ $commonUrl = Yii::$app->params['common'];
                 'headerOptions' => ['class' => 'kartik-sheet-style']
             ],
             [
-                'class' => 'kartik\grid\EditableColumn',
-                'attribute' => 'name',
-                'label' => Yii::t('app','Name'),
+                'attribute' => 'title',
+                'label' => Yii::t('app', 'Title'),
                 'vAlign' => 'middle',
                 'hAlign' => 'center',
+                'width' => '75px',
                 'value' => function ($model, $key, $index, $widget) {
-                    return $model['name'];
+                    return $model['title'];
                 },
-                // edit field
-                'editableOptions' => [
-                    'asPopover' => false,
-                ],
             ],
             [
-                'class' => 'kartik\grid\EditableColumn',
-                'attribute' => 'email',
-                'label' => Yii::t('app','Email'),
-                'vAlign' => 'middle',
-                'hAlign' => 'center',
-                'value' => function ($model, $key, $index, $widget) {
-                    return $model['email'];
-                },
-                // edit field
-                'editableOptions' => [
-                    'asPopover' => false,
-                ],
-            ],
-            [
-                'class' => 'kartik\grid\EditableColumn',
-                'attribute' => 'tel',
-                'label' => Yii::t('app','Tel'),
-                'vAlign' => 'middle',
-                'hAlign' => 'center',
-                'value' => function ($model, $key, $index, $widget) {
-                    return $model['tel'];
-                },
-                // edit field
-                'editableOptions' => [
-                    'asPopover' => false,
-                ],
-                'format'=>'raw'
-            ],
-            [
-                'class' => 'kartik\grid\EditableColumn',
                 'attribute' => 'content',
-                'label' => Yii::t('app','Content'),
+                'label' => Yii::t('app', 'Content'),
                 'vAlign' => 'middle',
                 'hAlign' => 'center',
+                'width' => '200px',
+                'contentOptions' => ['style' => 'width:200px;'],
                 'value' => function ($model, $key, $index, $widget) {
-                    return $model['content'];
+                    return strip_tags($model['content']);
                 },
-                // edit field
-                'editableOptions' => [
-                    'asPopover' => false,
-                ],
-                'format'=>'raw'
             ],
             [
                 'class' => 'kartik\grid\EditableColumn',
                 'attribute' => 'status',
-                'label' => Yii::t('app','Status'),
+                'label' => Yii::t('app', 'Status'),
                 'vAlign' => 'middle',
                 'hAlign' => 'center',
-                'width' => '150px',
+                'width' => '50px',
+                'headerOptions' => ['style' => 'width:40px;'],
                 'value' => function ($model, $key, $index, $widget) use ($arrStatus) {
                     return $arrStatus[$model['status']];
                 },
@@ -114,7 +77,7 @@ $commonUrl = Yii::$app->params['common'];
                     return [
                         'name' => 'status',
                         'asPopover' => false,
-                        'header' => Yii::t('app','Status'),
+                        'header' => Yii::t('app', 'Status'),
                         'size' => 'md',
                         'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
                         'data' => $arrStatus,
@@ -128,27 +91,19 @@ $commonUrl = Yii::$app->params['common'];
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
-                'filterInputOptions' => ['placeholder' => '-- '.Yii::t('app','Status').' --']
+                'filterInputOptions' => ['placeholder' => '-- ' . Yii::t('app', 'Status') . ' --']
             ],
             [
-                'attribute' => 'created_at',
-                'label' => Yii::t('app','Created_at'),
+                'label' => Yii::t('app', 'Actions'),
                 'vAlign' => 'middle',
                 'hAlign' => 'center',
-                'filter' => false,
-                'width' => '200px',
-                'format' => 'raw'
-            ],
-            [
-                'label' => Yii::t('app','Actions'),
-                'vAlign' => 'middle',
-                'hAlign' => 'center',
-                'width' => '150px',
+                'contentOptions' => ['style' => 'width:40px;'],
                 'value' => function ($model, $key, $index, $widget) {
-                    return Html::a('Xóa', Url::toRoute(['contact/delete', 'id' => \common\components\encrypt\CryptHelper::encryptString($key)]), ['class' => 'btn btn-danger', 'data' => [
-                        'method' => 'post',
-                        'confirm' => Yii::t('app','Are you sure you want to delete this item?'),
-                    ],]);
+                    return Html::a('<i class="fas fa-eye"></i> ' . Yii::t('app', 'View'), Url::toRoute(['terms/view', 'id' => \common\components\encrypt\CryptHelper::encryptString($key)]), ['class' => 'btn btn-info mb-2', 'target' => '_blank']) . '<br/>' .
+                        Html::a('<i class="far fa-trash-alt"></i> ' . Yii::t('app', 'Delete'), Url::toRoute(['terms/delete', 'id' => \common\components\encrypt\CryptHelper::encryptString($key)]), ['class' => 'btn btn-danger mt-2', 'data' => [
+                            'method' => 'post',
+                            'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                        ],]);
                 },
                 'format' => 'raw'
             ]
@@ -167,7 +122,7 @@ $commonUrl = Yii::$app->params['common'];
             // set export properties
             'export' => [
                 'fontAwesome' => true,
-                'label' => '<i class="far fa-file-alt"></i> '.Yii::t('app','Export files'),
+                'label' => '<i class="far fa-file-alt"></i> ' . Yii::t('app', 'Export files'),
             ],
             'responsive' => true,
             'persistResize' => false,
@@ -182,15 +137,43 @@ $commonUrl = Yii::$app->params['common'];
             'columns' => $gridColumns,
             'exportConfig' => $defaultExportConfig,
             'toolbar' => [
+                [
+                    'content' => Html::button('<i class="fas fa-plus"></i> ' . Yii::t('app', 'Add Terms And Services'),
+                        [
+                            'value' => Url::toRoute('terms/create'),
+                            'class' => 'btn btn-success',
+                            'id' => 'modalTermsButton',
+                            'data-bs-toggle' => 'modal',
+                            'data-bs-target' => '#modalTerms'
+                        ]),
+                    'options' => ['class' => 'btn-group mr-2']
+                ],
                 '{export}',
                 '{toggleData}',
             ],
             'panel' => [
                 'type' => GridView::TYPE_DEFAULT,
-                'heading' => Yii::t('app','Contacts'),
+                'heading' => Yii::t('app', 'Terms And Services List'),
             ],
         ]);
         Pjax::end();
         ?>
+        <!-- Modal -->
+        <div class="modal fade" id="modalTerms" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"><?= $this->title ?></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body modal-tag-content"></div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $('.modal-tag-content').load($('#modalTermsButton').attr('value'));
+            });
+        </script>
     </div>
 </div>
