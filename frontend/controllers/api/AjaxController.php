@@ -138,15 +138,11 @@ class AjaxController extends ActiveController
         $user_id = Yii::$app->user->id;
         $id = intval(CryptHelper::decryptString(ParamHelper::getParamValue('id')));
         $productQuantity = Product::getProductQuantityById($id);
-        $color = intval(CryptHelper::decryptString(ParamHelper::getParamValue('color')));
-        $size = intval(CryptHelper::decryptString(ParamHelper::getParamValue('size')));
         $amount = intval(ParamHelper::getParamValue('amount'));
         $price = intval(ParamHelper::getParamValue('price'));
         $cart = \common\models\Cart::findOne([
             'user_id' => $user_id,
             'product_id' => $id,
-            'color_id' => $color,
-            'size_id' => $size,
             'status' => SystemConstant::STATUS_ACTIVE,
         ]);
         if (!empty($cart)) {
@@ -173,8 +169,6 @@ class AjaxController extends ActiveController
             $cartModel = new \common\models\Cart();
             $cartModel->user_id = $user_id;
             $cartModel->product_id = $id;
-            $cartModel->color_id = $color;
-            $cartModel->size_id = $size;
             $cartModel->quantity = $amount;
             $cartModel->total_price = $amount * $price;
             $cartModel->created_at = date('Y-m-d H:i:s');

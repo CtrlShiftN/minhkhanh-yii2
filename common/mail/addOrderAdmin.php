@@ -1,10 +1,10 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $user common\models\User */
-$siteContact = \common\models\SiteContact::find()->where(['status' => \common\components\SystemConstant::STATUS_ACTIVE])->asArray()->one();
 ?>
 <div class="password-reset">
     Kính chào quý khách,<br/>
@@ -16,8 +16,6 @@ $siteContact = \common\models\SiteContact::find()->where(['status' => \common\co
             <th style="text-align: center">Mã SKU</th>
             <th style="text-align: center;width:120px;height:auto">Ảnh</th>
             <th style="text-align: center">Tên sản phẩm</th>
-            <th style="text-align: center">Màu sắc</th>
-            <th style="text-align: center">Kích cỡ</th>
             <th style="text-align: center">Số lượng</th>
             <th style="text-align: center">Đơn giá</th>
         </tr>
@@ -34,8 +32,6 @@ $siteContact = \common\models\SiteContact::find()->where(['status' => \common\co
                          alt="<?= \common\models\Product::findOne($order['product_id'])['name'] ?>" style="width: 100%">
                 </a></td>
             <td style="padding-left: 10px"><?= \common\models\Product::findOne($order['product_id'])['name'] ?></td>
-            <td style="text-align: center"><?= \common\models\Color::findOne($order['color_id'])['name'] ?></td>
-            <td style="text-align: center"><?= \common\models\Size::findOne($order['size_id'])['name'] ?></td>
             <td style="text-align: center"><?= $order['quantity'] ?></td>
             <td style="text-align: center"><?= $order['quantity'] * $order['product_price'] ?></td>
             </tr>
@@ -48,18 +44,18 @@ $siteContact = \common\models\SiteContact::find()->where(['status' => \common\co
         <tr>
             <td style="width: 20%">
                 <a href="<?= Yii::$app->params['frontend'] ?>">
-                    <img src="<?= Yii::$app->params['common'] . '/media/' . $siteContact['logo_link'] ?>"
+                    <img src="<?= Url::toRoute('img/logo200.png') ?>"
                          alt="<?= Yii::$app->params['senderName'] ?>" style="width: 100%">
                 </a>
             </td>
             <td style="width: 80%">
                 <h4><?= Yii::$app->params['senderName'] ?></h4>
                 <p>Hotline: <a style="text-decoration: none; color: #0b2e13"
-                               href="tel:<?= $siteContact['tel'] ?>"><?= $siteContact['tel'] ?></a></p>
+                               href="tel:<?= Yii::$app->params['adminTel'] ?>"><?= Yii::$app->params['adminTel'] ?></a></p>
                 <p>Email: <a style="text-decoration: none;color: #0b2e13"
-                             href="mailto:<?= $siteContact['email'] ?>"><?= $siteContact['email'] ?></a></p>
-                <p>Fanpage: <a style="text-decoration: none" href="https://www.facebook.com/deobellyvietnam">De Obelly</a></p>
-                <p><?= $siteContact['company_address'] ?></p>
+                             href="mailto:<?= Yii::$app->params['supportEmail'] ?>"><?= Yii::$app->params['supportEmail'] ?></a></p>
+                <p>Fanpage: <a style="text-decoration: none" href="https://www.facebook.com">MinhKhanh</a></p>
+                <p><?= Yii::$app->params['companyAddress'] ?></p>
             </td>
         </tr>
     </table>

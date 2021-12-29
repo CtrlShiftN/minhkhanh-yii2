@@ -389,10 +389,11 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, 
     max-height: 100vh;
 }
 
+.lamp {
+    zoom: .4;
+}
+
 @media (max-width: 1400px) {
-    .lamp {
-        zoom: .5;
-    }
 
     .error__content {
         top: 55%;
@@ -475,10 +476,6 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, 
         line-height: 2;
         padding-right: 20px;
         padding-left: 20px;
-    }
-
-    .lamp {
-        zoom: .6;
     }
 
     .error__content {

@@ -36,6 +36,7 @@ $action = Yii::$app->controller->action->id;
     </head>
     <body>
     <?php $this->beginBody() ?>
+    <?php $social = \frontend\models\Social::getAllSocialNetwork(); ?>
     <div id="wrapper">
         <div id="content">
 <!--            sidebar-->
@@ -71,9 +72,9 @@ $action = Yii::$app->controller->action->id;
                             <ul class="nav nav-pills nav-sidebar nav-child-indent flex-column"
                                 data-widget="treeview" role="menu">
                                 <li class="nav-item border-bottom">
-                                    <a href="<?= Url::toRoute('site/') ?>"
+                                    <a href="<?= Url::toRoute('shop/') ?>"
                                        class="nav-link text-uppercase text-dark p-3">
-                                        <p class="m-0 fs__15px"><?= Yii::t('app', 'New Arrivals') ?></p>
+                                        <p class="m-0 fs__15px"><?= Yii::t('app', 'Shop') ?></p>
                                     </a>
                                 </li>
                                 <li class="nav-item border-bottom">
@@ -83,7 +84,7 @@ $action = Yii::$app->controller->action->id;
                                     </a>
                                 </li>
                                 <li class="nav-item border-bottom">
-                                    <a href="<?= Url::toRoute('site/') ?>"
+                                    <a href="<?= Url::toRoute('post/') ?>"
                                        class="nav-link text-uppercase text-dark p-3">
                                         <p class="m-0 fs__15px"><?= Yii::t('app', 'News') ?></p>
                                     </a>
@@ -196,7 +197,7 @@ $action = Yii::$app->controller->action->id;
                                                class="text-decoration-none text-light">
                                                 <i class="fas fa-shopping-cart"></i>
                                                 <span class='badge bg-light rounded-circle text-danger'
-                                                      id='lblCartCount'>1</span>
+                                                      id='lblCartCount'><?= count(\frontend\models\Cart::getCartByUserId(Yii::$app->user->identity->getId())) ?></span>
                                             </a>
                                         </div>
                                     </li>
@@ -224,7 +225,7 @@ $action = Yii::$app->controller->action->id;
                             <ul class="list-unstyled w-100 h-100 p-0 m-0 d-flex justify-content-end bar-menu">
                                 <li class="bar-item">
                                     <a class="text-dark bar-link text-decoration-none fw-bold"
-                                       href="#"><?= Yii::t('app', 'New Arrivals') ?></a>
+                                       href="<?= Url::toRoute('shop/') ?>"><?= Yii::t('app', 'Shop') ?></a>
                                 </li>
                                 <li class="bar-item">
                                     <a class="text-dark bar-link text-decoration-none fw-bold"
@@ -232,7 +233,7 @@ $action = Yii::$app->controller->action->id;
                                 </li>
                                 <li class="bar-item">
                                     <a class="text-dark bar-link text-decoration-none fw-bold"
-                                       href="#"><?= Yii::t('app', 'News') ?></a>
+                                       href="<?= Url::toRoute('post/') ?>"><?= Yii::t('app', 'News') ?></a>
                                 </li>
                                 <li class="bar-item">
                                     <a class="text-dark bar-link text-decoration-none fw-bold"
@@ -337,7 +338,9 @@ $action = Yii::$app->controller->action->id;
                                                 class="ft-content"><?= Yii::t('app', 'Social networks') ?></span></li>
                                     <li>
                                         <div class="ft-social-network">
-                                            <a href="javascript:void(0)" class="mt-1"><i class="fab fa-facebook-f"></i></a>
+                                            <?php foreach ($social as $value): ?>
+                                                <a href="<?= $value['link'] ?>" class="mt-1"><?= $value['icon'] ?></a>
+                                            <?php endforeach; ?>
                                         </div>
                                     </li>
                                 </ul>

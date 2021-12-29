@@ -17,7 +17,7 @@ use Yii;
  * @property string|null $created_at
  * @property string|null $updated_at
  */
-class Contact extends \common\models\Contact
+class Contact extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -47,15 +47,20 @@ class Contact extends \common\models\Contact
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'email' => 'Email',
-            'tel' => 'Tel',
-            'content' => 'Content',
-            'status' => 'Status',
-            'user_id' => 'User ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'id' => Yii::t('app', 'ID'),
+            'name' => Yii::t('app', 'Name'),
+            'email' => Yii::t('app', 'Email'),
+            'tel' => Yii::t('app', 'Tel'),
+            'content' => Yii::t('app', 'Content'),
+            'status' => Yii::t('app', 'Status'),
+            'user_id' => Yii::t('app', 'User ID'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
         ];
+    }
+
+    public static function updateContact($id, $attribute, $value)
+    {
+        return \common\models\Contact::updateAll([$attribute => $value, 'updated_at' => date('Y-m-d H:i:s'), 'user_id' => Yii::$app->user->identity->getId()], ['id' => $id]);
     }
 }

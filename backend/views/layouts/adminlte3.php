@@ -212,8 +212,8 @@ AppAsset::register($this);
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= Url::toRoute('terms-and-services/') ?>"
-                               class="nav-link <?= ($controller == 'terms-and-services') ? 'active' : '' ?>">
+                            <a href="<?= Url::toRoute('terms/') ?>"
+                               class="nav-link <?= ($controller == 'terms') ? 'active' : '' ?>">
                                 <i class="nav-icon fas fa-concierge-bell"></i>
                                 <p><?= Yii::t('app', 'Terms & Services') ?></p>
                             </a>
