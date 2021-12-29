@@ -3,18 +3,16 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\TrackingStatus */
+/* @var $model backend\models\Product */
 
-$this->title = Yii::t('app', 'Update Tracking Status: {name}', [
+$this->title = Yii::t('app', 'Update Product: {name}', [
     'name' => $model->name,
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tracking Statuses'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Products'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
-<div class="tracking-status-update">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="product-update">
 
     <?= $this->render('_form', [
         'model' => $model,

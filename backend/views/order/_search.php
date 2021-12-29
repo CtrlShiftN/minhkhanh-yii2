@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'product_id') ?>
 
-    <?= $form->field($model, 'quantity') ?>
+    <?php // echo $form->field($model, 'quantity') ?>
 
     <?php // echo $form->field($model, 'province_id') ?>
 

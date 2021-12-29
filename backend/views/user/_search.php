@@ -41,15 +41,15 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'role') ?>
 
-    <?php // echo $form->field($model, 'source') ?>
-
-    <?php // echo $form->field($model, 'source_id') ?>
-
     <?php // echo $form->field($model, 'created_at') ?>
 
     <?php // echo $form->field($model, 'updated_at') ?>
 
     <?php // echo $form->field($model, 'verification_token') ?>
+
+    <?php // echo $form->field($model, 'source') ?>
+
+    <?php // echo $form->field($model, 'source_id') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

@@ -58,4 +58,9 @@ class Contact extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
+
+    public static function updateContact($id, $attribute, $value)
+    {
+        return \common\models\Contact::updateAll([$attribute => $value, 'updated_at' => date('Y-m-d H:i:s'), 'user_id' => Yii::$app->user->identity->getId()], ['id' => $id]);
+    }
 }

@@ -1,42 +1,64 @@
 <?php
 
+use kartik\detail\DetailView;
 use yii\helpers\Html;
-use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Trademark */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Trademarks'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+$arrStatus = [Yii::t('app', 'Inactive'), Yii::t('app', 'Active')];
 ?>
-<div class="trademark-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
+<div class="trademark-view container p-3">
+    <?php
+    $columns = [
+        [
+            'attribute' => 'name',
+            'value' => (!empty($model->name)) ? $model->name : null,
+        ],
+        [
+            'attribute' => 'slug',
+            'value' => $model->slug,
+            'displayOnly' => true
+        ],
+        [
+            'attribute' => 'status',
+            'value' => (!empty($arrStatus[$model->status])) ? $arrStatus[$model->status] : null,
+            'type' => DetailView::INPUT_SELECT2,
+            'widgetOptions' => [
+                'data' => $arrStatus,
+                'options' => ['placeholder' => '-- ' . Yii::t('app', 'Status') . ' --'],
+                'pluginOptions' => ['allowClear' => true]
             ],
-        ]) ?>
-    </p>
+        ],
+        [
+            'attribute' => 'created_at',
+            'format' => 'datetime',
+            'value' => (!empty($model->created_at)) ? $model->created_at : null,
+            'displayOnly' => true
+        ]
+    ]
+    ?>
 
     <?= DetailView::widget([
         'model' => $model,
-        'attributes' => [
-            'id',
-            'name',
-            'slug',
-            'status',
-            'admin_id',
-            'created_at',
-            'updated_at',
+        'condensed' => true,
+        'hover' => true,
+        'bordered' => true,
+        'hAlign' => DetailView::ALIGN_CENTER,
+        'vAlign' => DetailView::ALIGN_MIDDLE,
+        'mode' => DetailView::MODE_VIEW,
+        'panel' => [
+            'heading' => $this->title,
+            'type' => DetailView::TYPE_INFO,
         ],
-    ]) ?>
+        'deleteOptions' => [
+            'url' => \yii\helpers\Url::toRoute(['trademark/delete', 'id' => \common\components\encrypt\CryptHelper::encryptString($model->id)]),
+            'params' => ['id' => \common\components\encrypt\CryptHelper::encryptString($model->id), 'kvdelete' => true],
+        ],
+        'attributes' => $columns
+    ]); ?>
 
 </div>

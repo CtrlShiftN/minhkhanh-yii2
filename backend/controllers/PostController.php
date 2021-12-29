@@ -3,10 +3,21 @@
 namespace backend\controllers;
 
 use backend\models\Post;
+use backend\models\PostCategory;
 use backend\models\PostSearch;
+use backend\models\PostTag;
+use common\components\encrypt\CryptHelper;
+use common\components\helpers\StringHelper;
+use common\components\SystemConstant;
+use Yii;
+use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * PostController implements the CRUD actions for Post model.
@@ -21,14 +32,37 @@ class PostController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['@'],
+                        ]
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
-                        'delete' => ['POST'],
+                        'delete' => ['POST', 'GET'],
                     ],
                 ],
             ]
         );
+    }
+
+    /**
+     * @param \yii\base\Action $action
+     * @return bool
+     * @throws \yii\web\BadRequestHttpException
+     */
+    public function beforeAction($action)
+    {
+        $this->layout = 'adminlte3';
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+        return true; // or false to not run the action
     }
 
     /**
@@ -39,6 +73,22 @@ class PostController extends Controller
     {
         $searchModel = new PostSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        if (Yii::$app->request->post('hasEditable')) {
+            // which rows has been edited?
+            $_id = $_POST['editableKey'];
+            $_index = $_POST['editableIndex'];
+            // which attribute has been edited?
+            $attribute = $_POST['editableAttribute'];
+            // update to db
+            $value = $_POST['Post'][$_index][$attribute];
+            if ($attribute == 'title') {
+                $result = Post::updatePostTitle($_id, $attribute, $value);
+            } else {
+                $result = Post::updatePost($_id, $attribute, $value);
+            }
+            // response to gridview
+            return json_encode($result);
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -54,8 +104,53 @@ class PostController extends Controller
      */
     public function actionView($id)
     {
+        $id = CryptHelper::decryptString($id);
+        $model = $this->findModel($id);
+        $arrTag = PostTag::find()->where(
+            [
+                'status' => SystemConstant::STATUS_ACTIVE,
+                'id' => explode(',', $model->tag_id)
+            ])->asArray()->all();
+        $post = Yii::$app->request->post();
+        // process ajax delete
+        if (Yii::$app->request->isAjax && isset($post['kvdelete'])) {
+            echo Json::encode([
+                'success' => true,
+                'messages' => [
+                    'kv-detail-info' => Yii::t('app', 'Delete successfully!')
+                ]
+            ]);
+            return;
+        }
+        // return messages on update of record
+        if ($model->load($post)) {
+            $model->file = UploadedFile::getInstance($model, 'file');
+            $model->slug = trim(StringHelper::toSlug(trim($model->title)));
+            if ($model->file) {
+                if (!file_exists(Yii::getAlias('@common/media/post'))) {
+                    mkdir(Yii::getAlias('@common/media/post'), 0777);
+                }
+                $imageUrl = Yii::getAlias('@common/media');
+                $fileName = 'post/' . $model->slug . '.' . $model->file->getExtension();
+                $isUploadedFile = $model->file->saveAs($imageUrl . '/' . $fileName);
+                if ($isUploadedFile) {
+                    $model->avatar = $fileName;
+                }
+            }
+            if (!empty($model->tags)) {
+                $model->tag_id = implode(',', $model->tags);
+            }
+            $model->admin_id = Yii::$app->user->identity->getId();
+            $model->updated_at = date('Y-m-d H:i:s');
+            if ($model->save(false)) {
+                Yii::$app->session->setFlash('kv-detail-success', 'Cập nhật thành công!');
+            } else {
+                Yii::$app->session->setFlash('kv-detail-warning', 'Không thể cập nhật!');
+            }
+        }
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'tags' => ArrayHelper::map($arrTag, 'id', 'title'),
         ]);
     }
 
@@ -67,17 +162,40 @@ class PostController extends Controller
     public function actionCreate()
     {
         $model = new Post();
-
+        $model->scenario = 'create';
+        $arrTagId = PostTag::find()->where(['status' => SystemConstant::STATUS_ACTIVE])->asArray()->all();
+        $arrPostCategory = PostCategory::find()->where(['status' => SystemConstant::STATUS_ACTIVE])->asArray()->all();
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                $model->file = UploadedFile::getInstance($model, 'file');
+                $model->slug = trim(StringHelper::toSlug(trim($model->title)));
+                if ($model->file) {
+                    if (!file_exists(Yii::getAlias('@common/media/post'))) {
+                        mkdir(Yii::getAlias('@common/media/post'), 0777);
+                    }
+                    $imageUrl = Yii::getAlias('@common/media');
+                    $fileName = 'post/' . $model->slug . '.' . $model->file->getExtension();
+                    $isUploadedFile = $model->file->saveAs($imageUrl . '/' . $fileName);
+                    if ($isUploadedFile) {
+                        $model->avatar = $fileName;
+                    }
+                }
+                if (!empty($model->tags)) {
+                    $model->tag_id = implode(",", $model->tags);
+                }
+                $model->admin_id = Yii::$app->user->identity->getId();
+                $model->created_at = date('Y-m-d H:i:s');
+                $model->updated_at = date('Y-m-d H:i:s');
+                if ($model->save(false)) {
+                    return $this->redirect(Url::toRoute('post/'));
+                }
             }
-        } else {
-            $model->loadDefaultValues();
         }
 
         return $this->render('create', [
             'model' => $model,
+            'postTag' => $arrTagId,
+            'postCate' => $arrPostCategory
         ]);
     }
 
@@ -90,14 +208,40 @@ class PostController extends Controller
      */
     public function actionUpdate($id)
     {
+        $id = CryptHelper::decryptString($id);
         $model = $this->findModel($id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $arrTagId = PostTag::find()->where(['status' => SystemConstant::STATUS_ACTIVE])->asArray()->all();
+        $arrPostCategory = PostCategory::find()->where(['status' => SystemConstant::STATUS_ACTIVE])->asArray()->all();
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post())) {
+                $model->file = UploadedFile::getInstance($model, 'file');
+                $model->slug = trim(StringHelper::toSlug(trim($model->title)));
+                if ($model->file) {
+                    if (!file_exists(Yii::getAlias('@common/media'))) {
+                        mkdir(Yii::getAlias('@common/media'), 0777);
+                    }
+                    $imageUrl = Yii::getAlias('@common/media');
+                    $fileName = $model->slug . '.' . $model->file->getExtension();
+                    $isUploadedFile = $model->file->saveAs($imageUrl . '/post/' . $fileName);
+                    if ($isUploadedFile) {
+                        $model->avatar = 'post/' . $fileName;
+                    }
+                }
+                if (!empty($model->tags)) {
+                    $model->tag_id = implode(",", $model->tags);
+                }
+                $model->admin_id = Yii::$app->user->identity->getId();
+                $model->updated_at = date('Y-m-d H:i:s');
+                if ($model->save(false)) {
+                    return $this->redirect(Url::toRoute('post/'));
+                }
+            }
         }
 
         return $this->render('update', [
             'model' => $model,
+            'postTag' => $arrTagId,
+            'postCate' => $arrPostCategory
         ]);
     }
 
@@ -110,6 +254,7 @@ class PostController extends Controller
      */
     public function actionDelete($id)
     {
+        $id = CryptHelper::decryptString($id);
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -130,4 +275,5 @@ class PostController extends Controller
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
+
 }

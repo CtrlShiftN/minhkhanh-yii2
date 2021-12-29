@@ -36,7 +36,7 @@ class ProductAssoc extends \common\models\ProductAssoc
             [['product_id', 'category_id', 'status', 'admin_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['type_id'], 'string', 'max' => 255],
-            [['product_id'], 'unique'],
+            [['product_id'], 'unique', 'targetClass' => ProductAssoc::className()],
         ];
     }
 

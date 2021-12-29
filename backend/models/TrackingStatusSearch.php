@@ -4,12 +4,12 @@ namespace backend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\OrderTracking;
+use backend\models\TrackingStatus;
 
 /**
- * TrackingStatusSearch represents the model behind the search form of `backend\models\OrderTracking`.
+ * TrackingStatusSearch represents the model behind the search form of `backend\models\TrackingStatus`.
  */
-class TrackingStatusSearch extends OrderTracking
+class TrackingStatusSearch extends TrackingStatus
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class TrackingStatusSearch extends OrderTracking
     public function rules()
     {
         return [
-            [['id', 'order_id', 'admin_id', 'action'], 'integer'],
-            [['notes', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'status', 'admin_id'], 'integer'],
+            [['name', 'slug', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class TrackingStatusSearch extends OrderTracking
      */
     public function search($params)
     {
-        $query = OrderTracking::find();
+        $query = TrackingStatus::find();
 
         // add conditions that should always apply here
 
@@ -59,14 +59,14 @@ class TrackingStatusSearch extends OrderTracking
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'order_id' => $this->order_id,
+            'status' => $this->status,
             'admin_id' => $this->admin_id,
-            'action' => $this->action,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'notes', $this->notes]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'slug', $this->slug]);
 
         return $dataProvider;
     }

@@ -108,6 +108,8 @@ class CheckoutController extends \yii\web\Controller
                         $arrOrderInformMail[$key]['product_image'] = $productModel->image;
                         $arrOrderInformMail[$key]['product_price'] = $productModel->selling_price;
                         $arrOrderInformMail[$key]['quantity'] = $orderModel->quantity;
+                        $productModel->sold += $orderModel->quantity;
+                        $productModel->save();
                         $cartModel = \common\models\Cart::findOne($cartId);
                         $cartModel->status = SystemConstant::STATUS_INACTIVE;
                         if (!$cartModel->save()) {

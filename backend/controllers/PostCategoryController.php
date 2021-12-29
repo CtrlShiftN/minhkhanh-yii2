@@ -4,6 +4,12 @@ namespace backend\controllers;
 
 use backend\models\PostCategory;
 use backend\models\PostCategorySearch;
+use common\components\encrypt\CryptHelper;
+use common\components\helpers\StringHelper;
+use common\components\SystemConstant;
+use Yii;
+use yii\filters\AccessControl;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -21,14 +27,37 @@ class PostCategoryController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['@'],
+                        ]
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
-                        'delete' => ['POST'],
+                        'delete' => ['POST', 'GET'],
                     ],
                 ],
             ]
         );
+    }
+
+    /**
+     * @param \yii\base\Action $action
+     * @return bool
+     * @throws \yii\web\BadRequestHttpException
+     */
+    public function beforeAction($action)
+    {
+        $this->layout = 'adminlte3';
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+        return true; // or false to not run the action
     }
 
     /**
@@ -39,6 +68,26 @@ class PostCategoryController extends Controller
     {
         $searchModel = new PostCategorySearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        if (Yii::$app->request->post('hasEditable')) {
+            // which rows has been edited?
+            $_id = $_POST['editableKey'];
+            $_index = $_POST['editableIndex'];
+            // which attribute has been edited?
+            $attribute = $_POST['editableAttribute'];
+            if ($attribute == 'title') {
+                // update to db
+                $value = $_POST['PostCategory'][$_index][$attribute];
+                $result = PostCategory::updatePostCategoryTitle($_id, $attribute, $value);
+                // response to gridview
+                return json_encode($result);
+            } elseif ($attribute == 'status') {
+                // update to db
+                $value = $_POST['PostCategory'][$_index][$attribute];
+                $result = PostCategory::updatePostCategoryStatus($_id, $attribute, $value);
+                // response to gridview
+                return json_encode($result);
+            }
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -69,14 +118,20 @@ class PostCategoryController extends Controller
         $model = new PostCategory();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                $model->slug = StringHelper::toSlug($model->title);
+                $model->created_at = date('Y-m-d H:m:s');
+                $model->updated_at = date('Y-m-d H:m:s');
+                $model->status = SystemConstant::STATUS_ACTIVE;
+                if ($model->save()) {
+                    return $this->redirect(Url::toRoute('post-category/'));
+                }
             }
         } else {
             $model->loadDefaultValues();
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -110,6 +165,7 @@ class PostCategoryController extends Controller
      */
     public function actionDelete($id)
     {
+        $id = CryptHelper::decryptString($id);
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -128,6 +184,6 @@ class PostCategoryController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+        throw new NotFoundHttpException(Yii::t('app','The requested page does not exist.'));
     }
 }

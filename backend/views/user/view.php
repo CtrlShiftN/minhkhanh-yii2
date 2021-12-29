@@ -42,11 +42,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'referral_code',
             'status',
             'role',
-            'source',
-            'source_id',
             'created_at',
             'updated_at',
             'verification_token',
+            'source',
+            'source_id',
         ],
     ]) ?>
 

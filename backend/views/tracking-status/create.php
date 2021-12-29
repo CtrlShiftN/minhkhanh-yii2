@@ -3,15 +3,12 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\OrderTracking */
+/* @var $model backend\models\TrackingStatus */
 
-$this->title = Yii::t('app', 'Create Order Tracking');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Order Trackings'), 'url' => ['index']];
+$this->title = Yii::t('app', 'Add New Status');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="order-tracking-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="tracking-status-create">
 
     <?= $this->render('_form', [
         'model' => $model,

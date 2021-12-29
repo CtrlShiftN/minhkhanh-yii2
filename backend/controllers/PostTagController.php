@@ -4,6 +4,12 @@ namespace backend\controllers;
 
 use backend\models\PostTag;
 use backend\models\PostTagSearch;
+use common\components\encrypt\CryptHelper;
+use common\components\helpers\StringHelper;
+use common\components\SystemConstant;
+use Yii;
+use yii\filters\AccessControl;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -21,14 +27,37 @@ class PostTagController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['@'],
+                        ]
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
-                        'delete' => ['POST'],
+                        'delete' => ['POST', 'GET'],
                     ],
                 ],
             ]
         );
+    }
+
+    /**
+     * @param \yii\base\Action $action
+     * @return bool
+     * @throws \yii\web\BadRequestHttpException
+     */
+    public function beforeAction($action)
+    {
+        $this->layout = 'adminlte3';
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+        return true; // or false to not run the action
     }
 
     /**
@@ -39,6 +68,27 @@ class PostTagController extends Controller
     {
         $searchModel = new PostTagSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+
+        if (Yii::$app->request->post('hasEditable')) {
+            // which rows has been edited?
+            $_id = $_POST['editableKey'];
+            $_index = $_POST['editableIndex'];
+            // which attribute has been edited?
+            $attribute = $_POST['editableAttribute'];
+            if ($attribute == 'title') {
+                // update to db
+                $value = $_POST['PostTag'][$_index][$attribute];
+                $result = PostTag::updatePostTagTitle($_id, $attribute, $value);
+                // response to gridview
+                return json_encode($result);
+            } elseif ($attribute == 'status') {
+                // update to db
+                $value = $_POST['PostTag'][$_index][$attribute];
+                $result = PostTag::updatePostTagStatus($_id, $attribute, $value);
+                // response to gridview
+                return json_encode($result);
+            }
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -54,6 +104,7 @@ class PostTagController extends Controller
      */
     public function actionView($id)
     {
+        $id = CryptHelper::decryptString($id);
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -69,14 +120,20 @@ class PostTagController extends Controller
         $model = new PostTag();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                $model->slug = StringHelper::toSlug($model->title);
+                $model->created_at = date('Y-m-d H:m:s');
+                $model->updated_at = date('Y-m-d H:m:s');
+                $model->status = SystemConstant::STATUS_ACTIVE;
+                if ($model->save()) {
+                    return $this->redirect(Url::toRoute('post-tag/'));
+                }
             }
         } else {
             $model->loadDefaultValues();
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -90,6 +147,7 @@ class PostTagController extends Controller
      */
     public function actionUpdate($id)
     {
+        $id = CryptHelper::decryptString($id);
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -110,6 +168,7 @@ class PostTagController extends Controller
      */
     public function actionDelete($id)
     {
+        $id = CryptHelper::decryptString($id);
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -128,6 +187,6 @@ class PostTagController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

@@ -220,7 +220,6 @@ $this->registerCss('
                         </div>
                     <?php endforeach; ?>
                 </div>
-                <div class="swiper-pagination"></div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
             </div>
@@ -284,9 +283,7 @@ $this->registerCss('
         <span id="toastNotify"></span>
     </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/7.3.4/swiper-bundle.min.js"
-        integrity="sha512-ztZ7m9gYJmuwemu0TmAp9QDuhFhOYbbIoN6iIKMi5ay88l8U5tkt5OOlA/fP8DI/p/OphEY7QIbuoDQKpVvf7w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="<?= Url::toRoute('js/swiper-bundle.min.js') ?>"></script>
 <script>
     var swiper = new Swiper('.swiper', {
         slidesPerView: 1,

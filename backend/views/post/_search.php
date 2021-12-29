@@ -27,8 +27,6 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'admin_id') ?>
 
-    <?php // echo $form->field($model, 'viewed') ?>
-
     <?php // echo $form->field($model, 'tag_id') ?>
 
     <?php // echo $form->field($model, 'post_category_id') ?>

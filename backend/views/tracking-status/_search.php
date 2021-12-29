@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="order-tracking-search">
+<div class="tracking-status-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,13 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'order_id') ?>
+    <?= $form->field($model, 'name') ?>
+
+    <?= $form->field($model, 'slug') ?>
+
+    <?= $form->field($model, 'status') ?>
 
     <?= $form->field($model, 'admin_id') ?>
-
-    <?= $form->field($model, 'action') ?>
-
-    <?= $form->field($model, 'notes') ?>
 
     <?php // echo $form->field($model, 'created_at') ?>
 

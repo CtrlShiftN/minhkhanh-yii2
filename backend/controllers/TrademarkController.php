@@ -4,6 +4,14 @@ namespace backend\controllers;
 
 use backend\models\Trademark;
 use backend\models\TrademarkSearch;
+use common\components\encrypt\CryptHelper;
+use common\components\helpers\StringHelper;
+use common\components\SystemConstant;
+use Yii;
+use yii\filters\AccessControl;
+use yii\helpers\Html;
+use yii\helpers\Json;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -21,14 +29,37 @@ class TrademarkController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['@'],
+                        ]
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
-                        'delete' => ['POST'],
+                        'delete' => ['POST', 'GET'],
                     ],
                 ],
             ]
         );
+    }
+
+    /**
+     * @param \yii\base\Action $action
+     * @return bool
+     * @throws \yii\web\BadRequestHttpException
+     */
+    public function beforeAction($action)
+    {
+        $this->layout = 'adminlte3';
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+        return true; // or false to not run the action
     }
 
     /**
@@ -39,6 +70,26 @@ class TrademarkController extends Controller
     {
         $searchModel = new TrademarkSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        if (Yii::$app->request->post('hasEditable')) {
+            // which rows has been edited?
+            $_id = $_POST['editableKey'];
+            $_index = $_POST['editableIndex'];
+            // which attribute has been edited?
+            $attribute = $_POST['editableAttribute'];
+            if ($attribute == 'name') {
+                // update to db
+                $value = $_POST['Trademark'][$_index][$attribute];
+                $result = Trademark::updateTitle($_id, $attribute, $value);
+                // response to gridview
+                return json_encode($result);
+            } elseif ($attribute == 'status') {
+                // update to db
+                $value = $_POST['Trademark'][$_index][$attribute];
+                $result = Trademark::updateStatus($_id, $attribute, $value);
+                // response to gridview
+                return json_encode($result);
+            }
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -54,8 +105,32 @@ class TrademarkController extends Controller
      */
     public function actionView($id)
     {
+        $id = CryptHelper::decryptString($id);
+        $model = $this->findModel($id);
+        $post = Yii::$app->request->post();
+        // process ajax delete
+        if (Yii::$app->request->isAjax && isset($post['kvdelete'])) {
+            echo Json::encode([
+                'success' => true,
+                'messages' => [
+                    'kv-detail-info' => Yii::t('app', 'Delete successfully!')
+                ]
+            ]);
+            return;
+        }
+        // return messages on update of record
+        if ($model->load($post)) {
+            $model->slug = StringHelper::toSlug($model->name);
+            $model->admin_id = Yii::$app->user->identity->getId();
+            $model->updated_at = date('Y-m-d H:i:s');
+            if ($model->save(false)) {
+                Yii::$app->session->setFlash('kv-detail-success', 'Cập nhật thành công!');
+            } else {
+                Yii::$app->session->setFlash('kv-detail-warning', 'Không thể cập nhật!');
+            }
+        }
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
@@ -69,14 +144,21 @@ class TrademarkController extends Controller
         $model = new Trademark();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                $model->slug = StringHelper::toSlug($model->name);
+                $model->created_at = date('Y-m-d H:m:s');
+                $model->updated_at = date('Y-m-d H:m:s');
+                $model->status = SystemConstant::STATUS_ACTIVE;
+                $model->admin_id = Yii::$app->user->identity->getId();
+                if ($model->save()) {
+                    return $this->redirect(Url::toRoute('trademark/'));
+                }
             }
         } else {
             $model->loadDefaultValues();
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -90,10 +172,15 @@ class TrademarkController extends Controller
      */
     public function actionUpdate($id)
     {
+        $id = CryptHelper::decryptString($id);
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            $model->slug = StringHelper::toSlug($model->name);
+            $model->updated_at = date('Y-m-d H:i:s');
+            if ($model->save(false)) {
+                return $this->redirect('trademark/');
+            }
         }
 
         return $this->render('update', [
@@ -110,6 +197,7 @@ class TrademarkController extends Controller
      */
     public function actionDelete($id)
     {
+        $id = CryptHelper::decryptString($id);
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

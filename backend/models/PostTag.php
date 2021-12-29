@@ -2,6 +2,8 @@
 
 namespace backend\models;
 
+use common\components\helpers\StringHelper;
+use common\components\SystemConstant;
 use Yii;
 
 /**
@@ -14,7 +16,7 @@ use Yii;
  * @property string|null $created_at
  * @property string|null $updated_at
  */
-class PostTag extends \common\models\PostTag
+class PostTag extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -34,7 +36,16 @@ class PostTag extends \common\models\PostTag
             [['created_at', 'updated_at'], 'safe'],
             [['title', 'slug'], 'string', 'max' => 255],
             [['slug'], 'unique'],
+            ['slug', 'checkDuplicatedSlug']
         ];
+    }
+
+    public function checkDuplicatedSlug()
+    {
+        $color = PostTag::find()->where(['slug' => StringHelper::toSlug($this->title)])->asArray()->all();
+        if ($color) {
+            $this->addError('name', Yii::t('app', 'This title has already been used.'));
+        }
     }
 
     /**
@@ -50,5 +61,48 @@ class PostTag extends \common\models\PostTag
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
+    }
+
+    /**
+     * @param $attribute
+     * @param $params
+     * @param $validator
+     */
+    public function checkDuplicateSlug($attribute, $params, $validator)
+    {
+        if (\common\models\PostTag::findOne(['slug' => StringHelper::toSlug($this->title)])) {
+            $this->addError($attribute, 'Thẻ đã tồn tại.');
+        }
+    }
+
+    /**
+     * @param $id
+     * @param $attribute
+     * @param $value
+     * @return int
+     */
+    public static function updatePostTagTitle($id, $attribute, $value)
+    {
+        $slug = StringHelper::toSlug($value);
+        return \common\models\PostTag::updateAll([$attribute => $value, 'slug' => $slug, 'updated_at' => date('Y-m-d H:i:s')], ['id' => $id]);
+    }
+
+    /**
+     * @param $id
+     * @param $attribute
+     * @param $value
+     * @return int
+     */
+    public static function updatePostTagStatus($id, $attribute, $value)
+    {
+        return \common\models\PostTag::updateAll([$attribute => $value, 'updated_at' => date('Y-m-d H:i:s')], ['id' => $id]);
+    }
+
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function getAllTags()
+    {
+        return \common\models\PostTag::find()->where(['status' => SystemConstant::STATUS_ACTIVE])->asArray()->all();
     }
 }

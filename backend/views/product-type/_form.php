@@ -1,33 +1,33 @@
 <?php
 
+use kartik\file\FileInput;
+use kartik\form\ActiveForm;
+use kartik\select2\Select2;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\ProductType */
 /* @var $form yii\widgets\ActiveForm */
+$this->registerCss("
+.help-block{color: red}
+");
 ?>
 
-<div class="product-type-form">
+<div class="container product-type-form p-3">
+    <h3 class="text-uppercase pb-4"><?= Yii::t('app', 'Add New Type') ?></h3>
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'file')->widget(FileInput::classname(), [
+        'options' => ['multiple' => false, 'accept' => 'image/*'],
+        'pluginOptions' => ['previewFileType' => 'image', 'showUpload' => false]
+    ])->label(Yii::t('app', 'Image'));
+    ?>
 
-    <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'admin_id')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => Yii::t('app', 'Men Fashion')]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Submit'), ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

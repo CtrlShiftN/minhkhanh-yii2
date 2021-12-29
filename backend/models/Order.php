@@ -12,6 +12,8 @@ use yii\db\Query;
  * @property string $BL_code
  * @property int $user_id
  * @property int $product_id
+ * @property int $color_id
+ * @property int $size_id
  * @property int $quantity
  * @property int $province_id
  * @property int $district_id
@@ -44,11 +46,14 @@ class Order extends \common\models\Order
     public function rules()
     {
         return [
-            [['BL_code', 'user_id', 'product_id', 'quantity', 'province_id', 'district_id', 'village_id', 'specific_address', 'address', 'name', 'email', 'tel', 'admin_id', 'logistic_method'], 'required'],
-            [['user_id', 'product_id', 'quantity', 'province_id', 'district_id', 'village_id', 'admin_id', 'logistic_method', 'status'], 'integer'],
+            [['BL_code', 'user_id', 'product_id', 'color_id', 'size_id', 'quantity', 'province_id', 'district_id', 'village_id', 'specific_address', 'address', 'name', 'email', 'tel', 'admin_id', 'logistic_method'], 'required'],
+            [['user_id', 'product_id', 'color_id', 'size_id', 'quantity', 'province_id', 'district_id', 'village_id', 'admin_id', 'logistic_method', 'status'], 'integer'],
+            [['email'], 'email', 'message' => Yii::t('app', 'Invalid email.')],
+            [['quantity'], 'integer', 'min' => 1],
             [['address', 'notes'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['BL_code', 'specific_address', 'name', 'email', 'tel'], 'string', 'max' => 255],
+            [['tel'], 'match', 'pattern' => '/^(84|0)+([0-9]{9})$/', 'message' => Yii::t('app', 'Includes 10 digits starting with 0 or 84.')],
         ];
     }
 
@@ -59,21 +64,23 @@ class Order extends \common\models\Order
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'BL_code' => Yii::t('app', 'Bl Code'),
-            'user_id' => Yii::t('app', 'User ID'),
-            'product_id' => Yii::t('app', 'Product ID'),
+            'BL_code' => Yii::t('app', 'Bill of lading code'),
+            'user_id' => Yii::t('app', 'User'),
+            'product_id' => Yii::t('app', 'Product'),
+            'color_id' => Yii::t('app', 'Color'),
+            'size_id' => Yii::t('app', 'Size'),
             'quantity' => Yii::t('app', 'Quantity'),
-            'province_id' => Yii::t('app', 'Province ID'),
-            'district_id' => Yii::t('app', 'District ID'),
-            'village_id' => Yii::t('app', 'Village ID'),
+            'province_id' => Yii::t('app', 'Province'),
+            'district_id' => Yii::t('app', 'District'),
+            'village_id' => Yii::t('app', 'Village'),
             'specific_address' => Yii::t('app', 'Specific Address'),
             'address' => Yii::t('app', 'Address'),
             'notes' => Yii::t('app', 'Notes'),
-            'name' => Yii::t('app', 'Name'),
+            'name' => Yii::t('app', 'Consignee'),
             'email' => Yii::t('app', 'Email'),
             'tel' => Yii::t('app', 'Tel'),
-            'admin_id' => Yii::t('app', 'Admin ID'),
             'logistic_method' => Yii::t('app', 'Logistic Method'),
+            'admin_id' => Yii::t('app', 'Admin'),
             'status' => Yii::t('app', 'Status'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
@@ -175,9 +182,6 @@ class Order extends \common\models\Order
             ->all();
     }
 
-    /**
-     * @return string[]
-     */
     public static function getStatusColor()
     {
         return [

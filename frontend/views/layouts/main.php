@@ -71,9 +71,9 @@ $action = Yii::$app->controller->action->id;
                             <ul class="nav nav-pills nav-sidebar nav-child-indent flex-column"
                                 data-widget="treeview" role="menu">
                                 <li class="nav-item border-bottom">
-                                    <a href="<?= Url::toRoute('site/') ?>"
+                                    <a href="<?= Url::toRoute('shop/') ?>"
                                        class="nav-link text-uppercase text-dark p-3">
-                                        <p class="m-0 fs__15px"><?= Yii::t('app', 'New Arrivals') ?></p>
+                                        <p class="m-0 fs__15px"><?= Yii::t('app', 'Shop') ?></p>
                                     </a>
                                 </li>
                                 <li class="nav-item border-bottom">
@@ -83,7 +83,7 @@ $action = Yii::$app->controller->action->id;
                                     </a>
                                 </li>
                                 <li class="nav-item border-bottom">
-                                    <a href="<?= Url::toRoute('site/') ?>"
+                                    <a href="<?= Url::toRoute('post/') ?>"
                                        class="nav-link text-uppercase text-dark p-3">
                                         <p class="m-0 fs__15px"><?= Yii::t('app', 'News') ?></p>
                                     </a>
@@ -224,7 +224,7 @@ $action = Yii::$app->controller->action->id;
                             <ul class="list-unstyled w-100 h-100 p-0 m-0 d-flex justify-content-end bar-menu">
                                 <li class="bar-item">
                                     <a class="text-dark bar-link text-decoration-none fw-bold"
-                                       href="#"><?= Yii::t('app', 'New Arrivals') ?></a>
+                                       href="<?= Url::toRoute('shop/') ?>"><?= Yii::t('app', 'Shop') ?></a>
                                 </li>
                                 <li class="bar-item">
                                     <a class="text-dark bar-link text-decoration-none fw-bold"

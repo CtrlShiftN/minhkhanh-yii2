@@ -2,6 +2,8 @@
 
 namespace backend\models;
 
+use common\components\helpers\StringHelper;
+use common\components\SystemConstant;
 use Yii;
 
 /**
@@ -18,6 +20,8 @@ use Yii;
  */
 class ProductType extends \common\models\ProductType
 {
+    public $file;
+
     /**
      * {@inheritdoc}
      */
@@ -36,9 +40,18 @@ class ProductType extends \common\models\ProductType
             [['status', 'admin_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'slug', 'image'], 'string', 'max' => 255],
-            [['name'], 'unique'],
-            [['slug'], 'unique'],
+            [['name'], 'unique', 'targetClass' => ProductType::className()],
+            [['slug'], 'unique', 'targetClass' => ProductType::className()],
+            ['file', 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg', 'on' => 'create'],
+//            ['file', 'required', 'on' => 'create']
         ];
+    }
+
+    public function checkEmpty()
+    {
+        if (empty($this->file)) {
+            $this->addError('file', Yii::t('app', 'This name has already been used.'));
+        }
     }
 
     /**
@@ -55,6 +68,55 @@ class ProductType extends \common\models\ProductType
             'admin_id' => Yii::t('app', 'Admin ID'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
+            'file' => Yii::t('app', 'File'),
         ];
     }
+
+    /**
+     * @param $_id
+     * @param $attribute
+     * @param $value
+     * @return int
+     */
+    public static function updateProductTypeTitle($_id, $attribute, $value)
+    {
+            $slug = StringHelper::toSlug($value);
+            return \common\models\ProductType::updateAll([$attribute => $value, 'slug' => $slug, 'updated_at' => date('Y-m-d H:i:s'), 'admin_id' => Yii::$app->user->identity->getId()], ['id' => $_id]);
+
+    }
+
+    /**
+     * @param $id
+     * @param $attribute
+     * @param $value
+     * @return int
+     */
+    public static function updateProductType($id, $attribute, $value)
+    {
+            return \common\models\ProductType::updateAll(
+                [
+                    $attribute => $value,
+                    'updated_at' => date('Y-m-d H:i:s'),
+                    'admin_id' => Yii::$app->user->identity->getId()
+                ], ['id' => $id]);
+    }
+
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function getAllTypes()
+    {
+        return ProductType::find()->where(['status' => SystemConstant::STATUS_ACTIVE])->asArray()->all();
+    }
+
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function getCasualProductType()
+    {
+        return \frontend\models\ProductType::find()
+            ->orWhere(['and',['>=', 'id', 4],['status' => SystemConstant::STATUS_ACTIVE]])
+            ->asArray()->all();
+    }
 }
+
