@@ -21,7 +21,7 @@ $this->title = Yii::t('app', 'Create new post category');
         <div class="col-12 col-sm-4 col-md-4 col-lg-4"><h4><?= Yii::t('app', 'Title') ?> <sup
                         class="fill-red fs-6">(*)</sup></h4></div>
         <div class="col-12 col-sm-6 col-md-5 col-lg-6">
-            <?= $form->field($model, 'title')->textInput(['placeholder' => 'Quần áo'])->label(false) ?>
+            <?= $form->field($model, 'title')->textInput(['placeholder' => 'Tiêu đề'])->label(false) ?>
         </div>
     </div>
 

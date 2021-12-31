@@ -408,4 +408,8 @@ return [
     'A new order has been initialized!' => 'Một đơn hàng vừa được khởi tạo!',
     'Can not add this product to favorites.' => 'Không thể thêm vào mục ưa thích.',
     'Favorites already have this product.' => 'Mục ưa thích đã có sản phẩm này.',
+    'security camera' => 'camera an ninh',
+    'safety - security - quality' => 'an toàn - bảo mật - chất lượng',
+    'Affirm the brand and quality' => 'Khẳng định thương hiệu và chất lượng',
+    'MINHKHANH - Elevator' => 'MINHKHANH - Thang máy'
 ];

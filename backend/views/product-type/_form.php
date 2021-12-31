@@ -24,7 +24,7 @@ $this->registerCss("
     ])->label(Yii::t('app', 'Image'));
     ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => Yii::t('app', 'Men Fashion')]) ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => Yii::t('app', 'Camera')]) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Submit'), ['class' => 'btn btn-success']) ?>

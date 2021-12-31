@@ -115,7 +115,7 @@ class ProductType extends \common\models\ProductType
     public static function getCasualProductType()
     {
         return \frontend\models\ProductType::find()
-            ->orWhere(['and',['>=', 'id', 4],['status' => SystemConstant::STATUS_ACTIVE]])
+            ->orWhere(['status' => SystemConstant::STATUS_ACTIVE])
             ->asArray()->all();
     }
 }
