@@ -176,4 +176,30 @@ class Product extends \common\models\Product
         ])->orderBy('created_at DESC')
             ->limit(6)->asArray()->all();
     }
+
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function getFeaturedProduct()
+    {
+        return Product::find()->where([
+            'status' => SystemConstant::STATUS_ACTIVE,
+            'is_feature' => 1
+        ])->orderBy('created_at DESC')
+            ->limit(8)->asArray()->all();
+    }
+
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function getFeaturedOnSaleProduct()
+    {
+        return Product::find()->where([
+            'status' => SystemConstant::STATUS_ACTIVE,
+            'is_feature' => 1
+        ])
+            ->andWhere(['and',['not',['discount'=>0]],['not',['discount'=>null]]])
+            ->orderBy(new Expression('rand()'))
+            ->limit(8)->asArray()->all();
+    }
 }

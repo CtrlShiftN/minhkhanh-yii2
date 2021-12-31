@@ -29,28 +29,6 @@ $arrShopShow = [Yii::t('app', 'Hide'), Yii::t('app', 'Show')];
             'value' => (!empty($model->name)) ? $model->name : null,
         ],
         [
-            'attribute' => 'segment',
-            'value' => (!empty($arrSegment[$model->segment])) ? $arrSegment[$model->segment] : null,
-            'type' => DetailView::INPUT_SELECT2,
-            'widgetOptions' => [
-                'data' => $arrSegment,
-                'options' => ['placeholder' => '-- ' . Yii::t('app', 'Product Types') . ' --'],
-                'pluginOptions' => ['allowClear' => true]
-            ],
-            'format' => 'raw'
-        ],
-        [
-            'attribute' => 'shop_show',
-            'value' => (!empty($arrShopShow[$model->shop_show])) ? $arrShopShow[$model->shop_show] : null,
-            'type' => DetailView::INPUT_SELECT2,
-            'widgetOptions' => [
-                'data' => $arrShopShow,
-                'options' => ['placeholder' => '-- ' . Yii::t('app', 'Hide/Show') . ' --'],
-                'pluginOptions' => ['allowClear' => true]
-            ],
-            'format' => 'raw'
-        ],
-        [
             'attribute' => 'created_at',
             'format' => 'datetime',
             'value' => (!empty($model->created_at)) ? $model->created_at : null,

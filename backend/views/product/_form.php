@@ -13,8 +13,7 @@ use yii\web\JsExpression;
 /* @var $model backend\models\Product */
 /* @var $form yii\widgets\ActiveForm */
 $this->title = Yii::t('app', 'Add New Product');
-$arrProductType = ArrayHelper::map($type, 'id', 'name');
-$type = \common\components\helpers\SystemArrayHelper::removeElementAt($arrProductType, \common\components\SystemConstant::PRODUCT_TYPE_NEW);
+$type = ArrayHelper::map($type, 'id', 'name');
 $arrStatus = [Yii::t('app', 'Inactive'), Yii::t('app', 'Active')];
 $arrVisibility = [Yii::t('app', 'Show'), Yii::t('app', 'Hide')];
 $arrFeature = [Yii::t('app', 'Non-featured'), Yii::t('app', 'Featured')];

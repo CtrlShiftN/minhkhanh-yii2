@@ -3,6 +3,8 @@
 namespace frontend\controllers;
 
 use common\components\MailServer;
+use frontend\models\Post;
+use frontend\models\Product;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\Terms;
 use frontend\models\VerifyEmailForm;
@@ -83,7 +85,16 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $featuredProduct = Product::getFeaturedProduct();
+        $featuredOnSaleProduct = Product::getFeaturedOnSaleProduct();
+        $newProduct = Product::getLatestProduct();
+        $latestNews = Post::getLatestPosts(3);
+        return $this->render('index', [
+            'featuredProducts' => $featuredProduct,
+            'featuredOnSaleProduct' => $featuredOnSaleProduct,
+            'newProducts' => $newProduct,
+            'latestNews' => $latestNews,
+        ]);
     }
 
     /**
