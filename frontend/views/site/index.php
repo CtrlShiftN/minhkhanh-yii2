@@ -49,9 +49,33 @@ $this->registerCss("
         </div>
     </div>
 <?php endif; ?>
-    <style>
-
-    </style>
+<?php if (Yii::$app->session->hasFlash('creatNewsLetterSuccess')): ?>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"
+            id='btnCreatNewsLetterSuccess' hidden>
+    </button>
+    <div class="modal" id="myModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="swal2-icon swal2-success swal2-animate-success-icon d-flex">
+                        <div class="swal2-success-circular-line-left"></div>
+                        <span class="swal2-success-line-tip"></span>
+                        <span class="swal2-success-line-long"></span>
+                        <div class="swal2-success-ring"></div>
+                        <div class="swal2-success-fix"></div>
+                        <div class="swal2-success-circular-line-right"></div>
+                    </div>
+                    <div class='text-center text-uppercase'>
+                        <h2 class="mx-0 mb-3 text-success fw-light"><?= Yii::t('app', 'Successfully!') ?></h2>
+                        <p class="mx-0 mb-4"><?= Yii::t('app', Yii::$app->session->getFlash('creatNewsLetterSuccess')) ?></p>
+                        <button type="button" data-bs-dismiss="modal" id='btnCreateNewsLetterSuccessClose'
+                                hidden></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
     <div class="full-width mb-4 mb-md-5">
         <!-- Slider main container -->
         <div class="swiper position-relative banner-slide-height" id="banner-slide">
@@ -90,9 +114,8 @@ $this->registerCss("
             </div>
         </div>
     </div>
-    <div class="container m-0 p-0">
         <?php if (!empty($featuredProducts)): ?>
-            <div class="row m-0 p-0">
+            <div class="row m-0 p-0 w-100">
                 <section class="home-feature-product w-100 p-1">
                     <div class="section-heading text-center mb-4">
                         <h2 class="section-title">
@@ -251,7 +274,6 @@ $this->registerCss("
                 </section>
             </div>
         <?php endif; ?>
-    </div>
     <script src="<?= Url::toRoute('js/swiper-bundle.min.js') ?>"></script>
     <script>
         var swiper = new Swiper('.swiper', {
@@ -272,6 +294,14 @@ $this->registerCss("
         $('#btnModalResetSuccess').trigger("click");
         setTimeout(function () {
             $('#btnModalResetClose').trigger("click");
+        }, 2000);
+    </script>
+<?php endif; ?>
+<?php if (Yii::$app->session->hasFlash('creatNewsLetterSuccess')): ?>
+    <script>
+        $('#btnCreatNewsLetterSuccess').trigger("click");
+        setTimeout(function () {
+            $('#btnCreateNewsLetterSuccessClose').trigger("click");
         }, 2000);
     </script>
 <?php endif; ?>

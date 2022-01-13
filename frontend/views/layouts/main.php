@@ -72,15 +72,27 @@ $action = Yii::$app->controller->action->id;
                             <ul class="nav nav-pills nav-sidebar nav-child-indent flex-column"
                                 data-widget="treeview" role="menu">
                                 <li class="nav-item border-bottom">
-                                    <a href="<?= Url::toRoute('shop/') ?>"
+                                    <a href="<?= Url::toRoute('site/about') ?>"
                                        class="nav-link text-uppercase text-dark p-3">
-                                        <p class="m-0 fs__15px"><?= Yii::t('app', 'Shop') ?></p>
+                                        <p class="m-0 fs__15px"><?= Yii::t('app', 'Introductions') ?></p>
                                     </a>
                                 </li>
                                 <li class="nav-item border-bottom">
-                                    <a href="<?= Url::toRoute('site/') ?>"
+                                    <a href="<?= Url::toRoute('shop/') ?>"
                                        class="nav-link text-uppercase text-dark p-3">
-                                        <p class="m-0 fs__15px"><?= Yii::t('app', 'Introductions') ?></p>
+                                        <p class="m-0 fs__15px"><?= Yii::t('app', 'New Arrival') ?></p>
+                                    </a>
+                                </li>
+                                <li class="nav-item border-bottom">
+                                    <a href="<?= Url::toRoute('shop/') ?>"
+                                       class="nav-link text-uppercase text-dark p-3">
+                                        <p class="m-0 fs__15px"><?= Yii::t('app', 'Camera') ?></p>
+                                    </a>
+                                </li>
+                                <li class="nav-item border-bottom">
+                                    <a href="<?= Url::toRoute('shop/') ?>"
+                                       class="nav-link text-uppercase text-dark p-3">
+                                        <p class="m-0 fs__15px"><?= Yii::t('app', 'Elevator') ?></p>
                                     </a>
                                 </li>
                                 <li class="nav-item border-bottom">
@@ -89,19 +101,31 @@ $action = Yii::$app->controller->action->id;
                                         <p class="m-0 fs__15px"><?= Yii::t('app', 'News') ?></p>
                                     </a>
                                 </li>
+<!--                                <li class="nav-item border-bottom">-->
+<!--                                    <a href="--><?//= Url::toRoute('document/') ?><!--"-->
+<!--                                       class="nav-link text-uppercase text-dark p-3">-->
+<!--                                        <p class="m-0 fs__15px">--><?//= Yii::t('app', 'Documents') ?><!--</p>-->
+<!--                                    </a>-->
+<!--                                </li>-->
                                 <li class="nav-item border-bottom">
-                                    <a href="<?= Url::toRoute('site/') ?>"
+                                    <a href="<?= Url::toRoute('site/contact') ?>"
                                        class="nav-link text-uppercase text-dark p-3">
-                                        <p class="m-0 fs__15px"><?= Yii::t('app', 'Documents') ?></p>
+                                        <p class="m-0 fs__15px"><?= Yii::t('app', 'Contact') ?></p>
                                     </a>
                                 </li>
                                 <li class="nav-item border-bottom">
-                                    <a href="<?= Url::toRoute('site/') ?>"
+                                    <a href="<?= Url::toRoute('site/terms') ?>"
                                        class="nav-link text-uppercase text-dark p-3">
-                                        <p class="m-0 fs__15px"><?= Yii::t('app', 'Support') ?></p>
+                                        <p class="m-0 fs__15px"><?= Yii::t('app', 'Terms & Services') ?></p>
                                     </a>
                                 </li>
                                 <?php if (!Yii::$app->user->isGuest) : ?>
+                                    <li class="nav-item border-bottom">
+                                        <a href="<?= Url::toRoute('cart/') ?>"
+                                           class="nav-link text-uppercase text-dark p-3">
+                                            <p class="m-0 fs__15px"><i class="fas fa-shopping-cart"></i> <?= Yii::t('app', 'Cart') ?></p>
+                                        </a>
+                                    </li>
                                     <li class="nav-item border-bottom">
                                         <a href="<?= Url::toRoute('site/logout?ref=' . Yii::$app->request->url) ?>"
                                            class="nav-link text-uppercase text-dark p-3">
@@ -142,22 +166,21 @@ $action = Yii::$app->controller->action->id;
                             </ul>
                         </div>
                         <div class="col-12 col-lg-7 d-none d-md-flex mx-0 px-0">
-                            <ul class="list-unstyled w-100 p-0 m-0 d-flex align-items-center justify-content-md-center justify-content-lg-end">
-                                <li class="site-nav-top"><a
-                                            href="<?= Url::toRoute('site/terms') ?>"
-                                            class="text-decoration-none text-light"><span><?= Yii::t('app', 'Terms & Services') ?></span></a>
+                            <ul class="list-unstyled w-100 p-0 m-0 d-flex align-items-c enter justify-content-md-center justify-content-lg-end">
+                                <li class="site-nav-top"><a href="<?= Url::toRoute('site/contact') ?>"
+                                                            class="text-decoration-none text-light"><span><?= Yii::t('app', 'Contact') ?></span></a>
                                 </li>
                                 <li class="site-nav-top">
-                                    <div class="vr"></div>
+                                    <div class="vr mx-2"></div>
                                 </li>
-                                <li class="site-nav-top"><a
-                                            href="<?= Url::toRoute('site/contact') ?>"
-                                            class="text-decoration-none text-light"><span><?= Yii::t('app', 'Contact') ?></span></a>
+                                <li class="site-nav-top">
+                                    <a href="<?= Url::toRoute('site/terms') ?>"
+                                       class="text-decoration-none text-light"><span><?= Yii::t('app', 'Terms & Services') ?></span></a>
+                                </li>
+                                <li class="site-nav-top">
+                                    <div class="vr mx-2"></div>
                                 </li>
                                 <?php if (!Yii::$app->user->isGuest) : ?>
-                                    <li class="site-nav-top">
-                                        <div class="vr"></div>
-                                    </li>
                                     <li class="site-nav-top">
                                         <div class="dropdown header_login ps-2">
                                             <a class="dropdown-toggle text-decoration-none text-light" type="button"
@@ -173,9 +196,6 @@ $action = Yii::$app->controller->action->id;
                                         </div>
                                     </li>
                                 <?php else : ?>
-                                    <li class="site-nav-top">
-                                        <div class="vr mx-2"></div>
-                                    </li>
                                     <li class="site-nav-top"><a
                                                 href="<?= Url::toRoute('site/login?ref=' . Yii::$app->request->url) ?>"
                                                 class="text-decoration-none text-light"><span><?= Yii::t('app', 'Login') ?></span></a>
@@ -225,53 +245,57 @@ $action = Yii::$app->controller->action->id;
                             <ul class="list-unstyled w-100 h-100 p-0 m-0 d-flex justify-content-end bar-menu">
                                 <li class="bar-item">
                                     <a class="text-dark bar-link text-decoration-none fw-bold"
-                                       href="<?= Url::toRoute('shop/') ?>"><?= Yii::t('app', 'Shop') ?></a>
+                                       href="<?= Url::toRoute('shop/') ?>"><?= Yii::t('app', 'New Arrival') ?></a>
                                 </li>
                                 <li class="bar-item">
                                     <a class="text-dark bar-link text-decoration-none fw-bold"
-                                       href="#"><?= Yii::t('app', 'Introductions') ?></a>
+                                       href="<?= Url::toRoute('shop/') ?>"><?= Yii::t('app', 'Camera') ?></a>
+                                </li>
+                                <li class="bar-item">
+                                    <a class="text-dark bar-link text-decoration-none fw-bold"
+                                       href="<?= Url::toRoute('shop/') ?>"><?= Yii::t('app', 'Elevator') ?></a>
+                                </li>
+                                <li class="bar-item">
+                                    <a class="text-dark bar-link text-decoration-none fw-bold"
+                                       href="<?= Url::toRoute('site/about') ?>"><?= Yii::t('app', 'Introduction') ?></a>
                                 </li>
                                 <li class="bar-item">
                                     <a class="text-dark bar-link text-decoration-none fw-bold"
                                        href="<?= Url::toRoute('post/') ?>"><?= Yii::t('app', 'News') ?></a>
                                 </li>
-                                <li class="bar-item">
-                                    <a class="text-dark bar-link text-decoration-none fw-bold"
-                                       href="#"><?= Yii::t('app', 'Documents') ?></a>
-                                </li>
-                                <li class="bar-item">
-                                    <a class="text-dark bar-link text-decoration-none fw-bold"
-                                       href="#"><?= Yii::t('app', 'Support') ?></a>
-                                </li>
+<!--                                <li class="bar-item">-->
+<!--                                    <a class="text-dark bar-link text-decoration-none fw-bold"-->
+<!--                                       href="--><?//= Url::toRoute('document/') ?><!--">--><?//= Yii::t('app', 'Documents') ?><!--</a>-->
+<!--                                </li>-->
                             </ul>
                         </div>
                     </div>
                     <div class="w-100 p-0 m-0 d-none d-md-flex d-lg-none">
                         <ul class="list-unstyled w-100 p-0 m-0 d-flex justify-content-center bar-md-menu">
-                            <li class="bar-md-item py-3">
+                            <li class="bar-md-item py-2">
                                 <a class="text-dark bar-link text-decoration-none fw-bold"
-                                   href="#"><?= Yii::t('app', 'New Arrivals') ?></a>
+                                   href="<?= Url::toRoute('shop/') ?>"><?= Yii::t('app', 'New Arrival') ?></a>
                             </li>
-                            <li class="bar-md-item py-3">
+                            <li class="bar-md-item py-2">
                                 <a class="text-dark bar-link text-decoration-none fw-bold"
-                                   href="#"><?= Yii::t('app', 'Introductions') ?></a>
+                                   href="<?= Url::toRoute('shop/') ?>"><?= Yii::t('app', 'Camera') ?></a>
                             </li>
-                            <li class="bar-md-item py-3">
+                            <li class="bar-md-item py-2">
                                 <a class="text-dark bar-link text-decoration-none fw-bold"
-                                   href="#"><?= Yii::t('app', 'Introductions') ?></a>
+                                   href="<?= Url::toRoute('shop/') ?>"><?= Yii::t('app', 'Elevator') ?></a>
                             </li>
-                            <li class="bar-md-item py-3">
+                            <li class="bar-md-item py-2">
                                 <a class="text-dark bar-link text-decoration-none fw-bold"
-                                   href="#"><?= Yii::t('app', 'News') ?></a>
+                                   href="<?= Url::toRoute('site/about') ?>"><?= Yii::t('app', 'Introduction') ?></a>
                             </li>
-                            <li class="bar-md-item py-3">
+                            <li class="bar-md-item py-2">
                                 <a class="text-dark bar-link text-decoration-none fw-bold"
-                                   href="#"><?= Yii::t('app', 'Documents') ?></a>
+                                   href="<?= Url::toRoute('post/') ?>"><?= Yii::t('app', 'News') ?></a>
                             </li>
-                            <li class="bar-md-item py-3">
-                                <a class="text-dark bar-link text-decoration-none fw-bold"
-                                   href="#"><?= Yii::t('app', 'Support') ?></a>
-                            </li>
+<!--                            <li class="bar-md-item py-2">-->
+<!--                                <a class="text-dark bar-link text-decoration-none fw-bold"-->
+<!--                                   href="--><?//= Url::toRoute('document/') ?><!--">--><?//= Yii::t('app', 'Documents') ?><!--</a>-->
+<!--                            </li>-->
                         </ul>
                     </div>
                 </nav>
@@ -294,7 +318,7 @@ $action = Yii::$app->controller->action->id;
                                 <ul class="footer-nav no-bullets px-2 py-0">
                                     <h3 class="mb-1"><?= Yii::t('app', 'CONTACT INFO') ?></h3>
                                     <li><span class="ft-content"><i
-                                                    class="fas fa-home"></i> AAA, BBB street, CCC district, DDD </span>
+                                                    class="fas fa-home"></i> <?= Yii::$app->params['companyAddress'] ?></span>
                                     </li>
                                     <li><span class="ft-content"><i class="fas fa-phone-square"></i> <a
                                                     href="tel:<?= Yii::$app->params['adminTel'] ?>"><?= Yii::$app->params['adminTel'] ?></a></span>
@@ -367,5 +391,12 @@ $action = Yii::$app->controller->action->id;
     </div>
     <?php $this->endBody() ?>
     </body>
+    <!--
+──────▄▌▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌
+───▄▄██▌█ ░404NOTFOUND-V02 & DR.WHO-Q96
+▄▄▄▌▐██▌█ ░░░░░░ ░░░░░░░░░ ░░░░░░░▐.
+███████▌█▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ▄▄▌ .
+▀❍▀▀▀▀▀▀▀❍❍▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀▀❍❍ ▀▀.
+    -->
     </html>
 <?php $this->endPage();

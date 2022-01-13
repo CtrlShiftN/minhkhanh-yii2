@@ -13,6 +13,7 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'css/fonts/font.css?family=SVN+Veneer:400,700'
     ];
     public $js = [
     ];

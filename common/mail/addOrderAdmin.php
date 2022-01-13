@@ -1,8 +1,5 @@
 <?php
 
-use yii\helpers\Html;
-use yii\helpers\Url;
-
 /* @var $this yii\web\View */
 /* @var $user common\models\User */
 ?>
@@ -40,11 +37,11 @@ use yii\helpers\Url;
     <br/>
     Kiểm tra ngay: <a href="<?= Yii::$app->params['backend'] . "/order/" ?>">Go to Order manager.</a><br/>
     <p style="padding-bottom: 15px">Xin chân thành cám ơn!</p>
-    <table style="width: 100%" width="100%">
+    <table style="width: 100%">
         <tr>
             <td style="width: 20%">
                 <a href="<?= Yii::$app->params['frontend'] ?>">
-                    <img src="<?= Url::toRoute('img/logo200.png') ?>"
+                    <img src="<?= Yii::$app->params['frontend'] . '/img/logo200.png' ?>"
                          alt="<?= Yii::$app->params['senderName'] ?>" style="width: 100%">
                 </a>
             </td>
@@ -54,7 +51,7 @@ use yii\helpers\Url;
                                href="tel:<?= Yii::$app->params['adminTel'] ?>"><?= Yii::$app->params['adminTel'] ?></a></p>
                 <p>Email: <a style="text-decoration: none;color: #0b2e13"
                              href="mailto:<?= Yii::$app->params['supportEmail'] ?>"><?= Yii::$app->params['supportEmail'] ?></a></p>
-                <p>Fanpage: <a style="text-decoration: none" href="https://www.facebook.com">MinhKhanh</a></p>
+                <!--                <p>Fanpage: <a style="text-decoration: none" href="https://www.facebook.com">MinhKhanh</a></p>-->
                 <p><?= Yii::$app->params['companyAddress'] ?></p>
             </td>
         </tr>
