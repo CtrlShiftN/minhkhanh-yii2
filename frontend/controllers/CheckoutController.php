@@ -123,9 +123,9 @@ class CheckoutController extends \yii\web\Controller
                     }
                 }
                 // send mail to inform admin & client
-                $mailSubjectAdmin = 'MinhKhanh - '.Yii::t('app', 'A new order has been initialized!') . ' '.Yii::t('app','Billing code:') . $BL_code;
+                $mailSubjectAdmin = 'MINHKHANH - '.Yii::t('app', 'A new order has been initialized!') . ' '.Yii::t('app','Billing code:') . $BL_code;
                 MailServer::sendMailOrderInformAdmin($mailSubjectAdmin, $arrOrderInformMail);
-                $mailSubjectCustomer = Yii::t('app','MinhKhanh - Order placed successfully!'). ' '.Yii::t('app','Your billing code:') . $BL_code;
+                $mailSubjectCustomer = Yii::t('app','MINHKHANH - Order placed successfully!'). ' '.Yii::t('app','Your billing code:') . $BL_code;
                 MailServer::sendMailOrderInformCustomer($mailSubjectCustomer, $model['email'], $arrOrderInformMail);
                 // ./ send mail to inform admin & client
                 if ($count == count($cart)) {

@@ -135,7 +135,7 @@ class ProductController extends Controller
                     mkdir(Yii::getAlias('@common/media/product'), 0777);
                 }
                 $imageUrl = Yii::getAlias('@common/media');
-                $fileName = 'product/' . $model->slug . '.' . $model->file->getExtension();
+                $fileName = 'product/' . implode("-", $model->type) . '_' . $model->category . '_' . date('YmdHis') . $model->slug . '.' . $model->file->getExtension();
                 $isUploadedFile = $model->file->saveAs($imageUrl . '/' . $fileName);
                 if ($isUploadedFile) {
                     $model->image = $fileName;
@@ -151,7 +151,7 @@ class ProductController extends Controller
             $model->related_product = (!empty($model->relatedProduct)) ? implode(',', $model->relatedProduct) : null;
             // assoc
             if (!empty($model->type)) {
-                $assocModel->type_id = implode(',', $model->type);
+                $assocModel->type_id = ','.implode(',', $model->type).',';
             }
             if (!empty($model->category)) {
                 $assocModel->category_id = $model->category;
@@ -221,7 +221,7 @@ class ProductController extends Controller
                         mkdir(Yii::getAlias('@common/media/product'), 0777);
                     }
                     $imageUrl = Yii::getAlias('@common/media');
-                    $imgPath = 'product/' . implode("-", $model->type) . '_' . $model->category . '_' . $model->slug . '.' . $model->file->getExtension();
+                    $imgPath = 'product/' . implode("-", $model->type) . '_' . $model->category . '_' . date('YmdHis') . $model->slug . '.' . $model->file->getExtension();
                     $isUploadedImage = $model->file->saveAs($imageUrl . '/' . $imgPath);
                     if ($isUploadedImage){
                         $model->image = $imgPath;
@@ -229,7 +229,7 @@ class ProductController extends Controller
                     if ($model->files) {
                         $count = 1;
                         foreach ($model->files as $key => $file) {
-                            $imagePath = 'product/' . implode("-", $model->type) . '_' . $model->category . '_' . $model->slug . '_' . $count . '.' . $file->getExtension();
+                            $imagePath = 'product/' . implode("-", $model->type) . '_' . $model->category . '_' . date('YmdHis') . $model->slug . '_' . $count . '.' . $file->getExtension();
                             $arrImages[$key] = $imagePath;
                             $file->saveAs($imageUrl . '/' . $imagePath);
                             $count++;

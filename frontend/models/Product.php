@@ -128,7 +128,7 @@ class Product extends \common\models\Product
      */
     public static function getOnSaleProduct($otherId, $limit)
     {
-        return Product::find()->where(['status' => 1])->andWhere(['not', ['id' => $otherId]])->andWhere(['not', ['sale_price' => null]])->andWhere(['not', ['sale_price' => 0]])->orderBy(new Expression('rand()'))->limit($limit)->all();
+        return Product::find()->where(['status' => 1])->andWhere(['not', ['id' => $otherId]])->andWhere(['not', ['discount' => null]])->andWhere(['not', ['discount' => 0]])->orderBy(new Expression('rand()'))->limit($limit)->all();
     }
 
     /**

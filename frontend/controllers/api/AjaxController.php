@@ -16,6 +16,7 @@ use frontend\models\GeoLocation;
 use frontend\models\OrderForm;
 use frontend\models\Product;
 use Yii;
+use yii\helpers\Url;
 use yii\rest\ActiveController;
 
 class AjaxController extends ActiveController
@@ -264,15 +265,14 @@ class AjaxController extends ActiveController
                 $contactModel->name = $data['nameNewsLetter'];
                 $contactModel->email = $data['emailNewsLetter'];
                 if ($contactModel->save(false)) {
-                    $mailSubjectAdmin = Yii::t('app', 'A new contact has been initialized.');
-                    MailServer::sendMailContactAdmin($mailSubjectAdmin);
-                    Yii::$app->session->setFlash('creatNewsLetterSuccess', Yii::t('app', 'Submitted successfully!'));
+                    Yii::$app->session->setFlash('createNewsLetterSuccess', Yii::t('app', 'Submitted successfully!'));
                 } else {
-                    Yii::$app->session->setFlash('creatNewsLetterError', Yii::t('app', 'Send failed.'));
+                    Yii::$app->session->setFlash('createNewsLetterError', Yii::t('app', 'Send failed.'));
                 }
             } else {
                 Yii::$app->session->setFlash('creatNewsLetterSuccess', Yii::t('app', 'Submitted successfully!'));
             }
         }
+        $this->redirect(Url::home());
     }
 }

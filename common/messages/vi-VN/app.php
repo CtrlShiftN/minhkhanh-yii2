@@ -411,5 +411,15 @@ return [
     'security camera' => 'camera an ninh',
     'safety - security - quality' => 'an toàn - bảo mật - chất lượng',
     'Affirm the brand and quality' => 'Khẳng định thương hiệu và chất lượng',
-    'MINHKHANH - Elevator' => 'MINHKHANH - Thang máy'
+    'MINHKHANH - Elevator' => 'MINHKHANH - Thang máy',
+    'Under Construction' => 'Đang Xây Dựng',
+    'Sorry for the inconvenience.' => 'Xin lỗi vì sự bất tiện này.',
+    'We are currently building our brand new website.' => 'Chúng tôi hiện đang xây dựng trang web mới của mình.',
+    'Go back to homepage' => 'Quay lại trang chủ',
+    'Documents' => 'Tài liệu',
+    'Support' => 'Hỗ trợ',
+    'New Arrival' => 'Sản phẩm mới',
+    'No news yet!' => 'Hiện chưa có tin mới!',
+    'Elevator' => 'Thang máy',
+    'If you have a business inquiry or other question, please fill out the following form to contact us. Thank you!' => 'Nếu bạn có một yêu cầu kinh doanh hoặc câu hỏi khác, vui lòng điền vào biểu mẫu sau để liên hệ với chúng tôi. Cảm ơn bạn!',
 ];

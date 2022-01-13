@@ -1,0 +1,85 @@
+.full-width {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 49%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    overflow: hidden;
+}
+
+.shadow {
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 45%) !important;
+}
+
+.title-aboutus{
+    font-family: "SVN Veneer";
+}
+
+.banner-slide-height,
+.banner-slide-height .image-slide,
+.banner-slide-height .content-wrapper{
+    height: 45vw !important;
+}
+
+.banner-slide-height .image-slide,
+.banner-slide-height .bg-cover {
+    top: 0;
+    left: 0;
+}
+
+.objectfit-cover {
+    object-fit: cover !important;
+}
+
+.hover-change-whiteBg:hover {
+    background: white !important;
+    color: #b60606 !important;
+    border: 1px solid white !important;
+}
+
+@media (max-width: 768px) {
+    #banner-slide .fs-content {
+        font-size: 1.175rem !important;
+    }
+    #banner-slide .fs-2 {
+        font-size: 1.05rem !important;
+    }
+    #banner-slide .btn {
+        padding: 3px 6px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    #banner-slide .fs-content {
+        font-size: 1.375rem !important;
+    }
+    #banner-slide .fs-2 {
+        font-size: 1.15rem !important;
+    }
+    #banner-slide .btn {
+        padding: 5px 10px !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .bg-cover, .content-box {
+        background: rgba(0, 0, 0, 0.5);
+        padding: 15px;
+    }
+}
+
+@media (min-width: 992px) {
+    #banner-slide .fs-content {
+        font-size: calc(1.375rem + 1.5vw) !important;
+    }
+    #banner-slide .fs-2 {
+        font-size: calc(1.375rem + 0.8vw) !important;
+    }
+
+    .bg-cover, .content-box {
+        background: rgba(0, 0, 0, 0.5);
+        padding: 35px;
+    }
+}
+

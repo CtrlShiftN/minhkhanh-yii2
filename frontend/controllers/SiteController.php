@@ -156,14 +156,17 @@ class SiteController extends Controller
         ]);
     }
 
+
+
     /**
-     * Displays about page.
-     *
-     * @return mixed
+     * @return string
      */
     public function actionAbout()
     {
-        return $this->render('about');
+        $latestNews = Post::getLatestPosts(3);
+        return $this->render('about',[
+            'latestNews' => $latestNews
+        ]);
     }
 
     /**

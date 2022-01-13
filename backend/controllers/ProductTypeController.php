@@ -118,11 +118,7 @@ class ProductTypeController extends Controller
         if ($model->load($post)) {
             $model->file = UploadedFile::getInstance($model, 'file');
             // do not modify tailor made, mix & match slug
-            if ($model->id != SystemConstant::PRODUCT_TYPE_NEW &&
-                $model->id != SystemConstant::PRODUCT_TYPE_TAILOR_MADE &&
-                $model->id != SystemConstant::PRODUCT_TYPE_MIX_AND_MATCH) {
-                $model->slug = trim(StringHelper::toSlug(trim($model->name)));
-            }
+            $model->slug = trim(StringHelper::toSlug(trim($model->name)));
             if ($model->file) {
                 if (!file_exists(Yii::getAlias('@common/media/product-type'))) {
                     mkdir(Yii::getAlias('@common/media/product-type'), 0777);
@@ -133,10 +129,6 @@ class ProductTypeController extends Controller
                 if ($isUploadedFile) {
                     $model->image = $fileName;
                 }
-            }
-            // not allow change tailor made and mix & match segment
-            if ($model->id == SystemConstant::PRODUCT_TYPE_TAILOR_MADE || $model->id == SystemConstant::PRODUCT_TYPE_MIX_AND_MATCH) {
-                $model->segment = SystemConstant::SEGMENT_LUXURY;
             }
             $model->admin_id = Yii::$app->user->identity->getId();
             $model->updated_at = date('Y-m-d H:i:s');
@@ -223,11 +215,7 @@ class ProductTypeController extends Controller
     public function actionDelete($id)
     {
         $id = CryptHelper::decryptString($id);
-        if ($id != SystemConstant::PRODUCT_TYPE_NEW &&
-            $id != SystemConstant::PRODUCT_TYPE_TAILOR_MADE &&
-            $id != SystemConstant::PRODUCT_TYPE_MIX_AND_MATCH) {
-            $this->findModel($id)->delete();
-        }
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }

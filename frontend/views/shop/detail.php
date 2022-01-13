@@ -203,7 +203,7 @@ $this->registerCss('
                                              src="<?= $imgUrl . '/' . $value['image'] ?>">
                                     </div>
                                     <div class="pr-inf px-2 px-lg-1 px-xl-2 py-2 w-100 border-top">
-                                        <?php if (!empty($value['sale_price'])): ?>
+                                        <?php if (!empty($value['discount'])): ?>
                                             <span class="px-0 fw-bold mt-2 p-price text-danger">
                                     <span class="text-decoration-line-through text-dark fw-light fs-regular-price"><?= number_format($value['regular_price'], 0, ',', '.') ?>đ</span> <?= number_format($value['selling_price'], 0, ',', '.') ?>đ
                                 </span>
@@ -250,7 +250,7 @@ $this->registerCss('
                                              src="<?= $imgUrl . '/' . $value['image'] ?>">
                                     </div>
                                     <div class="pr-inf px-2 px-lg-1 px-xl-2 py-2 w-100 border-top">
-                                        <?php if (!empty($value['sale_price'])): ?>
+                                        <?php if (!empty($value['discount'])): ?>
                                             <span class="px-0 fw-bold mt-2 p-price text-danger">
                                     <span class="text-decoration-line-through text-dark fw-light fs-regular-price"><?= number_format($value['regular_price'], 0, ',', '.') ?>đ</span> <?= number_format($value['selling_price'], 0, ',', '.') ?>đ
                                 </span>

@@ -74,7 +74,7 @@ class PasswordResetRequestForm extends Model
             )
             ->setFrom(Yii::$app->params['senderEmail'])
             ->setTo($this->email)
-            ->setSubject('MinhKhanh- Password reset for your account')
+            ->setSubject('MINHKHANH- Password reset for your account')
             ->send();
     }
 }
