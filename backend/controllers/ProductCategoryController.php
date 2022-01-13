@@ -126,7 +126,7 @@ class ProductCategoryController extends Controller
                 $model->created_at = date('Y-m-d H:m:s');
                 $model->updated_at = date('Y-m-d H:m:s');
                 $model->status = SystemConstant::STATUS_ACTIVE;
-                $model->type_id = (!empty($model->types)) ? implode(",", $model->types) : null;
+                $model->type_id = (!empty($model->types)) ? $model->types : null;
                 $model->admin_id = Yii::$app->user->identity->getId();
                 if ($model->save()) {
                     return $this->redirect(Url::toRoute('product-category/'));

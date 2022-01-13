@@ -63,6 +63,6 @@ class ProductCategory extends \yii\db\ActiveRecord
      */
     public static function getCategoryByTypeId($id)
     {
-        return ProductCategory::find()->where(['status' => 1])->andWhere(['like', 'type_id', ','.$id.','])->asArray()->all();
+        return ProductCategory::find()->where(['status' => 1])->andWhere(['type_id' => $id])->asArray()->all();
     }
 }
