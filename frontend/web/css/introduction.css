@@ -83,3 +83,10 @@
     }
 }
 
+/* END SLIDER */
+.intro-text > p {
+    text-align: justify;
+    color: #666666;
+    font-family: "Montserrat", sans-serif;
+}
+

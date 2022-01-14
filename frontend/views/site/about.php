@@ -59,82 +59,37 @@ $this->registerCss("
         </div>
     </div>
 </div>
-
 <div class="row m-0 p-0 pb-4 pb-md-5">
-    <section class="about-content pb-4">
-        <div class="section-heading text-center mb-4">
-            <h2 class="section-title">
-                <span class="text-uppercase title-aboutus"><?= Yii::t('app', 'ABOUT US') ?></span>
-            </h2>
+    <div class="shop-intro text-center pt-md-5 pb-2">
+        <?php if (!empty($stories['intro'])): ?>
+            <img src="<?= $imgUrl . '/' . $stories['intro']['image'] ?>" width="100%">
+            <h3 class="text-uppercase py-2">MINHKHANH</h3>
+            <div class="intro-text px-3">
+                <?= (!empty($stories['intro']['content'])) ? $stories['intro']['content'] : '' ?>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
+<div class="full-width pb-4 pb-md-5 d-none d-md-block">
+    <?php if (!empty($stories['fullwidth'])): ?>
+        <img src="<?= $imgUrl . '/' . $stories['fullwidth']['image'] ?>" width="100%">
+    <?php endif; ?>
+</div>
+<div class="row m-0 p-0 pb-4 pb-md-5">
+    <div class="container-md p-0">
+        <div class="row quotes pb-4 pb-md-5 text-center w-100 mx-0 px-2 align-items-md-center justify-content-md-center">
+            <?php if (!empty($stories['quote'])): ?>
+                <div class="col-12 col-md-1"></div>
+                <div class="col-12 col-md-5">
+                    <img src="<?= $imgUrl . '/' . $stories['quote']['image'] ?>" width="100%">
+                </div>
+                <div class="col-12 col-md-5 intro-quote mt-3 mt-md-0 pt-md-0 pe-0">
+                    <?= $stories['quote']['content'] ?>
+                </div>
+                <div class="col-12 col-md-1"></div>
+            <?php endif; ?>
         </div>
-        <div class="section-content text-justify">
-            <h3>Giới thiệu công ty MINHKHANH</h3>
-            <h5 class="m-0">
-                1, Thi công lắp đặt, sữa chữa, di dời hệ thống Camera Quan sát
-            </h5>
-            <ul class="mb-2">
-                <li>Giải pháp thi công, lắp đặt camera quan sát cho tòa nhà, khối văn phòng.</li>
-                <li>Giải pháp thi công, lắp đặt camera quan sát cho nhà xưởng tại TPHCM.</li>
-                <li>Giải pháp thi công, lắp đặt cho Khách sạn.</li>
-                <li>Giải pháp thi công, lắp đặt cho khối Ngân hàng – Tài chính.</li>
-                <li>Giải pháp thi công, lắp đặt cho Siêu thị, Sàn giao dịch.</li>
-                <li>Giải pháp thi công, lắp đặt cho các nút giao thông.</li>
-                <li>Giải pháp thi công, lắp đặt cho nhà xưởng, kho bãi.</li>
-                <li>Giải pháp thi công, lắp đặt cho cửa hàng quán tạp hóa, quán bar, quán nhậu, gia đình.</li>
-            </ul>
-            <h5 class="m-0">
-                2, Hệ thống cầu thang máy
-            </h5>
-            <ul class="mb-3">
-                <li>Hệ thống cầu thang máy cho tòa nhà, khối văn phòng.</li>
-                <li>Hệ thống cầu thang máy cho Ngân Hàng.</li>
-                <li>Hệ thống  cầu thang máy cho Siêu thị, nhà kho.</li>
-            </ul>
-
-            <h3>Cơ cấu tổ chức của Camera Thời Đại</h3>
-            <p>Với hơn 10 năm hoạt động trong lĩnh vực camera an ninh,
-                chúng tôi luôn nắm bắt những công nghệ mới,
-                để tư vấn cho khách hàng giải pháp thi công và lắp đặt các thiết bị an ninh tốt nhất hiện tại.</p>
-            <p>Với đội ngũ nhân viên của chúng tôi đã được đào tạo nhiều lượt từ các trường cao đẳng,
-                đại học danh tiếng trong và ngoài nước.
-                Nhiều người trong số đó đã trở thành chuyên gia trong nhiều lĩnh vực.
-                Đặc biệt trong số họ có nhiều người có kinh nghiệm hàng đầu trong lĩnh vực Security.</p>
-
-            <h3>Định hướng phát triển</h3>
-            <p>
-                Với quy mô hoạt động rộng rãi,
-                Công ty MINHKHANH luôn cam kết mang tới khách hàng những sản phẩm và dịch vụ tốt nhất.
-                Với đội ngũ nhân viên chuyên sâu, năng động,
-                nhiệt tình và nhiều kinh nghiệm Công ty MINHKHANH chúng tôi luôn đem đến cho khách hang sự hài lòng và tin tưởng tuyệt đối.
-                Để duy trì vị trí hàng đầu trong lĩnh vực Security.
-            </p>
-            <p>
-                Đối với khách hàng trong nước,
-                Camera Thời Đại tiếp tục xây dựng mối quan hệ truyền thống chiến lược với khách hàng.
-                Với định hướng luôn đồng hành với các doanh nghiệp, cơ quan,
-                ban nghành, đoàn thể trên con đường hiện đại hóa với mục tiêu luôn cung cấp cho các doanh nghiệp những giải pháp tốt nhất.
-            </p>
-            <p>
-                Tiếp tục xây dựng và nâng cao đội ngũ cán bộ nhân viên có khả năng ứng dụng công nghệ hiện đại nhất và am hiểu sâu sắc về nghiệp vụ khách hàng.
-                Có khả năng tư vấn và làm việc trong môi trường quốc tế hóa ngày càng cao.
-            </p>
-            <p>
-                Xây dựng các đối tác nước ngoài uy tín và tin cậy,
-                cung cấp các giải pháp mới,
-                nhằm đáp ứng một cách cao nhất yêu cầu của khách hàng.
-            </p>
-            <p>
-                Liên tục ứng dụng những phương pháp mới nhất để nâng cao năng lực quản lý của doanh nghiệp và mở rộng việc cung cấp sản phẩm và dịch vụ ra thị trường khu vực.
-            </p>
-        </div>
-    </section>
-    <section class="contact-content p-0 m-0">
-        <div class="row m-0 p-0">
-            <a href="<?= Url::toRoute('shop/') ?>" class="text-decoration-none p-0 m-0">
-                <img class="w-100 objectfit-cover" src="<?= Url::toRoute('img/banner_lap_dat_camera.png') ?>">
-            </a>
-        </div>
-    </section>
+    </div>
 </div>
 
 <?php if (!empty($latestNews)): ?>

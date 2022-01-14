@@ -16,6 +16,7 @@ use common\models\Product;
 use common\models\ProductAssoc;
 use common\models\ProductCategory;
 use common\models\ProductType;
+use common\models\SiteAbout;
 use common\models\Social;
 use common\models\Terms;
 use common\models\TrackingStatus;
@@ -116,6 +117,7 @@ class SampleData
             'image' => 'product/camera/dahua/hdcvi/DH-HAC-HDBW1400EP-S2.png',
             'images' => 'product/camera/dahua/hdcvi/DH-HAC-HDBW1400EP-S2.png',
             'quantity' => 6312,
+            'is_feature' => 1,
             'trademark_id' => 1,
             'admin_id' => 1,
         ],
@@ -128,6 +130,7 @@ class SampleData
             'image' => 'product/camera/dahua/hdcvi/DH-HAC-HDBW1500EP.png',
             'images' => 'product/camera/dahua/hdcvi/DH-HAC-HDBW1500EP.png',
             'quantity' => 612,
+            'is_feature' => 1,
             'trademark_id' => 1,
             'admin_id' => 1,
         ],
@@ -140,6 +143,7 @@ class SampleData
             'image' => 'product/camera/dahua/hdcvi/DH-HAC-HDW1400EMP-A-S2.png',
             'images' => 'product/camera/dahua/hdcvi/DH-HAC-HDW1400EMP-A-S2.png',
             'quantity' => 612,
+            'is_feature' => 1,
             'trademark_id' => 1,
             'admin_id' => 1,
         ],
@@ -152,6 +156,7 @@ class SampleData
             'image' => 'product/camera/dahua/hdcvi/DH-HAC-HDBW1500RP-Z.png',
             'images' => 'product/camera/dahua/hdcvi/DH-HAC-HDBW1500RP-Z.png',
             'quantity' => 612,
+            'is_feature' => 1,
             'trademark_id' => 1,
             'admin_id' => 1,
         ],
@@ -164,6 +169,7 @@ class SampleData
             'image' => 'product/camera/dahua/hdcvi/dh-hac-hfw1200dp-768x768-1595210649-1596783207.png',
             'images' => 'product/camera/dahua/hdcvi/dh-hac-hfw1200dp-768x768-1595210649-1596783207.png',
             'quantity' => 612,
+            'is_feature' => 1,
             'trademark_id' => 1,
             'admin_id' => 1,
         ],
@@ -176,6 +182,7 @@ class SampleData
             'image' => 'product/camera/dahua/hdcvi/DH-HAC-HFW1400RP.png',
             'images' => 'product/camera/dahua/hdcvi/DH-HAC-HFW1400SP.png',
             'quantity' => 612,
+            'is_feature' => 1,
             'trademark_id' => 1,
             'admin_id' => 1,
         ],
@@ -188,6 +195,7 @@ class SampleData
             'image' => 'product/camera/dahua/hdcvi/DH-HAC-HFW1400SP-S2.png',
             'images' => 'product/camera/dahua/hdcvi/DH-HAC-HFW1400SP-S2.png',
             'quantity' => 612,
+            'is_feature' => 1,
             'trademark_id' => 1,
             'admin_id' => 1,
         ],
@@ -200,6 +208,7 @@ class SampleData
             'image' => 'product/camera/dahua/hdcvi/DH-HAC-HFW1400DP-S2.png',
             'images' => 'product/camera/dahua/hdcvi/DH-HAC-HFW1400DP-S2.png',
             'quantity' => 612,
+            'is_feature' => 1,
             'trademark_id' => 1,
             'admin_id' => 1,
         ],
@@ -211,6 +220,7 @@ class SampleData
             'image' => 'product/thang-may-sample.jpg',
             'images' => 'product/thang-may-sample.jpg',
             'quantity' => 612,
+            'is_feature' => 1,
             'trademark_id' => 2,
             'admin_id' => 1,
         ],
@@ -1555,21 +1565,67 @@ class SampleData
     }
 
     /**
+     * @var \string[][]
+     */
+    public static $arrAbout= [
+        [
+            'content' => "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consectetur cursus accumsan. Maecenas a commodo turpis. Donec nec vestibulum enim. Mauris posuere nulla dignissim bibendum vulputate. Cras placerat commodo lorem nec congue. Nam malesuada, orci id cursus laoreet, magna ante pellentesque lectus, non auctor nisl lacus et felis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi id ullamcorper orci. Etiam at fermentum nunc. Donec euismod risus eget convallis euismod. Aenean pharetra, lacus et tristique scelerisque, mi nibh efficitur mauris, non ornare elit ante pretium lorem. Donec aliquet interdum ante. Aliquam in nulla maximus, sodales ligula eget, fringilla diam. Vivamus id elit arcu. Cras tempus urna ut magna semper, at consectetur justo viverra. Curabitur metus massa, convallis tincidunt magna vel, fermentum finibus mauris.</p>",
+            'image' => 'stories/banner-cam-2.jpg',
+            'section' => 'intro',
+        ],
+        [
+            'image' => 'stories/banner-camera.jpg',
+            'section' => 'fullwidth',
+        ],
+        [
+            'content' => "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consectetur cursus accumsan. Maecenas a commodo turpis. Donec nec vestibulum enim. Mauris posuere nulla dignissim bibendum vulputate. Cras placerat commodo lorem nec congue. Nam malesuada, orci id cursus laoreet, magna ante pellentesque lectus, non auctor nisl lacus et felis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi id ullamcorper orci. Etiam at fermentum nunc. Donec euismod risus eget convallis euismod. Aenean pharetra, lacus et tristique scelerisque, mi nibh efficitur mauris, non ornare elit ante pretium lorem. Donec aliquet interdum ante. Aliquam in nulla maximus, sodales ligula eget, fringilla diam. Vivamus id elit arcu. Cras tempus urna ut magna semper, at consectetur justo viverra. Curabitur metus massa, convallis tincidunt magna vel, fermentum finibus mauris.</p>",
+            'image' => 'stories/elevator.jpg',
+            'section' => 'quote',
+        ]
+    ];
+
+    /**
+     *
+     */
+    public static function insertSampleSiteAbout()
+    {
+        $count = 0;
+        foreach (self::$arrAbout as $value) {
+            $model = new SiteAbout();
+            if (!empty($value['content'])) {
+                $model->content = $value['content'];
+            }
+            $model->image = $value['image'];
+            $model->section = $value['section'];
+            $model->admin_id = 1;
+            $model->created_at = date('Y-m-d H:i:s');
+            $model->updated_at = date('Y-m-d H:i:s');
+            if ($model->save()) {
+                $count++;
+            } else {
+                echo print_r($model->errors) . PHP_EOL;
+            }
+        }
+        echo 'Inserted ' . $count . '/' . count(self::$arrAbout) . ' stories' . PHP_EOL;
+    }
+
+    /**
      * @throws Exception
      */
     public static function importAllSampleData()
     {
-        self::insertSampleUser();
-        self::insertSampleProduct();
-        self::insertSampleProductAssoc();
-        self::insertSampleProductType();
-        self::insertSampleProductCategory();
-        self::insertSampleTrademark();
-        self::insertSampleTerms();
-        self::insertSampleCart();
-        self::insertSampleSocialNetwork();
-        self::insertSampleGeoLocation();
-        self::insertSampleOrderTracking();
-        self::insertSampleTrackingStatus();
+//        self::insertSampleUser();
+//        self::insertSampleProduct();
+//        self::insertSampleProductAssoc();
+//        self::insertSampleProductType();
+//        self::insertSampleProductCategory();
+//        self::insertSampleTrademark();
+//        self::insertSampleTerms();
+//        self::insertSampleCart();
+//        self::insertSampleSocialNetwork();
+//        self::insertSampleGeoLocation();
+//        self::insertSampleOrderTracking();
+//        self::insertSampleTrackingStatus();
+        self::insertSampleSiteAbout();
     }
 }
