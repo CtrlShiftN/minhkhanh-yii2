@@ -373,10 +373,8 @@ $action = Yii::$app->controller->action->id;
                                 <ul class="footer-nav no-bullets px-2 py-0">
                                     <h3 class="mb-1"><?= Yii::t('app', 'CERTIFICATE') ?></h3>
                                     <li>
-                                        <a href="javascript:void(0)" target="_blank"><img class="pt-2"
-                                                                                          src="//theme.hstatic.net/1000180292/1000232392/14/footer_payment_logo_1.png?v=3509"></a>
-                                        <a href="javascript:void(0)" target="_blank"><img class="pt-2"
-                                                                                          src="//theme.hstatic.net/1000180292/1000232392/14/footer_payment_logo_2.png?v=3509"></a>
+                                        <img class="pt-2" src="//theme.hstatic.net/1000180292/1000232392/14/footer_payment_logo_1.png?v=3509">
+                                        <img class="pt-2" src="//theme.hstatic.net/1000180292/1000232392/14/footer_payment_logo_2.png?v=3509">
                                     </li>
                                 </ul>
                             </div>
