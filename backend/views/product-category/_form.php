@@ -34,7 +34,6 @@ $this->registerCss('.select2-search__field{width: 100% !important}');
                 'data' => ArrayHelper::map($types, 'id', 'name'),
                 'options' => ['placeholder' => Yii::t('app', 'Choose product types')],
                 'pluginOptions' => [
-                    'multiple' => true,
                     'allowClear' => true
                 ],
             ])->label(false); ?>
