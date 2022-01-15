@@ -124,7 +124,7 @@ class ProductTypeController extends Controller
                     mkdir(Yii::getAlias('@common/media/product-type'), 0777);
                 }
                 $imageUrl = Yii::getAlias('@common/media');
-                $fileName = 'product-type/' . $model->slug . '.' . $model->file->getExtension();
+                $fileName = 'product-type/' . date('YmdHis') . $model->slug . '.' . $model->file->getExtension();
                 $isUploadedFile = $model->file->saveAs($imageUrl . '/' . $fileName);
                 if ($isUploadedFile) {
                     $model->image = $fileName;
@@ -162,7 +162,7 @@ class ProductTypeController extends Controller
                         mkdir(Yii::getAlias('@common/media/product-type'), 0777);
                     }
                     $imageUrl = Yii::getAlias('@common/media');
-                    $fileName = 'product-type/' . $model->slug . '.' . $model->file->getExtension();
+                    $fileName = 'product-type/' . date('YmdHis') . $model->slug . '.' . $model->file->getExtension();
                     $isUploadedFile = $model->file->saveAs($imageUrl . '/' . $fileName);
                     if ($isUploadedFile) {
                         $model->image = $fileName;

@@ -75,7 +75,7 @@ $config = ['template' => "{input}\n{error}\n{hint}"];
             </div>
             <div class="w-100 row m-0">
                     <p class="col-12 mx-0"><span
-                                class="fw-bold"><?= Yii::t('app', 'Address') ?>:</span><br> Số 1 đường Khương Đình, Kim Giang, Hà Nội
+                                class="fw-bold"><?= Yii::t('app', 'Address') ?>:</span><br> <?= Yii::$app->params['companyAddress'] ?>
                     </p>
                     <p class="d-inline-block col-12 col-sm-6"><span
                                 class="fw-bold">Email:</span><br> <?= Yii::$app->params['supportEmail'] ?></p>

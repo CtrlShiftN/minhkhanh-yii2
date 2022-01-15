@@ -6,10 +6,12 @@ use common\components\MailServer;
 use frontend\models\Post;
 use frontend\models\Product;
 use frontend\models\ResendVerificationEmailForm;
+use frontend\models\SiteAbout;
 use frontend\models\Terms;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\helpers\ArrayHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -164,8 +166,10 @@ class SiteController extends Controller
     public function actionAbout()
     {
         $latestNews = Post::getLatestPosts(3);
+        $stories = ArrayHelper::index(SiteAbout::getAllStories(), 'section');
         return $this->render('about',[
-            'latestNews' => $latestNews
+            'latestNews' => $latestNews,
+            'stories' => $stories
         ]);
     }
 

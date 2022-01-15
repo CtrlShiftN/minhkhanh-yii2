@@ -53,18 +53,6 @@ $arrFeature = [Yii::t('app', 'Non-featured'), Yii::t('app', 'Featured')];
                 ]
             ]) ?>
             <?= $form->field($model, 'discount', ['hintType' => ActiveField::HINT_SPECIAL])->textInput(['type' => 'number', 'placeholder' => '15%'])->hint('Phần trăm giảm giá cho sản phẩm, ví du: Giảm giá 15% thì điền 15 vào ô Giảm giá') ?>
-            <?= $form->field($model, 'sale_price')->widget(MaskMoney::classname(), [
-                'pluginOptions' => [
-                    'prefix' => 'VND ',
-                    'suffix' => ' đ',
-                    'affixesStay' => true,
-                    'thousands' => ',',
-                    'decimal' => '.',
-                    'precision' => 0,
-                    'allowZero' => false,
-                    'allowNegative' => false,
-                ]
-            ]) ?>
             <?= $form->field($model, 'trademark_id')->widget(Select2::classname(), [
                 'data' => \yii\helpers\ArrayHelper::map($trademark, 'id', 'name'),
                 'options' => ['placeholder' => Yii::t('app', 'Choose trademark')],

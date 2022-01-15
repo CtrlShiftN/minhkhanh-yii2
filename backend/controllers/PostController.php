@@ -131,7 +131,7 @@ class PostController extends Controller
                     mkdir(Yii::getAlias('@common/media/post'), 0777);
                 }
                 $imageUrl = Yii::getAlias('@common/media');
-                $fileName = 'post/' . $model->slug . '.' . $model->file->getExtension();
+                $fileName = 'post/' . date('YmdHis') . $model->slug . '.' . $model->file->getExtension();
                 $isUploadedFile = $model->file->saveAs($imageUrl . '/' . $fileName);
                 if ($isUploadedFile) {
                     $model->avatar = $fileName;
@@ -174,7 +174,7 @@ class PostController extends Controller
                         mkdir(Yii::getAlias('@common/media/post'), 0777);
                     }
                     $imageUrl = Yii::getAlias('@common/media');
-                    $fileName = 'post/' . $model->slug . '.' . $model->file->getExtension();
+                    $fileName = 'post/' . date('YmdHis') . $model->slug . '.' . $model->file->getExtension();
                     $isUploadedFile = $model->file->saveAs($imageUrl . '/' . $fileName);
                     if ($isUploadedFile) {
                         $model->avatar = $fileName;
@@ -221,7 +221,7 @@ class PostController extends Controller
                         mkdir(Yii::getAlias('@common/media'), 0777);
                     }
                     $imageUrl = Yii::getAlias('@common/media');
-                    $fileName = $model->slug . '.' . $model->file->getExtension();
+                    $fileName = date('YmdHis') . $model->slug . '.' . $model->file->getExtension();
                     $isUploadedFile = $model->file->saveAs($imageUrl . '/post/' . $fileName);
                     if ($isUploadedFile) {
                         $model->avatar = 'post/' . $fileName;

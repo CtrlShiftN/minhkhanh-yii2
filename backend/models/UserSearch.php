@@ -2,9 +2,11 @@
 
 namespace backend\models;
 
+use backend\models\User;
+use common\components\SystemConstant;
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\User;
 
 /**
  * UserSearch represents the model behind the search form of `backend\models\User`.
@@ -18,7 +20,32 @@ class UserSearch extends User
     {
         return [
             [['id', 'status', 'role'], 'integer'],
-            [['username', 'name', 'tel', 'address', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'verified_at', 'referral_code', 'source', 'source_id', 'created_at', 'updated_at', 'verification_token'], 'safe'],
+            [['username', 'name', 'tel', 'address', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'verified_at', 'referral_code', 'created_at', 'updated_at', 'verification_token', 'source', 'source_id'], 'safe'],
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'username' => Yii::t('app', 'Username'),
+            'name' => Yii::t('app', 'Name'),
+            'tel' => Yii::t('app', 'Tel'),
+            'address' => Yii::t('app', 'Address'),
+            'auth_key' => Yii::t('app', 'Auth Key'),
+            'password_hash' => Yii::t('app', 'Password Hash'),
+            'password_reset_token' => Yii::t('app', 'Password Reset Token'),
+            'email' => Yii::t('app', 'Email'),
+            'verified_at' => Yii::t('app', 'Verified At'),
+            'referral_code' => Yii::t('app', 'Referral Code'),
+            'status' => Yii::t('app', 'Status'),
+            'role' => Yii::t('app', 'Role'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
+            'verification_token' => Yii::t('app', 'Verification Token'),
         ];
     }
 
@@ -40,12 +67,16 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        $query = User::find();
+        $query = User::find()->where(['status' => SystemConstant::STATUS_ACTIVE]);
+        $query->andWhere(['>=', 'id', 2]);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+            'query' => $query->indexBy('id'),
+            'pagination' => [
+                'pageSize' => 15,
+            ],
         ]);
 
         $this->load($params);
@@ -75,9 +106,9 @@ class UserSearch extends User
             ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'referral_code', $this->referral_code])
+            ->andFilterWhere(['like', 'verification_token', $this->verification_token])
             ->andFilterWhere(['like', 'source', $this->source])
-            ->andFilterWhere(['like', 'source_id', $this->source_id])
-            ->andFilterWhere(['like', 'verification_token', $this->verification_token]);
+            ->andFilterWhere(['like', 'source_id', $this->source_id]);
 
         return $dataProvider;
     }
