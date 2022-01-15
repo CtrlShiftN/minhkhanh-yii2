@@ -23,7 +23,7 @@ $this->registerJsFile(Url::toRoute('js/product.js'));
         <div class="offcanvas-header border-bottom border-dark">
             <h5 class="offcanvas-title text-uppercase" id="offcanvasCategoryLabel"><?= Yii::t('app', 'Type') ?></h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                    aria-label="Close"></button>
+                    aria-label="Close" id="sm-offcanvas-close"></button>
         </div>
         <div class="offcanvas-body p-0">
             <div class="accordion accordion-flush ct-show" id="type_category_offcanvas">

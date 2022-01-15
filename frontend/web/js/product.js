@@ -194,6 +194,9 @@ function requestData() {
         console.log(jqXHR);
         alert("Request failed: " + textStatus); // check errors
     });
+    if(category != null) {
+        $('#sm-offcanvas-close').trigger('click');
+    }
 }
 
 function addToFavorite(obj) {
