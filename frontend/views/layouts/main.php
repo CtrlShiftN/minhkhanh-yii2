@@ -190,8 +190,7 @@ $action = Yii::$app->controller->action->id;
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownUserLogin">
                                                 <a class="dropdown-item"
-                                                   href="<?= Url::toRoute('site/logout?ref
-                                           =' . Yii::$app->request->url) ?>"><?= Yii::t('app', 'Log out') ?></a>
+                                                   href="<?= Url::toRoute('site/logout?ref=' . Yii::$app->request->url) ?>"><?= Yii::t('app', 'Log out') ?></a>
                                             </div>
                                         </div>
                                     </li>
@@ -263,10 +262,10 @@ $action = Yii::$app->controller->action->id;
                                     <a class="text-dark bar-link text-decoration-none fw-bold"
                                        href="<?= Url::toRoute('post/') ?>"><?= Yii::t('app', 'News') ?></a>
                                 </li>
-<!--                                <li class="bar-item">-->
-<!--                                    <a class="text-dark bar-link text-decoration-none fw-bold"-->
-<!--                                       href="--><?//= Url::toRoute('document/') ?><!--">--><?//= Yii::t('app', 'Documents') ?><!--</a>-->
-<!--                                </li>-->
+                                <li class="bar-item">
+                                    <a class="text-dark bar-link text-decoration-none fw-bold"
+                                       href="<?= Url::toRoute('document/') ?>"><?= Yii::t('app', 'Documents') ?></a>
+                                </li>
                             </ul>
                         </div>
                     </div>
