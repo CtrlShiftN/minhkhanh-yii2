@@ -19,7 +19,13 @@ $this->registerCss("
     .container {
         padding: 0 !important;
     }
-");
+    .intro-quote{
+    background: url(" . $imgUrl . "/quote.png) no-repeat top left;
+    position: relative;
+    padding-left: 90px;
+    text-align: justify;
+   }");
+?>
 ?>
 <div class="full-width mb-4">
     <!-- Slider main container -->
@@ -75,9 +81,9 @@ $this->registerCss("
         <img src="<?= $imgUrl . '/' . $stories['fullwidth']['image'] ?>" width="100%">
     <?php endif; ?>
 </div>
-<div class="row m-0 p-0 pb-4 pb-md-5">
+<div class="row m-0 p-0 pb-4">
     <div class="container-md p-0">
-        <div class="row quotes pb-4 pb-md-5 text-center w-100 mx-0 px-2 align-items-md-center justify-content-md-center">
+        <div class="row quotes pb-4 text-center w-100 mx-0 px-2 align-items-md-center justify-content-md-center">
             <?php if (!empty($stories['quote'])): ?>
                 <div class="col-12 col-md-1"></div>
                 <div class="col-12 col-md-5">

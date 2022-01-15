@@ -34,6 +34,7 @@ return [
     'Log out' => 'Đăng xuất',
     'Register' => 'Đăng ký',
     'ABOUT US' => 'VỀ CHÚNG TÔI',
+    'About Us' => 'Về Chúng Tôi',
     'Business philosophy' => 'Triết lý kinh doanh',
     'Event communication' => 'Truyền thông sự kiện',
     'Social activities' => 'Hoạt động xã hội',

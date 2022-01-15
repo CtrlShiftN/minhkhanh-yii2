@@ -11,7 +11,6 @@ use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\helpers\json;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -168,7 +167,12 @@ class UserController extends Controller
             $model->updated_at = date('Y-m-d H:m:s');
             $model->status = $model::STATUS_ACTIVE;
             if ($model->save()) {
-                return $this->redirect(Url::toRoute('user/'));
+                if($model->id == Yii::$app->user->identity->getId()) {
+                    Yii::$app->user->logout();
+                    return $this->goHome();
+                } else {
+                    return $this->redirect(Url::toRoute('user/'));
+                }
             }
         }
 

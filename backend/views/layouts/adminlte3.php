@@ -202,13 +202,12 @@ AppAsset::register($this);
                             </ul>
                         </li>
                         <!-- End warehouse -->
-
-                        <li class="nav-header text-uppercase font-weight-bold"><?= Yii::t('app', 'Others') ?></li>
+                        <li class="nav-header text-uppercase font-weight-bold"><?= Yii::t('app', 'Content Managers') ?></li>
                         <li class="nav-item">
-                            <a href="<?= Url::toRoute('contact/') ?>"
-                               class="nav-link <?= ($controller == 'contact') ? 'active' : '' ?>">
-                                <i class="nav-icon fas fa-envelope"></i>
-                                <p><?= Yii::t('app', 'Contact') ?></p>
+                            <a href="<?= Url::toRoute('site-about/') ?>"
+                               class="nav-link <?= ($controller == 'site-about') ? 'active' : '' ?>">
+                                <i class="nav-icon fas fa-concierge-bell"></i>
+                                <p><?= Yii::t('app', 'About Us') ?></p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -216,6 +215,14 @@ AppAsset::register($this);
                                class="nav-link <?= ($controller == 'terms') ? 'active' : '' ?>">
                                 <i class="nav-icon fas fa-concierge-bell"></i>
                                 <p><?= Yii::t('app', 'Terms & Services') ?></p>
+                            </a>
+                        </li>
+                        <li class="nav-header text-uppercase font-weight-bold"><?= Yii::t('app', 'Others') ?></li>
+                        <li class="nav-item">
+                            <a href="<?= Url::toRoute('contact/') ?>"
+                               class="nav-link <?= ($controller == 'contact') ? 'active' : '' ?>">
+                                <i class="nav-icon fas fa-envelope"></i>
+                                <p><?= Yii::t('app', 'Contact') ?></p>
                             </a>
                         </li>
                         <li class="nav-item">
