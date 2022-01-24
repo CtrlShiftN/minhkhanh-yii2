@@ -144,6 +144,13 @@ AppAsset::register($this);
                             </a>
                             <ul class="nav nav-treeview ps-1">
                                 <li class="nav-item">
+                                    <a href="<?= Url::toRoute('product/') ?>"
+                                       class="nav-link <?= ($controller == 'product') ? 'active' : '' ?>">
+                                        <i class="nav-icon far fa-newspaper"></i>
+                                        <p><?= Yii::t('app', 'Products') ?></p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="<?= Url::toRoute('product-type/') ?>"
                                        class="nav-link <?= ($controller == 'product-type') ? 'active' : '' ?>">
                                         <i class="nav-icon fas fa-user"></i>
@@ -162,13 +169,6 @@ AppAsset::register($this);
                                        class="nav-link <?= ($controller == 'trademark') ? 'active' : '' ?>">
                                         <i class="nav-icon fas fa-trademark"></i>
                                         <p><?= Yii::t('app', 'Trademark') ?></p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?= Url::toRoute('product/') ?>"
-                                       class="nav-link <?= ($controller == 'product') ? 'active' : '' ?>">
-                                        <i class="nav-icon far fa-newspaper"></i>
-                                        <p><?= Yii::t('app', 'Products') ?></p>
                                     </a>
                                 </li>
                             </ul>
@@ -223,6 +223,13 @@ AppAsset::register($this);
                                class="nav-link <?= ($controller == 'contact') ? 'active' : '' ?>">
                                 <i class="nav-icon fas fa-envelope"></i>
                                 <p><?= Yii::t('app', 'Contact') ?></p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= Url::toRoute('document/') ?>"
+                               class="nav-link <?= ($controller == 'document') ? 'active' : '' ?>">
+                                <i class="nav-icon far fa-file-alt"></i>
+                                <p><?= Yii::t('app', 'Document') ?></p>
                             </a>
                         </li>
                         <li class="nav-item">

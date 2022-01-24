@@ -423,4 +423,7 @@ return [
     'No news yet!' => 'Hiện chưa có tin mới!',
     'Elevator' => 'Thang máy',
     'If you have a business inquiry or other question, please fill out the following form to contact us. Thank you!' => 'Nếu bạn có một yêu cầu kinh doanh hoặc câu hỏi khác, vui lòng điền vào biểu mẫu sau để liên hệ với chúng tôi. Cảm ơn bạn!',
+    'Add New Document' => 'Thêm tài liệu mới',
+    'Document' => 'Tài liệu',
+    'Choose Type' => 'Chọn loại'
 ];

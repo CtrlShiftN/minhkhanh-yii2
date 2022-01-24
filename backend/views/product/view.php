@@ -16,7 +16,9 @@ $arrFeature = [Yii::t('app', 'Featured'), Yii::t('app', 'Non-featured')];
 $modelType = $model['type'];
 $modelCate = $model['category'];
 $modelRelated = $model->related_product;
+$action = Yii::$app->controller->action->id;
 ?>
+<input type="hidden" value="<?= $action ?>" id="action">
 <div class="product-view p-4">
     <?php
     $columns = [
@@ -46,7 +48,9 @@ $modelRelated = $model->related_product;
                         $arrType = explode(",",substr($modelType,1,strlen($modelType)-2));
                     }
                     foreach ($arrType as $key => $types) {
-                        $html .= '<div class="badge badge-info me-3 p-2">' . $type[$types] . '</div>';
+                        if (!empty($type[$types])) {
+                            $html .= '<div class="badge badge-info me-3 p-2">' . $type[$types] . '</div>';
+                        }
                     }
                 } else {
                     $html = null;
@@ -79,7 +83,9 @@ $modelRelated = $model->related_product;
                     $arrRelated = explode(',', $modelRelated);
                     $html = '<ol class="mb-0">';
                     foreach ($arrRelated as $key => $relatedProduct) {
-                        $html .= '<li>' . $products[$relatedProduct] . '</li>';
+                        if(!empty($products[$relatedProduct])) {
+                            $html .= '<li>' . $products[$relatedProduct] . '</li>';
+                        }
                     }
                     $html .= '</ol>';
                 } else {

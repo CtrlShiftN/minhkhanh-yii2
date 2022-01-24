@@ -82,8 +82,13 @@ class AjaxController extends ActiveController
         $getCursor = ParamHelper::getParamValue('cursor');
         $getProductType = CryptHelper::decryptString(ParamHelper::getParamValue('type'));
         $getSort = ParamHelper::getParamValue('sort');
+        $getKeyWord = ParamHelper::getParamValue('keyWord');
 
         $rows = Product::getAllProduct($getProductType, $getProductCategory);
+
+        if(!empty($getKeyWord)) {
+            $rows->andWhere(['like','name',$getKeyWord]);
+        }
 
         $count = count($rows->all());
 

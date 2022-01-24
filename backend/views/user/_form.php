@@ -9,8 +9,10 @@ use yii\helpers\Html;
 
 $this->registerCss('.help-block, .fill-red {color: red}');
 $this->registerCss('.help-block {padding-left: 5px}');
-$this->title = Yii::t('app', 'Add new account');
+$action = Yii::$app->controller->action->id;
+$this->title = ($action != 'update') ? Yii::t('app', 'Add new account'):Yii::t('app', 'Update account');
 ?>
+<input type="hidden" value="<?= $action ?>" id="action">
 
 <div class="container user-form p-3">
     <?php $form = ActiveForm::begin(); ?>
@@ -32,7 +34,7 @@ $this->title = Yii::t('app', 'Add new account');
         <div class="col-12 col-sm-2 col-md-3 col-lg-3"><h4><?= Yii::t('app', 'Password') ?> <sup class="fill-red fs-6">(*)</sup>
             </h4></div>
         <div class="col-12 col-sm-6 col-md-5 col-lg-6">
-            <?= $form->field($model, 'password_hash')->textInput(['placeholder' => 'Nhập vào mật khẩu...', 'value' => '','required'=>true])->label(false) ?>
+            <?= $form->field($model, 'password_hash')->textInput(['placeholder' => 'Nhập vào mật khẩu...', 'value' => ''])->label(false) ?>
         </div>
     </div>
     <div class="row pb-3">

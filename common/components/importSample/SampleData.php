@@ -1614,18 +1614,18 @@ class SampleData
      */
     public static function importAllSampleData()
     {
-//        self::insertSampleUser();
-//        self::insertSampleProduct();
-//        self::insertSampleProductAssoc();
-//        self::insertSampleProductType();
-//        self::insertSampleProductCategory();
-//        self::insertSampleTrademark();
-//        self::insertSampleTerms();
-//        self::insertSampleCart();
-//        self::insertSampleSocialNetwork();
-//        self::insertSampleGeoLocation();
-//        self::insertSampleOrderTracking();
-//        self::insertSampleTrackingStatus();
+        self::insertSampleUser();
+        self::insertSampleProduct();
+        self::insertSampleProductAssoc();
+        self::insertSampleProductType();
+        self::insertSampleProductCategory();
+        self::insertSampleTrademark();
+        self::insertSampleTerms();
+        self::insertSampleCart();
+        self::insertSampleSocialNetwork();
+        self::insertSampleGeoLocation();
+        self::insertSampleOrderTracking();
+        self::insertSampleTrackingStatus();
         self::insertSampleSiteAbout();
     }
 }

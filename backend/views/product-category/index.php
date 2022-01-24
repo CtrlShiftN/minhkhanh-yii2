@@ -76,9 +76,9 @@ $commonUrl = Yii::$app->params['common'];
                     $arrTypes = ArrayHelper::map($productTypes, 'id', 'name');
                     $html = "";
                     foreach (explode(',', $model['type_id']) as $type) {
-                            if (!empty($arrTypes[$type])) {
-                                $html .= '<span class="badge bg-info me-2">' . $arrTypes[$type] . '</span>';
-                            }
+                        if (!empty($arrTypes[$type])) {
+                            $html .= '<span class="badge bg-info me-2">' . $arrTypes[$type] . '</span>';
+                        }
                     }
                     return $html;
                 },

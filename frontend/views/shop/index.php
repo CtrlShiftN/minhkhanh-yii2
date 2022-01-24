@@ -15,9 +15,59 @@ $imgUrl = Yii::$app->params['common'] . "/media";
 $this->registerCssFile(Url::toRoute('css/product.css'));
 $paramCate = ParamHelper::getParamValue('type');
 $this->registerJsFile(Url::toRoute('js/product.js'));
+$keyword = ParamHelper::getParamValue('keyWord');
+$this->registerCss('
+    #btn-search {
+        z-index: 1;
+        right: 0;
+        outline: none;
+        border: none;
+        background-color: transparent;
+        padding: 7px 15px;
+    }
+
+    #key-word {
+        z-index: 0;
+        padding: 7px 15px;
+        border: unset;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.89);
+        border-radius: unset;
+        transition: 0.5s;
+        outline: none;
+    }
+
+    #key-word:focus {
+        box-shadow: none;
+        border: 1px solid rgba(0, 0, 0, 0.89);
+        border-radius: 20px;
+    }
+
+    @media (max-width: 992px) {
+        .w-search {
+            width: 100% !important;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .w-search {
+            width: 60% !important;
+        }
+    }
+');
 ?>
 <div class="visually-hidden" id="sth" data-id="<?= Yii::$app->user->isGuest ? 1 : 0 ?>"></div>
-<div class="row m-0 p-0 pt-4 pt-md-5 w-100">
+<div class="row d-flex align-items-center justify-content-center px-3">
+    <div class="w-search position-relative p-0">
+        <button type="button" class="position-absolute" id="btn-search"><i class="fas fa-search"></i></button>
+        <input type="text" id="key-word" placeholder="Nhập từ khóa tìm kiếm" class="w-100 position-relative">
+    </div>
+</div>
+<div class="row p-0 d-none" id="notify-search">
+    <div class="w-100 align-items-center justify-content-center d-flex">
+        <span class="fs-5 text-center">Kết quả tìm kiếm cho: <i id="content-search"></i> <button class="p-0 text-dark fs-6 m-0 btn bg-transparent" id="remove-keyword"><i class="fas fa-times-circle"></i></button></span>
+    </div>
+</div>
+<div class="row m-0 p-0 pt-4 w-100">
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasCategory"
          aria-labelledby="offcanvasCategoryLabel">
         <div class="offcanvas-header border-bottom border-dark">

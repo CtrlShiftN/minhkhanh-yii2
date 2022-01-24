@@ -7,6 +7,7 @@ use frontend\models\Post;
 use frontend\models\Product;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\SiteAbout;
+use frontend\models\SiteContact;
 use frontend\models\Terms;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -140,6 +141,7 @@ class SiteController extends Controller
      */
     public function actionContact()
     {
+        $content = SiteContact::getContactContent();
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->saveContactData()) {
@@ -155,6 +157,7 @@ class SiteController extends Controller
 
         return $this->render('contact', [
             'model' => $model,
+            'content' => $content,
         ]);
     }
 
