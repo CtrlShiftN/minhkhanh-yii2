@@ -1,4 +1,4 @@
-let category, type, typeName, cursor, sort, show_per_page, cdnUrl, imgUrl, buyNow;
+let category, type, typeName, cursor, sort, show_per_page, cdnUrl, imgUrl, buyNow, keyWord;
 let myUrl = location;
 let toastLive = document.getElementById('liveToast');
 //get param
@@ -21,7 +21,7 @@ jQuery(document).ready(function () {
 
 function requestParam() {
     let request = $.ajax({
-        url: "/api/ajax/get-link-and-title", // send request to
+        url: "/frontend/web/api/ajax/get-link-and-title", // send request to
         method: "POST", // sending method
     });
     request.done(function (response) {
@@ -89,14 +89,22 @@ function getCheckedBoxes(checkbox) {
 }
 
 function requestData() {
+    if (keyWord != null && keyWord != undefined && keyWord != '') {
+        $('#notify-search').removeClass('d-none');
+        $('#content-search').html(keyWord);
+    } else {
+        $('#notify-search').addClass('d-none');
+        $('#content-search').html('');
+    }
     let request = $.ajax({
-        url: "/api/ajax/product-filter-ajax", // send request to
+        url: "/frontend/web/api/ajax/product-filter-ajax", // send request to
         method: "POST", // sending method
         data: {
             cate: category,
             cursor: cursor,
             type: type,
             sort: sort,
+            keyWord: keyWord,
         }, // sending data
     });
 
@@ -194,7 +202,7 @@ function requestData() {
         console.log(jqXHR);
         alert("Request failed: " + textStatus); // check errors
     });
-    if(category != null) {
+    if (category != null) {
         $('#sm-offcanvas-close').trigger('click');
     }
 }
@@ -202,10 +210,10 @@ function requestData() {
 function addToFavorite(obj) {
     var productID = obj.getAttribute('data-id');
     if ($('#sth').attr('data-id') == 1) {
-        window.location.href = "/site/login?ref=" + window.location.pathname;
+        window.location.href = "/frontend/web/site/login?ref=" + window.location.pathname;
     } else {
         let request = $.ajax({
-            url: "/api/ajax/add-to-favorite", // send request to
+            url: "/frontend/web/api/ajax/add-to-favorite", // send request to
             method: "POST", // sending method
             data: {
                 id: productID,
@@ -273,3 +281,19 @@ function go_to_page(page_num) {
     $('#current_page').val(page_num);
     requestData();
 }
+function search() {
+    keyWord = $("#key-word").val().trim();
+    requestData();
+}
+$('#btn-search').click(search);
+//search data with enter key press
+$("#key-word").keypress(function (event) {
+    if (event.which == 13) {
+        search();
+    }
+});
+
+$('#remove-keyword').click(function () {
+    keyWord = null;
+    requestData();
+});

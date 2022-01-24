@@ -19,6 +19,7 @@ class m220115_143037_create_document_table extends Migration
             'link' => $this->string(),
             'product_type_id' => $this->bigInteger(),
             'admin_id' => $this->bigInteger(),
+            'status' => $this->smallInteger(2)->defaultValue(1)->comment('0 for inactive 1 for active'),
             'created_at' => $this->dateTime(),
             'updated_at' => $this->dateTime(),
         ]);

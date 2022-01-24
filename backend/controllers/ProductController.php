@@ -205,7 +205,6 @@ class ProductController extends Controller
                 $model->updated_at = date('Y-m-d H:i:s');
                 $sold = rand(201, 996);
                 $model->fake_sold = $sold;
-                $model->sold = $sold;
                 $model->viewed = rand(345, 9876);
                 if ($model->file) {
                     if (!file_exists(Yii::getAlias('@common/media/product'))) {
