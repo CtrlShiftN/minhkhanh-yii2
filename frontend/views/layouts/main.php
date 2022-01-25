@@ -42,7 +42,7 @@ $action = Yii::$app->controller->action->id;
                 padding: 7px 15px;
             }
 
-            #key-word {
+            .key-word {
                 z-index: 0;
                 padding: 7px 15px;
                 border: unset;
@@ -52,7 +52,7 @@ $action = Yii::$app->controller->action->id;
                 outline: none;
             }
 
-            #key-word:focus {
+            .key-word:focus {
                 box-shadow: none;
                 border: 1px solid rgba(0, 0, 0, 0.89);
                 border-radius: 20px;
@@ -87,8 +87,8 @@ $action = Yii::$app->controller->action->id;
                             <div class="w-100 position-relative p-0">
                                 <button type="submit" class="position-absolute btn-search"><i
                                             class="fas fa-search"></i></button>
-                                <input type="text" id="key-word" placeholder="Nhập từ khóa tìm kiếm"
-                                       class="w-100 position-relative" name="search" required>
+                                <input type="text" placeholder="Nhập từ khóa tìm kiếm"
+                                       class="w-100 position-relative key-word" name="search" required>
                             </div>
                         </div>
                         <div class="w-100 text-center py-2">

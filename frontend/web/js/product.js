@@ -92,7 +92,7 @@ function getCheckedBoxes(checkbox) {
 }
 
 function requestData() {
-    if(keySearch != null) {
+    if (keySearch != null) {
         keyWord = keySearch;
         $('#notify-search').removeClass('d-none');
         $('#content-search').html(keyWord);
@@ -290,11 +290,15 @@ function go_to_page(page_num) {
     $('#current_page').val(page_num);
     requestData();
 }
+
 function search() {
     keyWord = $("#key-word").val().trim();
     requestData();
 }
-$('#btn-search').click(search);
+
+$('#btn-search').click(function () {
+    search();
+});
 //search data with enter key press
 $("#key-word").keypress(function (event) {
     if (event.which == 13) {

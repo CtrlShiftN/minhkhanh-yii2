@@ -34,7 +34,7 @@ $this->registerCss('
 <div class="row d-flex align-items-center justify-content-center px-3">
     <div class="w-search position-relative p-0">
         <button type="button" class="position-absolute btn-search"><i class="fas fa-search"></i></button>
-        <input type="text" id="key-word" placeholder="Nhập từ khóa tìm kiếm" class="w-100 position-relative">
+        <input type="text" id="key-word" placeholder="Nhập từ khóa tìm kiếm" class="w-100 position-relative key-word">
     </div>
 </div>
 <div class="row p-0 d-none" id="notify-search">
