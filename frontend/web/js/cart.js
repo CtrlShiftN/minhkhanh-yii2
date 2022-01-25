@@ -97,7 +97,7 @@ document.querySelectorAll('.amountInput').forEach(item => {
 
 function updateAmount(id, amount, price) {
     let request = $.ajax({
-        url: "/frontend/web/api/ajax/update-amount-product-in-cart",
+        url: "/api/ajax/update-amount-product-in-cart",
         method: "POST",
         data: {
             id: id,

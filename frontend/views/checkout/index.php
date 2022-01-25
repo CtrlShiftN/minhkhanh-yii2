@@ -158,14 +158,7 @@ $this->registerJsFile(Url::toRoute('js/check-out.js'));
         <div class="col-12 col-md-6 m-0 p-0">
         </div>
         <div class="col-12 col-md-6 m-0 p-2">
-            <div class="my-1 py-2 w-100"><?= Yii::t('app', "Total product's price") ?>: <span class="fs-5 m-0 float-end"
-                                                                                              id="total_price_product"></span>
-            </div>
-            <div class="my-1 py-2 w-100"><?= Yii::t('app', 'VAT') ?>: <span class="fs-5 m-0 float-end"
-                                                                            id="vat"
-                                                                            data-vat="<?= \common\components\SystemConstant::VAT ?>"></span>
-            </div>
-            <div class="my-1 py-2 w-100"><?= Yii::t('app', 'Total payment') ?>: <span
+            <div class="my-1 py-2 w-100"><?= Yii::t('app', 'Cost') ?>: <span
                         class="fs-4 text-danger m-0 float-end"
                         id="total_price"></span></div>
         </div>
@@ -173,7 +166,7 @@ $this->registerJsFile(Url::toRoute('js/check-out.js'));
             <div class="col-7 col-sm-8 fs-xsm__12px">
                 <?= Yii::t('app', 'Clicking "Order" means you agree to abide by') ?> <a
                         href="<?= Url::toRoute('site/terms') ?>"
-                        class="text-decoration-none text-primary"><?= Yii::t('app', 'the De Obelly terms') ?>.</a>
+                        class="text-decoration-none text-primary"><?= Yii::t('app', 'the MINHKHANH terms') ?>.</a>
             </div>
             <div class="col-5 col-sm-4 px-2">
                 <button type="submit" class="btn bg-red rounded-0 px-3 px-sm-4 py-2 text-white float-end"

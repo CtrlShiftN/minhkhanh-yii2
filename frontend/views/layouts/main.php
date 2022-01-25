@@ -32,6 +32,43 @@ $action = Yii::$app->controller->action->id;
                 background: url('<?= $cdnUrl ?>/img/bg-footer.jpg') no-repeat;
                 background-size: cover;
             }
+
+            .btn-search {
+                z-index: 1;
+                right: 0;
+                outline: none;
+                border: none;
+                background-color: transparent;
+                padding: 7px 15px;
+            }
+
+            #key-word {
+                z-index: 0;
+                padding: 7px 15px;
+                border: unset;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.89);
+                border-radius: unset;
+                transition: 0.5s;
+                outline: none;
+            }
+
+            #key-word:focus {
+                box-shadow: none;
+                border: 1px solid rgba(0, 0, 0, 0.89);
+                border-radius: 20px;
+            }
+
+            @media (min-width: 992px) {
+                #offcanvas-search {
+                    width: 35vw;
+                }
+            }
+
+            #offcanvas-search {
+                height: 200px;
+            }
+
+
         </style>
     </head>
     <body>
@@ -39,13 +76,36 @@ $action = Yii::$app->controller->action->id;
     <?php $social = \frontend\models\Social::getAllSocialNetwork(); ?>
     <div id="wrapper">
         <div id="content">
-<!--            sidebar-->
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas offcanvas-end" id="offcanvas-search">
+                <form method="POST" action="<?= Url::toRoute('api/ajax/search-product') ?>" class="w-100">
+                    <div class="offcanvas-header px-3 pt-3 pb-2 border-bottom">
+                        <h4 class="offcanvas-title text-dark"><i class="fas fa-search"></i> Tìm kiếm</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                    </div>
+                    <div class="offcanvas-body px-0 pt-2 pb-3">
+                        <div class="d-flex align-items-center justify-content-center px-3">
+                            <div class="w-100 position-relative p-0">
+                                <button type="submit" class="position-absolute btn-search"><i
+                                            class="fas fa-search"></i></button>
+                                <input type="text" id="key-word" placeholder="Nhập từ khóa tìm kiếm"
+                                       class="w-100 position-relative" name="search" required>
+                            </div>
+                        </div>
+                        <div class="w-100 text-center py-2">
+                            <button type="submit" class="btn btn-danger text-light rounded-0 fs-6">Tìm kiếm</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--            sidebar-->
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+                 aria-labelledby="offcanvasExampleLabel">
                 <div class="offcanvas-header">
                     <span class="offcanvas-title" id="offcanvasExampleLabel">
                         <img src="<?= Url::toRoute('img/logo200.png') ?>" class="w-50 objectfit-cover">
                     </span>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body border-top p-0">
                     <?php if (!Yii::$app->user->isGuest) : ?>
@@ -101,12 +161,12 @@ $action = Yii::$app->controller->action->id;
                                         <p class="m-0 fs__15px"><?= Yii::t('app', 'News') ?></p>
                                     </a>
                                 </li>
-<!--                                <li class="nav-item border-bottom">-->
-<!--                                    <a href="--><?//= Url::toRoute('document/') ?><!--"-->
-<!--                                       class="nav-link text-uppercase text-dark p-3">-->
-<!--                                        <p class="m-0 fs__15px">--><?//= Yii::t('app', 'Documents') ?><!--</p>-->
-<!--                                    </a>-->
-<!--                                </li>-->
+                                <li class="nav-item border-bottom">
+                                    <a href="<?= Url::toRoute('document/') ?>"
+                                       class="nav-link text-uppercase text-dark p-3">
+                                        <p class="m-0 fs__15px"><?= Yii::t('app', 'Documents') ?></p>
+                                    </a>
+                                </li>
                                 <li class="nav-item border-bottom">
                                     <a href="<?= Url::toRoute('site/contact') ?>"
                                        class="nav-link text-uppercase text-dark p-3">
@@ -123,7 +183,9 @@ $action = Yii::$app->controller->action->id;
                                     <li class="nav-item border-bottom">
                                         <a href="<?= Url::toRoute('cart/') ?>"
                                            class="nav-link text-uppercase text-dark p-3">
-                                            <p class="m-0 fs__15px"><i class="fas fa-shopping-cart"></i> <?= Yii::t('app', 'Cart') ?></p>
+                                            <p class="m-0 fs__15px"><i
+                                                        class="fas fa-shopping-cart"></i> <?= Yii::t('app', 'Cart') ?>
+                                            </p>
                                         </a>
                                     </li>
                                     <li class="nav-item border-bottom">
@@ -148,7 +210,7 @@ $action = Yii::$app->controller->action->id;
                     <span>Copyright &copy; <?= date('Y') ?> by MinhKhanh</span>
                 </div>
             </div>
-<!--            end sidebar-->
+            <!--            end sidebar-->
             <div class="w-100 px-0 py-1 m-0 topbar-content d-none d-md-flex">
                 <nav class="container text-light">
                     <div class="row w-100 m-0 p-0">
@@ -229,17 +291,24 @@ $action = Yii::$app->controller->action->id;
             <div class="w-100 p-0 m-0 bottombar-content sticky-top shadow bg-light">
                 <nav class="container p-0">
                     <div class="row w-100 m-0 p-0">
-                        <div class="col-1 d-flex align-items-center justify-content-center d-md-none">
-                            <button class="btn rounded-0 border-0 bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                        <div class="col-2 d-flex align-items-center justify-content-center d-md-none">
+                            <button class="btn rounded-0 border-0 bg-transparent" type="button"
+                                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+                                    aria-controls="offcanvasExample">
                                 <i class="fas fa-bars"></i>
                             </button>
                         </div>
-                        <div class="col-10 col-md-12 col-lg-2 p-0 mx-0 d-flex justify-content-center justify-content-xl-start">
+                        <div class="col-8 col-md-12 col-lg-2 p-0 mx-0 d-flex justify-content-center justify-content-xl-start">
                             <a href="<?= Url::home() ?>" class="logo-align">
                                 <img src="<?= Url::toRoute('img/logo200.png') ?>" class=" objectfit-cover">
                             </a>
                         </div>
-                        <div class="col-1 d-md-none"></div>
+                        <div class="col-2 d-flex align-items-center justify-content-center d-md-none">
+                            <button class="btn bg-transparent p-0 m-0 text-dark fw-bold" type="button"
+                                    data-bs-toggle="offcanvas" data-bs-target="#offcanvas-search">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
                         <div class="col-10 d-none d-lg-flex align-items-center mx-0 px-0">
                             <ul class="list-unstyled w-100 h-100 p-0 m-0 d-flex justify-content-end bar-menu">
                                 <li class="bar-item">
@@ -266,6 +335,15 @@ $action = Yii::$app->controller->action->id;
                                     <a class="text-dark bar-link text-decoration-none fw-bold"
                                        href="<?= Url::toRoute('document/') ?>"><?= Yii::t('app', 'Documents') ?></a>
                                 </li>
+                                <li class="search-bar">
+                                    <div class="vr-search"></div>
+                                </li>
+                                <li class="search-bar">
+                                    <button class="btn bg-transparent p-0 m-0 text-dark fw-bold" type="button"
+                                            data-bs-toggle="offcanvas" data-bs-target="#offcanvas-search">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -291,10 +369,19 @@ $action = Yii::$app->controller->action->id;
                                 <a class="text-dark bar-link text-decoration-none fw-bold"
                                    href="<?= Url::toRoute('post/') ?>"><?= Yii::t('app', 'News') ?></a>
                             </li>
-<!--                            <li class="bar-md-item py-2">-->
-<!--                                <a class="text-dark bar-link text-decoration-none fw-bold"-->
-<!--                                   href="--><?//= Url::toRoute('document/') ?><!--">--><?//= Yii::t('app', 'Documents') ?><!--</a>-->
-<!--                            </li>-->
+                            <li class="bar-md-item py-2">
+                                <a class="text-dark bar-link text-decoration-none fw-bold"
+                                   href="<?= Url::toRoute('document/') ?>"><?= Yii::t('app', 'Documents') ?></a>
+                            </li>
+                            <li class="search-bar-md py-2">
+                                <div class="vr-search"></div>
+                            </li>
+                            <li class="search-bar-md py-2">
+                                <button class="btn bg-transparent p-0 m-0 text-dark fw-bold" type="button"
+                                        data-bs-toggle="offcanvas" data-bs-target="#offcanvas-search">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -372,8 +459,10 @@ $action = Yii::$app->controller->action->id;
                                 <ul class="footer-nav no-bullets px-2 py-0">
                                     <h3 class="mb-1"><?= Yii::t('app', 'CERTIFICATE') ?></h3>
                                     <li>
-                                        <img class="pt-2" src="//theme.hstatic.net/1000180292/1000232392/14/footer_payment_logo_1.png?v=3509">
-                                        <img class="pt-2" src="//theme.hstatic.net/1000180292/1000232392/14/footer_payment_logo_2.png?v=3509">
+                                        <img class="pt-2"
+                                             src="//theme.hstatic.net/1000180292/1000232392/14/footer_payment_logo_1.png?v=3509">
+                                        <img class="pt-2"
+                                             src="//theme.hstatic.net/1000180292/1000232392/14/footer_payment_logo_2.png?v=3509">
                                     </li>
                                 </ul>
                             </div>
@@ -384,9 +473,70 @@ $action = Yii::$app->controller->action->id;
                     <span>Copyright &copy; <?= date('Y') ?> by MinhKhanh</span>
                 </div>
             </footer>
+            <div id="back-to-top">
+                <i class="fa fa-angle-up" aria-hidden="true"></i>
+            </div>
         </div>
     </div>
+    <div class="phone-call">
+        <a href="tel:<?= Yii::$app->params['adminTel'] ?>"><img
+                    src="<?= Yii::$app->params['common'] . '/media/phone-call.png' ?>"
+                    width="50" alt="<?= Yii::t('app', 'Call Now') ?>" title="<?= Yii::t('app', 'Call Now') ?>"></a>
+    </div>
     <?php $this->endBody() ?>
+    <!-- Messenger Chat Plugin Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Chat Plugin code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "103100908941434");
+        chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v12.0'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <script>
+        $(document).ready(function () {
+            let offset = window.innerHeight / 1.7;
+            let duration = 350;
+            $('#back-to-top').hide();
+            jQuery(window).scroll(function () {
+                if (jQuery(this).scrollTop() >= offset) {
+                    jQuery('#back-to-top').fadeIn(duration);
+                } else {
+                    jQuery('#back-to-top').fadeOut(duration);
+                }
+            });
+
+            jQuery('#back-to-top').click(function (event) {
+                event.preventDefault();
+                jQuery('html, body').animate({
+                    scrollTop: 0
+                }, duration);
+                return false;
+            })
+        });
+    </script>
     </body>
     <!--
 ──────▄▌▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌

@@ -288,7 +288,7 @@ return [
     'Note to the seller' => 'Lưu ý cho người bán',
     'Order' => 'Đặt hàng',
     'Clicking "Order" means you agree to abide by' => 'Nhấp vào "Đặt hàng" có nghĩa là bạn đồng ý tuân theo',
-    'the De Obelly terms' => 'các điều khoản của De Obelly',
+    'the MINHKHANH terms' => 'các điều khoản của MINHKHANH',
     'Optional' => 'Không bắt buộc',
     'Payment on delivery' => 'Thanh toán khi nhận hàng',
     'Credit/Debit card' => 'Thẻ tín dụng/Ghi nợ',
@@ -425,5 +425,7 @@ return [
     'If you have a business inquiry or other question, please fill out the following form to contact us. Thank you!' => 'Nếu bạn có một yêu cầu kinh doanh hoặc câu hỏi khác, vui lòng điền vào biểu mẫu sau để liên hệ với chúng tôi. Cảm ơn bạn!',
     'Add New Document' => 'Thêm tài liệu mới',
     'Document' => 'Tài liệu',
-    'Choose Type' => 'Chọn loại'
+    'Choose Type' => 'Chọn loại',
+    "Cost" => 'Thành giá',
+    'Get at the store' => 'Nhận tại cửa hàng',
 ];

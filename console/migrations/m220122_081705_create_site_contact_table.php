@@ -17,7 +17,7 @@ class m220122_081705_create_site_contact_table extends Migration
             'gps_link' => $this->text()->notNull(),
             'logo_link' => $this->string()->notNull(),
             'company_address' => $this->string()->notNull(),
-            'tel' => $this->integer()->notNull(),
+            'tel' => $this->string()->notNull(),
             'email' => $this->string()->notNull(),
             'admin_id' => $this->bigInteger()->notNull(),
             'status' => $this->smallInteger(2)->defaultValue(1)->comment('0 for inactive 1 for active'),

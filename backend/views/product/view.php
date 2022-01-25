@@ -129,6 +129,10 @@ $action = Yii::$app->controller->action->id;
             'value' => (!empty($model->quantity)) ? $model->quantity : null,
         ],
         [
+            'attribute' => 'sold',
+            'value' => (!empty($model->sold) || $model->sold == 0) ? $model->sold : null,
+        ],
+        [
             'attribute' => 'trademark_id',
             'type' => DetailView::INPUT_SELECT2,
             'value' => (!empty($trademark[$model->trademark_id])) ? $trademark[$model->trademark_id] : null,

@@ -68,7 +68,9 @@ class Product extends \common\models\Product
             ['file', 'required', 'on' => 'create'],
             [['files'], 'file', 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 10, 'on' => 'create'],
             [['type', 'category', 'relatedProduct'], 'safe'],
-            [['type', 'category'], 'required'],
+            [['type', 'category'], 'required', 'when' => function ($model) {
+                return Yii::$app->controller->action->id == 'create';
+            }, 'whenClient' => "function () {return $('#action').val() == 'create';}"],
             ['quantity', 'integer', 'min' => 1],
             ['name', 'checkDuplicatedSlug'],
             ['discount', 'integer', 'min' => 0, 'max' => 100]

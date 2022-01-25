@@ -54,13 +54,13 @@ $arrLogisticMethod = [Yii::t('app', 'Home delivery'), Yii::t('app', 'Get at the 
                 },
             ],
             [
-                'attribute' => 'user_name',
+                'attribute' => 'name',
                 'label' => Yii::t('app', 'Customer Name'),
                 'vAlign' => 'middle',
                 'hAlign' => 'center',
                 'width' => '140px',
                 'value' => function ($model, $key, $index, $widget) {
-                    return $model['user_name'];
+                    return $model['name'];
                 },
                 'format' => 'raw',
                 'filterType' => GridView::FILTER_SELECT2,
@@ -77,7 +77,7 @@ $arrLogisticMethod = [Yii::t('app', 'Home delivery'), Yii::t('app', 'Get at the 
                 'hAlign' => 'center',
                 'width' => '140px',
                 'value' => function ($model, $key, $index, $widget) {
-                    return $model['product_name'];
+                    return \backend\models\Product::findNameByID($model['product_id']);
                 },
                 'format' => 'raw',
                 'filterType' => GridView::FILTER_SELECT2,

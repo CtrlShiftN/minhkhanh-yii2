@@ -8,6 +8,7 @@ use common\components\helpers\ParamHelper;
 use common\components\MailServer;
 use common\components\SystemConstant;
 use common\models\Contact;
+use common\models\Document;
 use common\models\Favorite;
 use common\models\Order;
 use frontend\models\Cart;
@@ -82,8 +83,7 @@ class AjaxController extends ActiveController
         $getCursor = ParamHelper::getParamValue('cursor');
         $getProductType = CryptHelper::decryptString(ParamHelper::getParamValue('type'));
         $getSort = ParamHelper::getParamValue('sort');
-        $getKeyWord = ParamHelper::getParamValue('keyWord');
-
+        $getKeyWord = ParamHelper::getParamValue('search');
         $rows = Product::getAllProduct($getProductType, $getProductCategory);
 
         if(!empty($getKeyWord)) {
@@ -279,5 +279,10 @@ class AjaxController extends ActiveController
             }
         }
         $this->redirect(Url::home());
+    }
+
+    public function actionSearchProduct(){
+        $data = Yii::$app->request->post();
+        $this->redirect(Url::toRoute('shop/index?search='.$data['search']));
     }
 }

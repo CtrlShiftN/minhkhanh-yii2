@@ -10,6 +10,15 @@ body {
     opacity: 0.5;
     margin: 0 8px;
 }
+
+.vr-search {
+    display: inline-block;
+    width: 1px;
+    min-height: 0.9rem;
+    background-color: #000;
+    height: 1rem;
+}
+
 .topbar-content {
     font-size: 0.8rem !important;
     z-index: 999 !important;
@@ -47,7 +56,9 @@ body {
 }
 
 .bottombar-content .bar-menu .bar-item,
-.bottombar-content .bar-md-menu .bar-md-item {
+.bottombar-content .bar-menu .search-bar,
+.bottombar-content .bar-md-menu .bar-md-item,
+.bottombar-content .bar-md-menu .search-bar-md {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -191,3 +202,107 @@ footer .footer-content {
 .header_login > .dropdown-toggle:after {
     display: none;
 }
+
+#back-to-top {
+    position: fixed;
+    bottom: 100px;
+    right: 34px;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    opacity: 0.5;
+    background: #000000;
+    color: #ffffff;
+    text-align: center;
+    font-size: 24px;
+    z-index: 9999;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Phone call btn */
+.phone-call {
+    width: 50px;
+    height: 50px;
+    left: 29px;
+    bottom: 25px;
+    background: #10b418;
+    position: fixed;
+    text-align: center;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 99;
+    display: inline-block;
+    transition: 0.3s;
+    /*line-height: 65px;*/
+}
+
+.phone-call:before {
+    position: absolute;
+    content: " ";
+    z-index: -1;
+    top: -15px;
+    left: -15px;
+    background-color: #10b418;
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    opacity: 0.6;
+    -webkit-animation: pulse 1s ease-out;
+    animation: pulse 1.8s ease-out;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-transform: scale(0);
+        opacity: 0;
+    }
+    25% {
+        -webkit-transform: scale(0.3);
+        opacity: 1;
+    }
+    50% {
+        -webkit-transform: scale(0.6);
+        opacity: .6;
+    }
+    75% {
+        -webkit-transform: scale(0.9);
+        opacity: .3;
+    }
+    100% {
+        -webkit-transform: scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    25% {
+        transform: scale(0.3);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(0.6);
+        opacity: .6;
+    }
+    75% {
+        transform: scale(0.9);
+        opacity: .3;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+/* End Phone call btn */

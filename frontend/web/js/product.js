@@ -2,6 +2,9 @@ let category, type, typeName, cursor, sort, show_per_page, cdnUrl, imgUrl, buyNo
 let myUrl = location;
 let toastLive = document.getElementById('liveToast');
 //get param
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+let keySearch = urlParams.get('search');
 const parseUrlQuery = (value) => {
     let urlParams = new URL(value).searchParams
     return Array.from(urlParams.keys()).reduce((acc, key) => {
@@ -89,12 +92,18 @@ function getCheckedBoxes(checkbox) {
 }
 
 function requestData() {
-    if (keyWord != null && keyWord != undefined && keyWord != '') {
+    if(keySearch != null) {
+        keyWord = keySearch;
         $('#notify-search').removeClass('d-none');
         $('#content-search').html(keyWord);
     } else {
-        $('#notify-search').addClass('d-none');
-        $('#content-search').html('');
+        if (keyWord != null && keyWord != undefined && keyWord != '') {
+            $('#notify-search').removeClass('d-none');
+            $('#content-search').html(keyWord);
+        } else {
+            $('#notify-search').addClass('d-none');
+            $('#content-search').html('');
+        }
     }
     let request = $.ajax({
         url: "/frontend/web/api/ajax/product-filter-ajax", // send request to
@@ -104,7 +113,7 @@ function requestData() {
             cursor: cursor,
             type: type,
             sort: sort,
-            keyWord: keyWord,
+            search: keyWord,
         }, // sending data
     });
 
@@ -294,6 +303,6 @@ $("#key-word").keypress(function (event) {
 });
 
 $('#remove-keyword').click(function () {
-    keyWord = null;
+    keyWord = keySearch = null;
     requestData();
 });

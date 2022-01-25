@@ -7,7 +7,7 @@ $("#amountInput").keypress(function (e) {
 });
 $('#btnAddToCart').click(function () {
     if ($('#sth').attr('data-id') == 1) {
-        window.location.href = "/frontend/web/site/login?ref=" + window.location.pathname + '?detail=' + $('.product-information').attr('data-id');
+        window.location.href = "/site/login?ref=" + window.location.pathname + '?detail=' + $('.product-information').attr('data-id');
     } else {
         if ($('#quantity').attr('data-quantity') != 0) {
             if ($('#color').attr('data-color') == '' || $('#size').attr('data-size') == '') {
@@ -25,7 +25,7 @@ $('#btnAddToCart').click(function () {
 });
 $('#btnBuyNow').click(function (e) {
     if ($('#sth').attr('data-id') == 1) {
-        window.location.href = "/frontend/web/site/login?ref=" + window.location.pathname + '?detail=' + $('.product-information').attr('data-id');
+        window.location.href = "/site/login?ref=" + window.location.pathname + '?detail=' + $('.product-information').attr('data-id');
     } else {
         if ($('#color').attr('data-color') == '' || $('#size').attr('data-size') == '') {
             e.preventDefault();
@@ -48,7 +48,7 @@ function requestData() {
     amount = $('#amountInput').val();
     price = $('.price').attr('data-price');
     let request = $.ajax({
-        url: "/frontend/web/api/ajax/update-or-create-cart",
+        url: "/api/ajax/update-or-create-cart",
         method: "POST",
         data: {
             id: id,
@@ -216,10 +216,10 @@ if (parseInt($('#quantity').attr('data-quantity')) == 0) {
 function addToFavorite(obj) {
     var productID = obj.getAttribute('data-id');
     if ($('#sth').attr('data-id') == 1) {
-        window.location.href = "/frontend/web/site/login?ref=" + window.location.pathname;
+        window.location.href = "/site/login?ref=" + window.location.pathname;
     } else {
         let request = $.ajax({
-            url: "/frontend/web/api/ajax/add-to-favorite", // send request to
+            url: "/api/ajax/add-to-favorite", // send request to
             method: "POST", // sending method
             data: {
                 id: productID,

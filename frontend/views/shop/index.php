@@ -17,31 +17,6 @@ $paramCate = ParamHelper::getParamValue('type');
 $this->registerJsFile(Url::toRoute('js/product.js'));
 $keyword = ParamHelper::getParamValue('keyWord');
 $this->registerCss('
-    #btn-search {
-        z-index: 1;
-        right: 0;
-        outline: none;
-        border: none;
-        background-color: transparent;
-        padding: 7px 15px;
-    }
-
-    #key-word {
-        z-index: 0;
-        padding: 7px 15px;
-        border: unset;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.89);
-        border-radius: unset;
-        transition: 0.5s;
-        outline: none;
-    }
-
-    #key-word:focus {
-        box-shadow: none;
-        border: 1px solid rgba(0, 0, 0, 0.89);
-        border-radius: 20px;
-    }
-
     @media (max-width: 992px) {
         .w-search {
             width: 100% !important;
@@ -58,7 +33,7 @@ $this->registerCss('
 <div class="visually-hidden" id="sth" data-id="<?= Yii::$app->user->isGuest ? 1 : 0 ?>"></div>
 <div class="row d-flex align-items-center justify-content-center px-3">
     <div class="w-search position-relative p-0">
-        <button type="button" class="position-absolute" id="btn-search"><i class="fas fa-search"></i></button>
+        <button type="button" class="position-absolute btn-search"><i class="fas fa-search"></i></button>
         <input type="text" id="key-word" placeholder="Nhập từ khóa tìm kiếm" class="w-100 position-relative">
     </div>
 </div>

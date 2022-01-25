@@ -45,6 +45,7 @@ $this->registerCss('
     min-height: 70vh;
 }
 ');
+$commonUrl = Yii::$app->params['common'];
 ?>
 <div class="container w-100 m-0 p-0" id="document-wrap">
     <div class="row px-0 pb-3 mb-3 align-items-center justify-content-center border-bottom border-danger m-0">
@@ -60,7 +61,7 @@ $this->registerCss('
     <div class="row p-0 m-0">
         <?php foreach ($document as $value): ?>
             <div class="col-6 col-md-4 col-xl-4 col-xxl-3 mb-2 px-2 h-100 d-inline">
-                <a href="<?= \yii\helpers\Url::toRoute($value['link']) ?>" download
+                <a href="<?= $commonUrl . '/documents/' . $value['link'] ?>" download
                    class="text-decoration-none text-dark w-100">
                     <div class="card w-100 items-download h-100">
                         <img src="<?= $imgUrl . '/' . $value['image'] ?>" class="w-100 file-img">

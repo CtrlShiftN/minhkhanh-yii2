@@ -8,7 +8,7 @@ $imgUrl = Yii::$app->params['common'] . '/media';
 <div class="site-index pt-3">
     <!-- Info boxes -->
     <div class="row">
-        <div class="col-lg-3 col-6">
+        <div class="col-6">
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
@@ -23,7 +23,7 @@ $imgUrl = Yii::$app->params['common'] . '/media';
             </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-3 col-6">
+        <div class="col-6">
             <!-- small box -->
             <div class="small-box bg-warning">
                 <div class="inner">
